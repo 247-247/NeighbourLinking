@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+       <ImageView
+           android:layout_width="70dp"
+           android:layout_height="70dp"
+        android:scaleType="fitCenter"
+           android:src="@mipmap/ic_launcher"
+           android:id="@+id/imageview_announcement_list_item"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:id="@+id/name_announcement_list_item"
+                android:layout_height="wrap_content"
+                android:text="Any Name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_announcement_list_item"
+                android:textAlignment="center"
+                android:text="12/12/17"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:id="@+id/msg_announcement_list_item"
+                android:layout_height="wrap_content"
+                android:text="Any Text"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bedg_announcement_list_item"
+                android:textAlignment="center"
+                android:text="12/12"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#817B7B"
+
+
+        />
+
+</LinearLayout>

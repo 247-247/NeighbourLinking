@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "471289957797",
+    "firebase_url": "https://neighbourlinking-d0561.firebaseio.com",
+    "project_id": "neighbourlinking-d0561",
+    "storage_bucket": "neighbourlinking-d0561.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471289957797:android:19989b975b8ca110",
+        "android_client_info": {
+          "package_name": "com.example.waqarahmed.neighbourlinking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471289957797-dtigqe4fo8mrqi2tfm219htfubkie3fa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.waqarahmed.neighbourlinking",
+            "certificate_hash": "89930c472d2f1a84a8098a5d7bb55000c870afab"
+          }
+        },
+        {
+          "client_id": "471289957797-m8cotddkppiljg16af24pt3ott0nd4gc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHhfAwvLf9WeMuVw5efiqBwcZG66otwRQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471289957797-m8cotddkppiljg16af24pt3ott0nd4gc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

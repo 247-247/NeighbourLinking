@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.waqarahmed.neighbourlinking.Activities.Post">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageButton
+            android:layout_marginTop="30dp"
+            android:id="@+id/img_btn"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_person_outline_black_32dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_edit"
+            android:background="@drawable/customborder_for_blog_row"
+            android:hint="Title..."/>
+        <EditText
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/desc_edit"
+            android:background="@drawable/customborder_for_blog_row"
+            android:hint="Description..."/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/done_post"
+            android:background="@drawable/customborder_for_blog_row"
+            android:layout_gravity="bottom|center"
+            android:text="Done"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+</ScrollView>

@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">NeighbourLinking</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_about">About</string>
+    <string name="title_activity_conversation">Conversation</string>
+    <string name="onLineServer">http://6b25c12a.ngrok.io</string>
+    <string name="title_activity_request_related_detail">RequestRelatedDetail</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="emailerror">Enter a valid email</string>
+    <string name="nameerror">Enter a valid name</string>
+    <string name="mobileerror">Enter a valid mobile</string>
+
+
+    <string-array name="house_arrays">
+        <item>C-1</item>
+        <item>C-2</item>
+        <item>C-3</item>
+        <item>C-4</item>
+        <item>C-5</item>
+        <item>C-5</item>
+        <item>C-6</item>
+        <item>C-7</item>
+    </string-array>
+
+    <string-array name="skill_list">
+        <item>Plumber</item>
+        <item>Electration</item>
+        <item>Architect</item>
+        <item>Sweeper</item>
+
+    </string-array>
+    <string name="title_activity_service_main">ServiceMainActivity</string>
+    <string name="title_activity_main_brand">MainBrandActivity</string>
+
+</resources>

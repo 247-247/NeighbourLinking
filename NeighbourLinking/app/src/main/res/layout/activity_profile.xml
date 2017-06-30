@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView  xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="46dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_person_outline_black_32dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/first_name_edit_profileActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/customborder_for_blog_row"
+        android:ems="10"
+        android:hint="First Name..."
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="false" />
+
+    <EditText
+        android:id="@+id/last_name_edit_profileActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Last Name..."
+        android:inputType="textPersonName"
+        android:background="@drawable/customborder_for_blog_row"
+        android:layout_below="@+id/first_name_edit_profileActivity"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/adress_edit_profileActity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_name_edit_profileActivity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+
+        android:background="@drawable/customborder_for_blog_row"
+        android:ems="10"
+        android:hint="Contact#..."
+        android:inputType="phone" />
+    <EditText
+        android:id="@+id/countery_edit_profileActivty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adress_edit_profileActity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/customborder_for_blog_row"
+        android:ems="10"
+        android:hint="City..."
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/gender_spiner_profileActivty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        style="@style/spinner_style"
+        android:layout_below="@+id/countery_edit_profileActivty"
+        android:layout_marginTop="21dp" />
+
+    <Button
+        android:id="@+id/submit_profile_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gender_spiner_profileActivty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/customborder_for_blog_row"
+        android:text="Done" />
+
+
+</RelativeLayout>
+</ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/boarder_arround_blog_item"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/senderImage_imageView"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/senderName_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="serif"
+                    android:text="Hellllo"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sender_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="12/11/2017" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/titleShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="5dp"
+            android:textColor="@android:color/black"
+            tools:textSize="20dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/imageShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            tools:layout_height="250dp" />
+
+        <TextView
+            android:id="@+id/descShow"
+            android:layout_marginTop="10dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            tools:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/border_arround_blog_btn"
+
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:padding="10dp"
+                android:src="@drawable/thumb_up_blck" />
+
+            <ImageButton
+                android:id="@+id/comment_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.50"
+                android:padding="10dp"
+
+                android:src="@drawable/ic_comment_black_10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:background="#FFFFFF"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
