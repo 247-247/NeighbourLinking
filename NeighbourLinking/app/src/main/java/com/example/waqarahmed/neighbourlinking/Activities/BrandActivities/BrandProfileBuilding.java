@@ -158,21 +158,27 @@ public class BrandProfileBuilding extends AppCompatActivity {
         }
     }
 
-    private void startSetupAccount() {
+    private void startSetupAccount()
+    {
         // final String profileName =  AccountSetupNAme.getText().toString().trim();
         spnrValue =spinner.getSelectedItem().toString();
         final String name = nameEdit.getText().toString();
         final String contact = ContactEdit.getText().toString();
 
-        if(!TextUtils.isEmpty(name) && resultUri != null && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue)) {
-            if (AppStatus.getInstance(this).isOnline()){
-                if (progress == null) {
+        if(!TextUtils.isEmpty(name) && resultUri != null && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue))
+        {
+            if (AppStatus.getInstance(this).isOnline())
+            {
+                if (progress == null)
+                {
                     progress = AppUtils.createProgressDialog(this);
                     progress.show();
                     StorageReference mStorageChildImage = mUserProfileStorage.child(resultUri.getLastPathSegment());
-                    mStorageChildImage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    mStorageChildImage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                    {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                        {
                             @SuppressWarnings("VisibleForTests")  Uri downloadURL = taskSnapshot.getDownloadUrl();
                             progress.dismiss();
                             upLoadBranProfileInfo ul = new upLoadBranProfileInfo(BrandProfileBuilding.this);
@@ -181,17 +187,19 @@ public class BrandProfileBuilding extends AppCompatActivity {
                         }
                     });
 
-                } else {
-                   // progress.show();
                 }
 
+            }
+            else
+            {
+                Toast.makeText(BrandProfileBuilding.this,"Network error Errors",Toast.LENGTH_SHORT).show();
             }
 
 
 
         }
         else{
-            Toast.makeText(BrandProfileBuilding.this,"AccountSetup Faild Errors",Toast.LENGTH_SHORT).show();
+            Toast.makeText(BrandProfileBuilding.this,"AccountSetup Field Errors",Toast.LENGTH_SHORT).show();
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,7 +22,16 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.BrandProfileBuilding;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManProfile;
+import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
+import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Services.BrandServices.upLoadBranProfileInfo;
+import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.upLoadServiceManProfileInfo;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -34,6 +44,10 @@ public class ServiceManProfileBuilding extends AppCompatActivity {
     public static final int GALLARY_CODE = 1;
     Uri resultUri;
     private AwesomeValidation awesomeValidation;
+    StorageReference mUserProfileStorage;
+    ProgressDialog progress ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +62,8 @@ public class ServiceManProfileBuilding extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.skill_list_serviceProfile);
         donrBtn = (Button) findViewById(R.id.doneBtn_serviceProfile);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this, R.id.name_brandProfile, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
+        mUserProfileStorage = FirebaseStorage.getInstance().getReference().child("Profile_images");
+        awesomeValidation.addValidation(this, R.id.name_serviceProfile, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
       //  awesomeValidation.addValidation(this, R.id.contact_brandProfile, "^[2-9]{2}[0-9]{8}$", R.string.mobileerror);
 
         spnrValue =spinner.getSelectedItem().toString();
@@ -61,7 +76,7 @@ public class ServiceManProfileBuilding extends AppCompatActivity {
         donrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContactEdit.length()>11) {
+                if(ContactEdit.length()==11) {
                     if (awesomeValidation.validate()) {
                         startSetupAccount();
                     } else {
@@ -139,24 +154,45 @@ public class ServiceManProfileBuilding extends AppCompatActivity {
     private void startSetupAccount() {
         // final String profileName =  AccountSetupNAme.getText().toString().trim();
         spnrValue =spinner.getSelectedItem().toString();
-        String name = nameEdit.getText().toString();
-        String contact = ContactEdit.getText().toString();
+        final String name = nameEdit.getText().toString();
+        final String contact = ContactEdit.getText().toString();
 
-        if(!TextUtils.isEmpty(name) && resultUri != null && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue)) {
+        if(!TextUtils.isEmpty(name) && resultUri != null && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue))
+        {
 
+            if (AppStatus.getInstance(this).isOnline())
+            {
+                if (progress == null)
+                {
+                    progress = AppUtils.createProgressDialog(this);
+                    progress.show();
+                    StorageReference mStorageChildImage = mUserProfileStorage.child(resultUri.getLastPathSegment());
+                    mStorageChildImage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                    {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                        {
+                            @SuppressWarnings("VisibleForTests") Uri downloadURL = taskSnapshot.getDownloadUrl();
+                            progress.dismiss();
+                            upLoadServiceManProfileInfo ul = new upLoadServiceManProfileInfo(ServiceManProfileBuilding.this);
+                            ul.execute(name, downloadURL.toString(), contact, spnrValue);
+                        }
+                    });
 
-            Intent mainIntent = new Intent(ServiceManProfileBuilding.this , MainBrandActivity.class);
-            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(mainIntent);
-
-
-
-
+                } else
+                    {
+                    // progress.show();
+                    }
+            }
+            else
+            {
+                Toast.makeText(ServiceManProfileBuilding.this, "Network Errors", Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            Toast.makeText(ServiceManProfileBuilding.this,"AccountSetup Field Errors",Toast.LENGTH_SHORT).show();
+        else
+        {
+            Toast.makeText(ServiceManProfileBuilding.this, "AccountSetup Field Errors", Toast.LENGTH_SHORT).show();
         }
-
 
     }
     @Override

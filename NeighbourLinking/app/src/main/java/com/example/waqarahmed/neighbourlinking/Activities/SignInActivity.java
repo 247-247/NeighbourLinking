@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.SignInServiceMan;
+import com.example.waqarahmed.neighbourlinking.Services.BrandServices.SignInServiceMan;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.SignInBrand;
 import com.example.waqarahmed.neighbourlinking.Services.DeviceRegistrationRelated;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SignInActivity extends AppCompatActivity {
    TextView mEmailView,mPasswordView;
