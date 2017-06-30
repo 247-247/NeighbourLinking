@@ -10,9 +10,11 @@ import java.io.Serializable;
 public class ServiceRequest implements Serializable{
     int id;
     String type, owner_house_address,owner_contact,owner_name,status,owner_image_url,powerMan_name,
-            powerMan_image_url,powerMan_id,created_at,updated_at,cause,sender_id;
+            powerMan_image_url,powerMan_id,created_at,updated_at,cause,sender_id , s;
 
-    public ServiceRequest(int id, String type, String owner_house_address, String owner_contact, String owner_name, String status, String owner_image_url, String powerMan_name, String powerMan_image_url, String powerMan_id, String created_at, String updated_at, String cause, String sender_id) {
+    public ServiceRequest(int id, String type, String owner_house_address, String owner_contact, String owner_name, String status, String owner_image_url, String powerMan_name, String
+            powerMan_image_url, String powerMan_id, String created_at, String updated_at, String cause,
+                          String sender_id, String s) {
         this.id = id;
         this.type = type;
         this.owner_house_address = owner_house_address;
@@ -27,6 +29,7 @@ public class ServiceRequest implements Serializable{
         this.updated_at = updated_at;
         this.cause = cause;
         this.sender_id = sender_id;
+        this.s = s;
     }
 
     public ServiceRequest() {
@@ -74,6 +77,10 @@ public class ServiceRequest implements Serializable{
 
     public String getStatus() {
         return status;
+    }
+
+    public void setAcceptetStatus(String s){
+        this.s = s;
     }
 
     public void setStatus(String status) {
@@ -142,5 +149,8 @@ public class ServiceRequest implements Serializable{
 
     public void setSender_id(String sender_id) {
         this.sender_id = sender_id;
+    }
+    public String getAcceptetStatus(){
+        return s;
     }
 }

@@ -83,8 +83,32 @@
                 android:id="@+id/sName_editiew_rDActivity"/>
 
         </LinearLayout>
+        <LinearLayout
 
-              <LinearLayout
+            style="@style/linealayoutUseInAbout"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/firstName_textView_"
+                android:text="Is Accepted:"
+
+                android:layout_weight=".40"/>
+            <EditText
+                android:enabled="false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".60"
+                android:text="Panding"
+                android:background="@drawable/customborder_for_blog_row"
+                android:id="@+id/isAccepted_editiew_rDActivity"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             style="@style/linealayoutUseInAbout">
 
             <TextView

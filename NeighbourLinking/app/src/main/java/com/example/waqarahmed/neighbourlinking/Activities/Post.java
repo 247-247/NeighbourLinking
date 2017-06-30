@@ -43,7 +43,7 @@ public class Post extends AppCompatActivity {
     Button mSubmit;
     private Uri resultUri =null;
     StorageReference strRef;
-    StorageReference mUserPostStorage;;
+    StorageReference mUserPostStorage;
     DatabaseReference mDatabaseReferenceUser;
     DatabaseReference dbRefBlog;
     FirebaseUser firebaseUser;

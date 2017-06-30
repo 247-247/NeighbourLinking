@@ -134,6 +134,7 @@ public class RetrievAllRequestList extends AsyncTask<String, Void,  ArrayList<Se
                         r.setUpdated_at(jsonObject.getString("updated_at"));
                         r.setCause(jsonObject.getString("cause"));
                         r.setSender_id(jsonObject.getString("sender_id"));
+                        r.setAcceptetStatus(jsonObject.getString("s")); // accept status
 
 
 

@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 public class RequestDetailActivity extends AppCompatActivity {
     ImageView mCurrentServiceImage;
     TextView mHeadName, mHeadDate;
-    EditText mFirstName, mStatusEdit , mCreateField,mCauseEdit;
+    EditText mFirstName, mStatusEdit , mCreateField,mCauseEdit , isAccaptedEdit;
     ServiceRequest serviceRequest;
 
     @Override
@@ -33,6 +33,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         mFirstName= (EditText) findViewById(R.id.sName_editiew_rDActivity);
         mStatusEdit= (EditText) findViewById(R.id.status_editiew_rDActivity);
         mCauseEdit= (EditText) findViewById(R.id.cause_editiew_rDActivity);
+        isAccaptedEdit = (EditText) findViewById(R.id.isAccepted_editiew_rDActivity);
         serviceRequest = (ServiceRequest) getIntent().getSerializableExtra("rObject");
 
       //  Toast.makeText(RequestDetailActivity.this,""+serviceRequest.getCause(),Toast.LENGTH_LONG).show();
@@ -70,6 +71,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         mStatusEdit.setText(serviceRequest.getStatus());
         mCreateField.setText(serviceRequest.getCreated_at());
         mCauseEdit.setText(serviceRequest.getCause());
+        isAccaptedEdit.setText(serviceRequest.getAcceptetStatus());
 
     }
     @Override
