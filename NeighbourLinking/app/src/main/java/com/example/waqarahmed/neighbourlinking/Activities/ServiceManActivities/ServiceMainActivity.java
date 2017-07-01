@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
+import com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment.ServiceMan_activeRequest;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
@@ -159,6 +160,10 @@ public class ServiceMainActivity extends AppCompatActivity {
             int s = SharedPref.read(SharedPref.ID,0);
 //            SharedPref.write(SharedPref.ID, employeeId);//save int in shared preference.
 //            SharedPref.write(SharedPref.IS_SIGN_IN, true);//save boolean in shared preference.
+            if(position == 0){
+            ServiceMan_activeRequest serviceMan_activeRequest = new ServiceMan_activeRequest();
+            return  serviceMan_activeRequest;
+        }
             return PlaceholderFragment.newInstance(s);
         }
 

@@ -69,7 +69,7 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
         if (AppStatus.getInstance(cxt).isOnline()) {
             progress.show();
 
-            String url_string = "http://3fca518c.ngrok.io/Neighbour/public/newBrandRegister";
+            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/newBrandRegister";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;

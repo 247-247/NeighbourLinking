@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Classes.Comment;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,7 @@ public class Comments extends AppCompatActivity {
     DatabaseReference mDatabaseReferenceUser;
     FirebaseAuth mAuth;
     String comment_body;
+    String currentUser;
     String snder_name , msgBody,sendingDate , sender_image_comment;
 
 
@@ -61,6 +64,13 @@ public class Comments extends AppCompatActivity {
         mCommentView = (EditText) findViewById(R.id.message_edit);
         mLeaveComment_btn = (ImageButton) findViewById(R.id.sendComment_btn);
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            currentUser = mAuth.getCurrentUser().getUid().toString();
+        }
+        else{
+            BrandSharedPref.init(this);
+            currentUser = String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0));
+        }
 
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Comment").child(post_key_string);
@@ -78,6 +88,12 @@ public class Comments extends AppCompatActivity {
 
                 }
             });
+        }else {
+
+            Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
+            sender_image_comment = brand.getImage_url();
+            snder_name = brand.getName();
+
         }
 
 
@@ -95,7 +111,7 @@ public class Comments extends AppCompatActivity {
                         db.child("comment_sender_image").setValue(sender_image_comment);
                         db.child("comment_body").setValue(msgBody);
                         db.child("sending_date").setValue(date);
-                        db.child("sender_uid").setValue(mAuth.getCurrentUser().getUid());
+                        db.child("sender_uid").setValue(currentUser);
                         mCommentView.setText("");
                         Toast.makeText(Comments.this,"Comment send",Toast.LENGTH_SHORT).show();
 

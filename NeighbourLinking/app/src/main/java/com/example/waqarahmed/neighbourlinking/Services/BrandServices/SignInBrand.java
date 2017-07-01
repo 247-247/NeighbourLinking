@@ -11,6 +11,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBr
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
@@ -74,7 +75,7 @@ public class SignInBrand extends AsyncTask<String, Void, String> {
         if (AppStatus.getInstance(cxt).isOnline())
         {
 
-            String url_string = "http://77a0de08.ngrok.io/Neighbour/public/getBrandBasesOnEmail";
+            String url_string = "http://b362f197.ngrok.io/Neighbour/public/getBrandBasesOnEmail";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;
@@ -131,14 +132,17 @@ public class SignInBrand extends AsyncTask<String, Void, String> {
                        JSONObject jsonObject = jsonRootObject.getJSONObject("BrandBaseOnEmail");
                     Log.i(TAG, "doInBackground: 13 "+ jsonObject.getString("status"));
                          String response = jsonObject.getString("status");
+                    String acc = jsonObject.getString("Account");
                     Log.i(TAG, "doInBackground: 14 ");
                     int employeeId = jsonObject.getInt("id");
 
                     if(response.equals("yes")){
                         Log.i(TAG, "doInBackground: 15 ");
                         BrandSharedPref.init(cxt.getApplicationContext());
-                        BrandSharedPref.write(SharedPref.ID, employeeId);//save int in shared preference.
-                        BrandSharedPref.write(SharedPref.IS_SIGN_IN, true);//save boolean in shared preference.
+                        BrandSharedPref.write(BrandSharedPref.ID, employeeId);//save int in shared preference.
+                        BrandSharedPref.write(BrandSharedPref.IS_SIGN_IN, true);//save boolean in shared preference.
+                        BrandSharedPref.write(BrandSharedPref.ACCOUNT,acc);
+
                         return "yes";
                     }
                     else{
@@ -181,6 +185,9 @@ public class SignInBrand extends AsyncTask<String, Void, String> {
             if(s.equals("yes")){
                // Toast.makeText(cxt,"True",Toast.LENGTH_SHORT).show();
                 Intent BrandIntent = new Intent(cxt,MainBrandActivity.class);
+                BrandIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                BrandIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+
                 cxt.startActivity(BrandIntent);
 
 

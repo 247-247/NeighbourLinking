@@ -70,7 +70,7 @@ public class RegisterNewServiceMan extends AsyncTask<String, Void, String> {
         if (AppStatus.getInstance(cxt).isOnline())
         {
 
-            String url_string = "http://3fca518c.ngrok.io/Neighbour/public/RegisterNewEmployee";
+            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/RegisterNewEmployee";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;

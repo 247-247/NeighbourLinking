@@ -103,24 +103,7 @@
                 android:layout_weight=".60"/>
 
         </LinearLayout>
-        <LinearLayout
-            style="@style/linealayoutUseInAbout">
 
-            <TextView
-                android:layout_width="0dp"
-                android:textSize="20dp"
-                android:layout_height="wrap_content"
-                android:text="Email:"
-                android:layout_weight=".40"/>
-            <EditText
-                android:enabled="false"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailName_editiew_aboutActivity"
-                android:background="@drawable/customborder_for_blog_row"
-                android:layout_weight=".60"/>
-
-        </LinearLayout>
         <LinearLayout
             style="@style/linealayoutUseInAbout">
 
@@ -158,24 +141,7 @@
                 android:layout_weight=".60"/>
 
         </LinearLayout>
-        <LinearLayout
-            style="@style/linealayoutUseInAbout">
 
-            <TextView
-                android:layout_width="0dp"
-                android:textSize="20dp"
-                android:layout_height="wrap_content"
-                android:text="Gender:"
-                android:layout_weight=".40"/>
-            <EditText
-                android:layout_width="0dp"
-                android:enabled="false"
-                android:layout_height="wrap_content"
-                android:id="@+id/gender_editiew_aboutActivity"
-                android:background="@drawable/customborder_for_blog_row"
-                android:layout_weight=".60"/>
-
-        </LinearLayout>
         <LinearLayout
             style="@style/linealayoutUseInAbout">
 
@@ -190,6 +156,44 @@
                 android:enabled="false"
                 android:layout_height="wrap_content"
                 android:id="@+id/createDate_editiew_aboutActivity"
+                android:background="@drawable/customborder_for_blog_row"
+                android:layout_weight=".60"/>
+
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linealayoutUseInAbout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_view_aboutActivity"
+                android:text="Email:"
+                android:layout_weight=".40"/>
+            <EditText
+                android:enabled="false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailName_editiew_aboutActivity"
+                android:background="@drawable/customborder_for_blog_row"
+                android:layout_weight=".60"/>
+
+        </LinearLayout>
+        <LinearLayout
+            style="@style/linealayoutUseInAbout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/gender_textview_aboutActivity"
+                android:text="Gender:"
+                android:layout_weight=".40"/>
+            <EditText
+                android:layout_width="0dp"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/gender_editiew_aboutActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
 

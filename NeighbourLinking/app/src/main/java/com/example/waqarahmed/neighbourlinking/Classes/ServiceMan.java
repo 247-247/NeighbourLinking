@@ -7,12 +7,12 @@ package com.example.waqarahmed.neighbourlinking.Classes;
 public class ServiceMan {
 
     int id;
-   String  email,name,contact,skill,status,image_url;
+   String  email,name,contact,skill,status,image_url,isAccountSetUp;
 
     public ServiceMan() {
     }
 
-    public ServiceMan(int id, String email, String name, String contact, String skill, String status, String image_url) {
+    public ServiceMan(int id, String email, String name, String contact, String skill, String status, String image_url,String isAccountSetUp) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -20,6 +20,7 @@ public class ServiceMan {
         this.skill = skill;
         this.status = status;
         this.image_url = image_url;
+        this.isAccountSetUp = isAccountSetUp;
     }
 
     public int getId() {
@@ -77,4 +78,12 @@ public class ServiceMan {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+    public String getIsAccountSetUp() {
+        return isAccountSetUp;
+    }
+
+    public void setIsAccountSetUp(String isAccountSetUp) {
+        this.isAccountSetUp = isAccountSetUp;
+    }
+
 }

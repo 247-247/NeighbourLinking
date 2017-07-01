@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Services.BrandServices;
+package com.example.waqarahmed.neighbourlinking.Services.ServiceManServices;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -76,7 +76,7 @@ public class SignInServiceMan extends AsyncTask<String, Void, String> {
         if (AppStatus.getInstance(cxt).isOnline())
         {
 
-            String url_string = "http://77a0de08.ngrok.io/Neighbour/public/getEmployeeBasesOnEmail";
+            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/getEmployeeBasesOnEmail";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;

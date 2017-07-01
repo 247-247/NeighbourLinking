@@ -22,11 +22,13 @@ import android.widget.TextView;
 
 import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Fragments.Home_Wall;
 import com.example.waqarahmed.neighbourlinking.Fragments.MyPosts;
 import com.example.waqarahmed.neighbourlinking.Fragments.UserProfile;
 import com.example.waqarahmed.neighbourlinking.Fragments._Home_wall;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfo;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
@@ -56,6 +58,21 @@ public class MainBrandActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+
+        BrandSharedPref.init(this);
+        String isAccountSetup = BrandSharedPref.read(BrandSharedPref.ACCOUNT,"no");
+        if(isAccountSetup.equals("no")){
+
+            startActivity(new Intent(MainBrandActivity.this,BrandProfileBuilding.class));
+        }
+        else{
+
+            RetrievBranProfileInfo retrievBranProfileInfo = new RetrievBranProfileInfo(this);
+            retrievBranProfileInfo.execute();
+        }
+
+
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -76,6 +93,35 @@ public class MainBrandActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        BrandSharedPref.init(this);
+        String isAccountStup = BrandSharedPref.read(BrandSharedPref.ACCOUNT,"no");
+        if(isAccountStup.equals("no")){
+
+        }else {
+            final Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(20000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
+            if(!brand.equals(null)){
+                getSupportActionBar().setTitle(brand.getName());
+
+            }
+
+        }
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,8 +145,10 @@ public class MainBrandActivity extends AppCompatActivity {
         }
         if (id == R.id.action_logout) {
             BrandSharedPref.init(getApplicationContext());
-            BrandSharedPref.write(SharedPref.ID,0);
-            BrandSharedPref.write(SharedPref.IS_SIGN_IN,false);
+            BrandSharedPref.write(BrandSharedPref.ID,0);
+            BrandSharedPref.write(BrandSharedPref.IS_SIGN_IN,false);
+            BrandSharedPref.write(BrandSharedPref.ACCOUNT,"no");
+            BrandSharedPref.writeObject(BrandSharedPref.OBJECT,null);
             Intent login = new Intent(MainBrandActivity.this , SignInActivity.class);  // then call log in page
             login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(login);

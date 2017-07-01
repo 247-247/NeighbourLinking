@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.waqarahmed.neighbourlinking.Adapter.ChatMessageAdapter;
 import com.example.waqarahmed.neighbourlinking.Classes.Message;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ private RecyclerView mRecyclerView;
     private ImageView mImageView;
     String receiverId,userName,senderId , receverName;
     DatabaseReference mConversation , mUser;
+    String currentUserId;
     FirebaseAuth mAuth;
 
     String chat_msg , chat_user_name;
@@ -71,10 +73,21 @@ private RecyclerView mRecyclerView;
         receverName = getIntent().getExtras().get("receverName").toString();
         getSupportActionBar().setTitle(receverName);
 
+
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            currentUserId = mAuth.getCurrentUser().getUid().toString();
+
+        }
+        else{
+            SharedPref.init(this);
+            currentUserId = String.valueOf(SharedPref.read(SharedPref.ID,0));
+        }
 
         room_1 = mAuth.getCurrentUser().getUid() + "_" + receiverId;
         room_2 = receiverId + "_" + mAuth.getCurrentUser().getUid();
+//        room_1 = currentUserId + "_" + receiverId;
+//        room_2 = receiverId + "_" + currentUserId;
         mConversation = FirebaseDatabase.getInstance().getReference().child("Conversation");
         mUser = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid());
         mUser.addValueEventListener(new ValueEventListener() {

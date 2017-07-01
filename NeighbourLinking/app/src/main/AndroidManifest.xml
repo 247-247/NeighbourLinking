@@ -82,7 +82,8 @@
             android:label="@string/title_activity_main_brand"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.BrandActivities.BrandProfileBuilding" />
-        <activity android:name=".Activities.ServiceManActivities.ServiceManProfileBuilding"></activity>
+        <activity android:name=".Activities.ServiceManActivities.ServiceManProfileBuilding" />
+        <activity android:name=".Activities.BrandActivities.AboutBrand"></activity>
     </application>
 
 </manifest>

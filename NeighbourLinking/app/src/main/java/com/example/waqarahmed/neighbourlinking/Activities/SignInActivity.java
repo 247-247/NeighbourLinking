@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Services.BrandServices.SignInServiceMan;
+import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.SignInServiceMan;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.SignInBrand;
 import com.example.waqarahmed.neighbourlinking.Services.DeviceRegistrationRelated;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,6 +129,7 @@ public class SignInActivity extends AppCompatActivity {
     private void signInAsServiceMan(String e, String p) {
 
         SignInServiceMan signInServiceMan = new SignInServiceMan(this);
+
         signInServiceMan.execute(e,p);
 
     }
@@ -172,7 +173,8 @@ public class SignInActivity extends AppCompatActivity {
                     String currentUserId = mAuth.getCurrentUser().getUid();
                     if (dataSnapshot.hasChild("image")) {
                         Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                         startActivity(mainIntent);
 
                     } else {

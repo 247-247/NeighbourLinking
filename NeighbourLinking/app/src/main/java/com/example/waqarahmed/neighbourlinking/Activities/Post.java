@@ -17,7 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -48,9 +51,10 @@ public class Post extends AppCompatActivity {
     DatabaseReference dbRefBlog;
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
-    DatabaseReference mCurrenUser;
+   // DatabaseReference mCurrenUser;
     ProgressDialog mProgBar;
     private static final int GALLARY_CODE = 2;
+    String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +71,14 @@ public class Post extends AppCompatActivity {
         mProgBar.setMessage("Uploading...");
         strRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-       firebaseUser = mAuth.getCurrentUser();
+      // firebaseUser = mAuth.getCurrentUser();
+
+        BrandSharedPref.init(this);
+        currentUserId = String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0));
+
         dbRefBlog= FirebaseDatabase.getInstance().getReference().child("Blog");
         dbRefBlog.keepSynced(true);
-        mCurrenUser = FirebaseDatabase.getInstance().getReference().child("User").child(firebaseUser.getUid());
+        //mCurrenUser = FirebaseDatabase.getInstance().getReference().child("User").child(firebaseUser.getUid());
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,33 +109,21 @@ public class Post extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     @SuppressWarnings("VisibleForTests")   final Uri downloadUri = taskSnapshot.getDownloadUrl();
                     final DatabaseReference newPost = dbRefBlog.push();
-
-
-                    mCurrenUser.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            newPost.child("title").setValue(title_val);
+                    Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
+                    if(!brand.equals(null)){
+                    newPost.child("title").setValue(title_val);
                             newPost.child("desc").setValue(desc_val);
                             newPost.child("post_image").setValue(downloadUri.toString());
-                            newPost.child("uid").setValue(firebaseUser.getUid());
-                            newPost.child("sender_image").setValue(dataSnapshot.child("image").getValue());
+                            newPost.child("uid").setValue(currentUserId);
+                            newPost.child("sender_image").setValue(brand.getImage_url());
                             newPost.child("send_date").setValue( new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-                            newPost.child("username").setValue(dataSnapshot.child("first_name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Intent mainIntent = new Intent(Post.this , MainActivity.class);
-                                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(mainIntent);
+                            newPost.child("username").setValue(brand.getName());
 
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                        Intent mainBrandIntent = new Intent(Post.this, MainBrandActivity.class);
+                        mainBrandIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        mainBrandIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                        startActivity(mainBrandIntent);
+                    }
 
                     mProgBar.dismiss();
 

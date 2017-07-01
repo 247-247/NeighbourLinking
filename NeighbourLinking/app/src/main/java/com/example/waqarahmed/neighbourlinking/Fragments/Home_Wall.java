@@ -18,6 +18,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.Comments;
 import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,7 @@ public class Home_Wall extends Fragment {
     DatabaseReference mDatabaseComment;
     FirebaseAuth.AuthStateListener authStateListener;
     boolean mLikeProcess = false;
+    String currentUserId;
 
     public Home_Wall() {
         // Required empty public constructor
@@ -67,6 +69,17 @@ public class Home_Wall extends Fragment {
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
         mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Comment");
+        if(mAuth.getCurrentUser() != null){
+            currentUserId = mAuth.getCurrentUser().getUid().toString();
+
+        }
+        else {
+            BrandSharedPref.init(getActivity().getApplicationContext());
+            int id = BrandSharedPref.read(BrandSharedPref.ID,0);
+            currentUserId  = String.valueOf(id);
+
+        }
+
         mDatabaseReferenceBlog.keepSynced(true);
         mDatabaseReferenceUser.keepSynced(true);
         mDatabaseLike.keepSynced(true);
@@ -119,12 +132,12 @@ public class Home_Wall extends Fragment {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if(mLikeProcess)
                                 {
-                                    if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
-                                        mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                    if(dataSnapshot.child(post_key).hasChild(currentUserId)){
+                                        mDatabaseLike.child(post_key).child(currentUserId).removeValue();
                                         mLikeProcess = false;
                                     }
                                     else {
-                                        mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("AnyValue");
+                                        mDatabaseLike.child(post_key).child(currentUserId).setValue("AnyValue");
                                         mLikeProcess = false;
                                     }
 
@@ -173,6 +186,7 @@ public class Home_Wall extends Fragment {
         ImageButton mComment;
         FirebaseAuth mAuth;
         DatabaseReference mDatabaseLike;
+
         public BlogViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
@@ -187,12 +201,24 @@ public class Home_Wall extends Fragment {
         }
 
         public void setMlikebtn(final String post_key){
+            final String currentUserId;
+
+            if(mAuth.getCurrentUser() != null){
+                currentUserId = mAuth.getCurrentUser().getUid().toString();
+
+            }
+            else {
+                BrandSharedPref.init(mView.getContext());
+                int id = BrandSharedPref.read(BrandSharedPref.ID,0);
+                currentUserId  = String.valueOf(id);
+
+            }
 
             mDatabaseLike.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(mAuth.getCurrentUser() != null){
-                        if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                    if( currentUserId != null){
+                        if(dataSnapshot.child(post_key).hasChild(currentUserId)){
                             mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
 
                         }else{

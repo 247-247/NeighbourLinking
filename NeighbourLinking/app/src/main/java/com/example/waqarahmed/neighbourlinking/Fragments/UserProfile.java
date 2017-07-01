@@ -20,6 +20,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
 import com.example.waqarahmed.neighbourlinking.Activities.Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +53,7 @@ public class UserProfile extends Fragment {
     String currentUserId;
     FirebaseRecyclerAdapter<Blog, BBlogViewHolder> firebaseRecyclerAdapter;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,7 @@ public class UserProfile extends Fragment {
         mCurrentUserAbout_btn= (Button) view.findViewById(R.id.currentUserAbout);
         mCurrentUserUpdatetd_btn = (Button) view.findViewById(R.id.currentUserUpdatetd);
         mCurrentUserPost_btn= (Button) view.findViewById(R.id.currentUserPost);
+
         mCurrentUserPost_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -76,7 +76,7 @@ public class upLoadServiceManProfileInfo extends AsyncTask<String, Void, String>
         if (AppStatus.getInstance(cxt).isOnline()) {
             progress.show();
 
-            String url_string = "http://77a0de08.ngrok.io/Neighbour/public/InserNewEmployee";
+            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/InserNewEmployee";
             try {
                 Log.i("TAG", "doInBackground:  " + s_name  + s_contact);
                 URL url = null;
