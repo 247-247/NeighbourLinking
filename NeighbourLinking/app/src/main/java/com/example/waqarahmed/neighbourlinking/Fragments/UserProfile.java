@@ -16,9 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.About;
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.UpDateBrandProfile;
+import com.example.waqarahmed.neighbourlinking.Activities.Comments;
 import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
 import com.example.waqarahmed.neighbourlinking.Activities.Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -47,8 +51,7 @@ public class UserProfile extends Fragment {
     DatabaseReference mDatabaseLike;
     Query mCurrentUserProfileQuery;
     DatabaseReference mCurrentUserProfileDatabaseRefence;
-    DatabaseReference mCurrentUserInFo_fireBaseDbRef;
-    FirebaseAuth.AuthStateListener authStateListener;
+
     boolean mLikeProcess = false;
     String currentUserId;
     FirebaseRecyclerAdapter<Blog, BBlogViewHolder> firebaseRecyclerAdapter;
@@ -73,6 +76,8 @@ public class UserProfile extends Fragment {
         mCurrentUserAbout_btn= (Button) view.findViewById(R.id.currentUserAbout);
         mCurrentUserUpdatetd_btn = (Button) view.findViewById(R.id.currentUserUpdatetd);
         mCurrentUserPost_btn= (Button) view.findViewById(R.id.currentUserPost);
+        BrandSharedPref.init(getActivity().getApplicationContext());
+        currentUserId= String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0));
 
         mCurrentUserPost_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +89,15 @@ public class UserProfile extends Fragment {
         mCurrentUserAbout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent About_Intent = new Intent(getActivity().getApplicationContext(), About.class);
+                Intent About_Intent = new Intent(getActivity().getApplicationContext(), AboutBrand.class);
                 startActivity(About_Intent);
+            }
+        });
+        mCurrentUserUpdatetd_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent update_Intent = new Intent(getActivity().getApplicationContext(), UpDateBrandProfile.class);
+                startActivity(update_Intent);
             }
         });
 
@@ -100,13 +112,6 @@ public class UserProfile extends Fragment {
 
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
         mCurrentUserProfileDatabaseRefence = FirebaseDatabase.getInstance().getReference().child("Blog");
-        if(mAuth.getCurrentUser() != null) {
-
-            currentUserId = mAuth.getCurrentUser().getUid();
-            mCurrentUserInFo_fireBaseDbRef = mDatabaseReferenceUser.child(currentUserId);
-          //  mCurrentUserProfileQuery = mCurrentUserProfileDatabaseRefence.orderByChild("uid").equalTo(currentUserId);
-            mCurrentUserInFo_fireBaseDbRef.keepSynced(true);
-        }
 
 
 
@@ -120,40 +125,34 @@ public class UserProfile extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-        if(mAuth.getCurrentUser() != null){
-        if(!currentUserId.equals(null)) {
-
-            mCurrentUserInFo_fireBaseDbRef.addValueEventListener(new ValueEventListener() {
+        BrandSharedPref.init(getActivity().getApplicationContext());
+        final Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
+        if(brand != null) {
+            Picasso.with(getActivity().getApplicationContext()).load(brand.getImage_url()).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.hasChildren()){
-                    String name = dataSnapshot.child("first_name").getValue().toString();
-                    String create_date = dataSnapshot.child("create_date").getValue().toString();
-                    final String imageUrl = dataSnapshot.child("image").getValue().toString();
-                    mCurrentUserName_textView.setText(name);
-                    mAccountCreated_date_textView.setText(create_date);
-                    Picasso.with(getActivity().getApplicationContext()).load(imageUrl).centerCrop().resize(75, 75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            Picasso.with(getActivity().getApplicationContext()).load(imageUrl).centerCrop().resize(75, 75).into(mCurrentUser_imageView);
-                        }
-                    });
-                }}
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onSuccess() {
 
                 }
-            });
 
-            mCurrentUserProfileQuery = mCurrentUserProfileDatabaseRefence.orderByChild("uid").equalTo(currentUserId);
+                @Override
+                public void onError() {
+                    Picasso.with(getActivity().getApplicationContext()).load(brand.getImage_url()).into(mCurrentUser_imageView);
+                }
+            });
+            mCurrentUserName_textView.setText(brand.getName());
+            mAccountCreated_date_textView.setText(brand.getCreated_at());
+
+        }
+
+        mCurrentUserProfileQuery = mCurrentUserProfileDatabaseRefence.orderByChild("uid").equalTo(currentUserId);
             firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BBlogViewHolder>(
                     Blog.class,
                     R.layout.blog_row,
@@ -184,7 +183,7 @@ public class UserProfile extends Fragment {
                         @Override
                         public void onClick(View view) {
                             String post = getRef(position).toString();
-                            Toast.makeText(getActivity(), post_key, Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(getActivity(), post_key, Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -196,11 +195,11 @@ public class UserProfile extends Fragment {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (mLikeProcess) {
-                                        if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
-                                            mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                        if (dataSnapshot.child(post_key).hasChild(currentUserId)) {
+                                            mDatabaseLike.child(post_key).child(currentUserId).removeValue();
                                             mLikeProcess = false;
                                         } else {
-                                            mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("AnyValue");
+                                            mDatabaseLike.child(post_key).child(currentUserId).setValue("AnyValue");
                                             mLikeProcess = false;
                                         }
 
@@ -214,10 +213,21 @@ public class UserProfile extends Fragment {
                             });
                         }
                     });
+                    viewHolder.mComment.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent comment_Intent = new Intent(getActivity().getApplicationContext(), Comments.class);
+                            comment_Intent.putExtra("postKey", post_key);
+                            startActivity(comment_Intent);
+
+                        }
+                    });
+
+
 
                 }
             };
-        }}
+
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
     // TODO: Rename method, update argument and hook method into UI event
@@ -240,10 +250,14 @@ public class UserProfile extends Fragment {
         ImageView post_image;
         ImageButton mlikebtn;
         FirebaseAuth mAuth;
+        ImageButton mComment;
         DatabaseReference mDatabaseLike;
+        Context context;
         public BBlogViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
+            context = itemView.getContext();
+            mComment = (ImageButton) mView.findViewById(R.id.comment_btn);
             post_title = (TextView) mView.findViewById(R.id.titleShow);
             post_image = (ImageView) mView.findViewById(R.id.imageShow);
             mlikebtn = (ImageButton) itemView.findViewById(R.id.like_btn);
@@ -258,8 +272,11 @@ public class UserProfile extends Fragment {
             mDatabaseLike.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(mAuth.getCurrentUser() != null){
-                        if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                    BrandSharedPref.init(context);
+                    String currentUserId = String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0));
+                    if(!currentUserId.equals(0)){
+
+                        if(dataSnapshot.child(post_key).hasChild(String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0)))){
                             mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
 
                         }else{
@@ -315,7 +332,7 @@ public class UserProfile extends Fragment {
         public void setSenderProfileImage(final Context cxt, final String image){
             final ImageView imageView1 = (ImageView) mView.findViewById(R.id.senderImage_imageView);
 
-            Picasso.with(cxt).load(image).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(imageView1, new Callback() {
+            Picasso.with(cxt).load(image).centerCrop().resize(75,75).placeholder(R.mipmap.ic_launcher).networkPolicy(NetworkPolicy.OFFLINE).into(imageView1, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -323,7 +340,7 @@ public class UserProfile extends Fragment {
 
                 @Override
                 public void onError() {
-                    Picasso.with(cxt).load(image).centerCrop().resize(75,75).into(imageView1);
+                    Picasso.with(cxt).load(image).centerCrop().placeholder(R.mipmap.ic_launcher).resize(75,75).into(imageView1);
                 }
             });
         }

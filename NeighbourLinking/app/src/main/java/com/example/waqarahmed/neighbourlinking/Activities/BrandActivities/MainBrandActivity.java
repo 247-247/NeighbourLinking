@@ -56,6 +56,7 @@ public class MainBrandActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("N 2 N");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
@@ -97,28 +98,28 @@ public class MainBrandActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        BrandSharedPref.init(this);
-        String isAccountStup = BrandSharedPref.read(BrandSharedPref.ACCOUNT,"no");
-        if(isAccountStup.equals("no")){
+//        BrandSharedPref.init(this);
+//        String isAccountStup = BrandSharedPref.read(BrandSharedPref.ACCOUNT,"no");
+//        if(isAccountStup.equals("no")){
+//
+//        }else {
+//            final Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Thread.sleep(20000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//            Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
+//            if(!brand.equals(null)){
+//                getSupportActionBar().setTitle(brand.getName());
+//
+//            }
 
-        }else {
-            final Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(20000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
-            if(!brand.equals(null)){
-                getSupportActionBar().setTitle(brand.getName());
-
-            }
-
-        }
+    //    }
 
 
     }

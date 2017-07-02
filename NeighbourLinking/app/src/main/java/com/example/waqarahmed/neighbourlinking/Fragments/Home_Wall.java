@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
 import com.example.waqarahmed.neighbourlinking.Activities.Comments;
 import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
@@ -96,7 +97,7 @@ public class Home_Wall extends Fragment {
                 mDatabaseReferenceBlog
         ) {
             @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, final int position) {
+            protected void populateViewHolder(BlogViewHolder viewHolder, final Blog model, final int position) {
                 final String post_key;
                 post_key = getRef(position).getKey().toString();
                 viewHolder.setName(model.getUsername());
@@ -106,6 +107,17 @@ public class Home_Wall extends Fragment {
                 viewHolder.setDate(model.getSend_date());
                 viewHolder.setImage(getActivity().getApplicationContext(),model.getPost_image());
                 viewHolder.setMlikebtn(post_key);
+                viewHolder.imageView1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent BrandAboutInent = new Intent(getActivity().getApplicationContext(), AboutBrand.class);
+                        BrandAboutInent.putExtra("id",model.getUid());
+                        startActivity(BrandAboutInent);
+                       // Toast.makeText(getActivity().getApplicationContext(),model.getUid(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
                 viewHolder.post_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -185,6 +197,7 @@ public class Home_Wall extends Fragment {
         ImageButton mlikebtn;
         ImageButton mComment;
         FirebaseAuth mAuth;
+        ImageView   imageView1 ;
         DatabaseReference mDatabaseLike;
 
         public BlogViewHolder(View itemView) {
@@ -194,6 +207,7 @@ public class Home_Wall extends Fragment {
             post_title = (TextView) mView.findViewById(R.id.titleShow);
             post_image = (ImageView) mView.findViewById(R.id.imageShow);
             mlikebtn = (ImageButton) itemView.findViewById(R.id.like_btn);
+              imageView1 = (ImageView) mView.findViewById(R.id.senderImage_imageView);
             mAuth = FirebaseAuth.getInstance();
             mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
             mDatabaseLike.keepSynced(true);
@@ -272,7 +286,7 @@ public class Home_Wall extends Fragment {
 
         }
         public void setSenderProfileImage(final Context cxt, final String image){
-            final ImageView imageView1 = (ImageView) mView.findViewById(R.id.senderImage_imageView);
+            //final ImageView imageView1 = (ImageView) mView.findViewById(R.id.senderImage_imageView);
 
             Picasso.with(cxt).load(image).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(imageView1, new Callback() {
                 @Override

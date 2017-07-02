@@ -83,7 +83,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.BrandActivities.BrandProfileBuilding" />
         <activity android:name=".Activities.ServiceManActivities.ServiceManProfileBuilding" />
-        <activity android:name=".Activities.BrandActivities.AboutBrand"></activity>
+        <activity android:name=".Activities.BrandActivities.AboutBrand" />
+        <activity android:name=".Activities.BrandActivities.UpDateBrandProfile"></activity>
     </application>
 
 </manifest>

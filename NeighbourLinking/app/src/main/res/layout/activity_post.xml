@@ -19,9 +19,10 @@
             android:layout_marginTop="30dp"
             android:id="@+id/img_btn"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_person_outline_black_32dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_person_outline_black_32dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"

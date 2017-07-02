@@ -11,18 +11,20 @@ public class Blog {
     String username;
     String sender_image;
      String send_date;
+    String uid;
 
     public Blog() {
 
     }
 
-    public Blog(String title, String desc, String post_image, String username, String sender_image, String send_date) {
+    public Blog(String title, String desc, String post_image, String username, String sender_image, String send_date,String uid) {
         this.title = title;
         this.desc = desc;
         this.post_image = post_image;
         this.username = username;
         this.sender_image = sender_image;
         this.send_date = send_date;
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -71,5 +73,12 @@ public class Blog {
 
     public void setSend_date(String send_date) {
         this.send_date = send_date;
+    }
+    public void setUid(String uid){
+        this.uid = uid;
+
+    }
+    public String getUid(){
+        return this.uid;
     }
 }
