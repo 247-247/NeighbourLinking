@@ -11,6 +11,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
+import com.example.waqarahmed.neighbourlinking.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,8 +70,8 @@ public class RegisterNewServiceMan extends AsyncTask<String, Void, String> {
         serviceMan_password = strings[1];
         if (AppStatus.getInstance(cxt).isOnline())
         {
-
-            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/RegisterNewEmployee";
+            String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/RegisterNewEmployee";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;

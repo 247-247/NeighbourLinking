@@ -12,7 +12,8 @@ public class ServiceRequest implements Serializable{
     String type, owner_house_address,owner_contact,owner_name,status,owner_image_url,powerMan_name,
             powerMan_image_url,powerMan_id,created_at,updated_at,cause,sender_id , s;
 
-    public ServiceRequest(int id, String type, String owner_house_address, String owner_contact, String owner_name, String status, String owner_image_url, String powerMan_name, String
+    public ServiceRequest(int id, String type, String owner_house_address, String owner_contact,
+                          String owner_name, String status, String owner_image_url, String powerMan_name, String
             powerMan_image_url, String powerMan_id, String created_at, String updated_at, String cause,
                           String sender_id, String s) {
         this.id = id;
@@ -120,7 +121,7 @@ public class ServiceRequest implements Serializable{
     }
 
     public String getCreated_at() {
-        return created_at;
+        return this.created_at;
     }
 
     public void setCreated_at(String created_at) {
@@ -150,7 +151,13 @@ public class ServiceRequest implements Serializable{
     public void setSender_id(String sender_id) {
         this.sender_id = sender_id;
     }
-    public String getAcceptetStatus(){
+
+
+    public String getS() {
         return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
     }
 }

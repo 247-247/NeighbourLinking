@@ -240,6 +240,7 @@ public class activeRequest extends Fragment {
             if(item.getTitle().equals("Service Man's About")){
                 Intent rDetailintent = new Intent(getActivity().getApplicationContext(),ServiceManProfile.class);
                 rDetailintent.putExtra("id", serviceRequest.getPowerMan_id());
+
               //  Toast.makeText(getActivity().getApplicationContext(), serviceRequest.getPowerMan_id(), Toast.LENGTH_SHORT).show();
 
 

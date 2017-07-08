@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.waqarahmed.neighbourlinking.Classes.ChatMessage;
 import com.example.waqarahmed.neighbourlinking.Classes.Message;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +28,8 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     private final String TAG = "ChatMessageAdapter";
     private static final int MY_MESSAGE = 0, OTHER_MESSAGE = 1;
     FirebaseAuth mAuth;
+    String mCurrentUserId;
+
 
     private List<Message> mMessages;
     private Context mContext;
@@ -35,6 +38,15 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
         mContext = context;
         mMessages = data;
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            mCurrentUserId = mAuth.getCurrentUser().getUid().toString();
+        }
+        else {
+            SharedPref.init(context);
+            int id = SharedPref.read(SharedPref.ID,0);
+            mCurrentUserId = String.valueOf(id);
+
+        }
     }
 
     @Override
@@ -46,7 +58,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     public int getItemViewType(int position) {
         Message item = mMessages.get(position);
 
-        if (item.getSenderId().equals(mAuth.getCurrentUser().getUid()))
+        if (item.getSenderId().equals(mCurrentUserId))
             return MY_MESSAGE;
         else
             return OTHER_MESSAGE;

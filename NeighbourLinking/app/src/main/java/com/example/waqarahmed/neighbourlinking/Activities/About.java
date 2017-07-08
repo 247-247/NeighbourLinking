@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,6 +54,7 @@ public class About extends AppCompatActivity {
         EmailView = (TextView) findViewById(R.id.email_view_aboutActivity);
         mAuth = FirebaseAuth.getInstance();
         mProg = new ProgressDialog(this);
+        mCreateField = (EditText) findViewById(R.id.createDate_editiew_aboutActivity);
 
 
         if(mAuth.getCurrentUser() != null){
@@ -61,10 +63,11 @@ public class About extends AppCompatActivity {
             onIfUserItselfLogin(userId);
         }else {
             userId = getIntent().getStringExtra("id");
-            onIntentReceived(userId);
+           onIntentReceived(userId);
+      //      Toast.makeText(About.this,userId , Toast.LENGTH_SHORT).show();
         }
 
-                mCreateField = (EditText) findViewById(R.id.createDate_editiew_aboutActivity);
+
 
 
 

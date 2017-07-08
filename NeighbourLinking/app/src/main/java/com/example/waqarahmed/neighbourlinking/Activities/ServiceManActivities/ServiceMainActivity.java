@@ -20,22 +20,16 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
-import com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment.ServiceMan_activeRequest;
+import com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment.AceptAndActiveRequest;
+import com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment.ServiceMan_newRequest;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.RetrievServicemanProfileInfo;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
 public class ServiceMainActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -50,13 +44,33 @@ public class ServiceMainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Neighbour 2 Neighbour");
+
+
+        SharedPref.init(this);
+        String isAccountSetup = SharedPref.read(SharedPref.ACCOUNT,"no");
+        if(isAccountSetup.equals("no")){
+
+            startActivity(new Intent(ServiceMainActivity.this,ServiceManProfileBuilding.class));
+            finish();
+        }
+        else{
+
+            RetrievServicemanProfileInfo retrievServicemanProfileInfo = new RetrievServicemanProfileInfo(this);
+            retrievServicemanProfileInfo.execute();
+        }
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+
+      //  mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -88,16 +102,24 @@ public class ServiceMainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
 
-             Intent serviceProfile = new Intent(ServiceMainActivity.this,ServiceManProfileBuilding.class);
+             Intent serviceProfile = new Intent(ServiceMainActivity.this,AboutServiceman.class);
              startActivity(serviceProfile);
+            return true;
+        }
+        if (id == R.id.action_update) {
+
+            Intent serviceProfile = new Intent(ServiceMainActivity.this,ServiceManProfileBuilding.class);
+            startActivity(serviceProfile);
             return true;
         }
         if (id == R.id.action_logout) {
             SharedPref.init(getApplicationContext());
             SharedPref.write(SharedPref.ID,0);
             SharedPref.write(SharedPref.IS_SIGN_IN,false);
+            SharedPref.write(SharedPref.ACCOUNT,"no");
+            SharedPref.writeObject(SharedPref.OBJECT,null);
             Intent login = new Intent(ServiceMainActivity.this , SignInActivity.class);
             login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(login);
@@ -161,10 +183,17 @@ public class ServiceMainActivity extends AppCompatActivity {
 //            SharedPref.write(SharedPref.ID, employeeId);//save int in shared preference.
 //            SharedPref.write(SharedPref.IS_SIGN_IN, true);//save boolean in shared preference.
             if(position == 0){
-            ServiceMan_activeRequest serviceMan_activeRequest = new ServiceMan_activeRequest();
-            return  serviceMan_activeRequest;
+            ServiceMan_newRequest serviceMan_newRequest = new ServiceMan_newRequest();
+            return serviceMan_newRequest;
         }
-            return PlaceholderFragment.newInstance(s);
+           if(position == 1){
+               AceptAndActiveRequest aceptAndActiveRequest = new AceptAndActiveRequest();
+
+               return aceptAndActiveRequest;
+
+          }
+
+            return PlaceholderFragment.newInstance(1);
         }
 
         @Override
@@ -177,11 +206,11 @@ public class ServiceMainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "New";
                 case 1:
-                    return "SECTION 2";
+                    return "History";
                 case 2:
-                    return "SECTION 3";
+                    return "Panding";
             }
             return null;
         }

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"  android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.AboutServiceman">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/currentUser_imageView_brandAboutActivity"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/currentUserName_textView_brandAboutActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="serif"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/accountCreated_date_brandAboutActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="2dp"
+            android:background="@color/cardview_dark_background"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                style="@style/linealayoutUseInAbout"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/firstName_textView_brandAboutActivity"
+                    android:text="Name:"
+
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:enabled="false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".60"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:id="@+id/firstName_editiew_brandAboutActivity"/>
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/linealayoutUseInAbout">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Contact:"
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contact_editiew_brandAboutActivity"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:enabled="false"
+                    android:layout_weight=".60"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linealayoutUseInAbout">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Skill:"
+                    android:textSize="20dp"
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/skill_editiew_brandAboutActivity"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:layout_weight=".60"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/linealayoutUseInAbout">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created at:"
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/createDate_editiew_brandAboutActivity"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:layout_weight=".60"/>
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/linealayoutUseInAbout">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/email_view_aboutActivity"
+                    android:text="Email:"
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:enabled="false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailName_editiew_brandAboutActivity"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:layout_weight=".60"/>
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/linealayoutUseInAbout">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/status_textview_brandAboutActivity"
+                    android:text="Status:"
+                    android:layout_weight=".40"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/status_editiew_brandAboutActivity"
+                    android:background="@drawable/customborder_for_blog_row"
+                    android:layout_weight=".60"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
+</ScrollView>

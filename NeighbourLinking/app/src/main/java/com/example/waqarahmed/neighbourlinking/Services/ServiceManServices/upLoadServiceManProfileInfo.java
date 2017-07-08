@@ -8,9 +8,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.MainServiceManActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
+import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
@@ -75,8 +77,8 @@ public class upLoadServiceManProfileInfo extends AsyncTask<String, Void, String>
 
         if (AppStatus.getInstance(cxt).isOnline()) {
             progress.show();
-
-            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/InserNewEmployee";
+            String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/InserNewEmployee";
             try {
                 Log.i("TAG", "doInBackground:  " + s_name  + s_contact);
                 URL url = null;
@@ -179,7 +181,11 @@ public class upLoadServiceManProfileInfo extends AsyncTask<String, Void, String>
                 progress.dismiss();
             if(s.equals("yes")){
                // Toast.makeText(cxt,"True",Toast.LENGTH_SHORT).show();
-                Intent mainServicentant = new Intent(cxt,ServiceMainActivity.class);
+
+                SharedPref.init(cxt);
+                SharedPref.write(SharedPref.ACCOUNT,"yes");
+
+                Intent mainServicentant = new Intent(cxt,MainServiceManActivity.class);
                 mainServicentant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mainServicentant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
 

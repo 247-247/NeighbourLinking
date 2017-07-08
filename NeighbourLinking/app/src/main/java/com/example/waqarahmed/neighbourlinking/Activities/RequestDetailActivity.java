@@ -34,12 +34,26 @@ public class RequestDetailActivity extends AppCompatActivity {
         mStatusEdit= (EditText) findViewById(R.id.status_editiew_rDActivity);
         mCauseEdit= (EditText) findViewById(R.id.cause_editiew_rDActivity);
         isAccaptedEdit = (EditText) findViewById(R.id.isAccepted_editiew_rDActivity);
+        mCreateField = (EditText) findViewById(R.id.createDate_editiew_rAActivity);
         serviceRequest = (ServiceRequest) getIntent().getSerializableExtra("rObject");
+        setDisplayValue(serviceRequest);
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(12000);
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+       // setDisplayValue();
 
       //  Toast.makeText(RequestDetailActivity.this,""+serviceRequest.getCause(),Toast.LENGTH_LONG).show();
 
 
-        mCreateField = (EditText) findViewById(R.id.createDate_editiew_rAActivity);
+
 
 
 
@@ -48,10 +62,10 @@ public class RequestDetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setDisplayValue();
+        //setDisplayValue();
     }
 
-    public void setDisplayValue(){
+    public void setDisplayValue(final ServiceRequest serviceRequest){
 
 
         Picasso.with(RequestDetailActivity.this).load(serviceRequest.getPowerMan_image_url()).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentServiceImage , new Callback() {
@@ -71,7 +85,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         mStatusEdit.setText(serviceRequest.getStatus());
         mCreateField.setText(serviceRequest.getCreated_at());
         mCauseEdit.setText(serviceRequest.getCause());
-        isAccaptedEdit.setText(serviceRequest.getAcceptetStatus());
+        isAccaptedEdit.setText(serviceRequest.getS());
 
     }
     @Override

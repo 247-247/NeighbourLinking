@@ -11,6 +11,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBr
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.Classes.Brand;
+import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 
 import org.json.JSONException;
@@ -65,8 +66,8 @@ public class RetrievBranProfileInfo extends AsyncTask<String, Void, String> {
 
         if (AppStatus.getInstance(cxt).isOnline()) {
            // progress.show();
-
-            String url_string = "http://b362f197.ngrok.io/Neighbour/public/getBrandBasesOnId";
+            String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/getBrandBasesOnId";
             try {
                 URL url = null;
                 try {

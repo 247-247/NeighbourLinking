@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.MainServiceManActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
                 if(firebaseAuth.getCurrentUser() == null){  //if tanant not sign in
                     if(isServiceManSignIn){                 // then chk service man sign in
-                        Intent servceManIntent = new Intent(MainActivity.this, ServiceMainActivity.class);
+                        Intent servceManIntent = new Intent(MainActivity.this, MainServiceManActivity.class);
                         startActivity(servceManIntent);
 
                     }else{                              // then if service man not sign in

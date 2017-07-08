@@ -10,6 +10,7 @@ import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForMenPowerList;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForServices;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsyncResponseForRequest;
+import com.example.waqarahmed.neighbourlinking.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,8 @@ public class RetrievAllRequestList extends AsyncTask<String, Void,  ArrayList<Se
     protected  ArrayList<ServiceRequest> doInBackground(String... params) {
         String typ = params[0];
         String id = params[1];
-        String url_string = "http://337cdc80.ngrok.io/Neighbour/public/getRequestBaseOnFirebaseId";
+        String baseUrl = context.getResources().getString(R.string.baseUrl);
+        String url_string = baseUrl+"/Neighbour/public/getRequestBaseOnFirebaseId";
         if(typ.equals("login")){   //http://localhost/ForJSONArray_push/index.php
             try {
                 Log.i("TAG", "doInBackground: 1 ");

@@ -1,11 +1,14 @@
 package com.example.waqarahmed.neighbourlinking.Services;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
+import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsyncResponse;
 import com.example.waqarahmed.neighbourlinking.R;
 
@@ -34,7 +37,8 @@ import java.net.URLEncoder;
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     Context context;
-    AlertDialog alertDialog ;
+    ProgressDialog progress ;
+
 
     public AsyncResponse asyncResponse=null;
     public  BackgroundWorker(Context ctx){
@@ -42,65 +46,63 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         context = ctx;
 
     }
+
     @Override
     protected String doInBackground(String... params) {
         String typ = params[0];
-        String url_string = "http://41196a3f.ngrok.io/Neighbour/public/AllNotificationList";
-        if(typ.equals("login")){   //http://localhost/ForJSONArray_push/index.php
+        if (AppStatus.getInstance(context).isOnline()) {
+            progress.show();
+            String baseUrl = context.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/AllNotificationList";
+            if (typ.equals("login")) {   //http://localhost/ForJSONArray_push/index.php
 
-            try {
-                Log.i("TAG", "doInBackground: 1 ");
-
-                URL url = null;
                 try {
-                    url = new URL(url_string);
+                    Log.i("TAG", "doInBackground: 1 ");
+
+                    URL url = null;
+                    try {
+                        url = new URL(url_string);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    Log.i("TAG", "doInBackground: 2 ");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    Log.i("TAG", "doInBackground: 3 ");
+                    httpURLConnection.setRequestMethod("GET");
+                    Log.i("TAG", "doInBackground: 4 ");
+                    httpURLConnection.setDoInput(true);
+
+                    Log.i("TAG", "doInBackground: 6 ");
+
+                    Log.i("TAG", "doInBackground: 7 ");
+
+
+                    InputStream inputStream = httpURLConnection.getInputStream();
+
+
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                    String result = " ";
+                    String line = " ";
+                    String TAG = "Tag";
+                    Log.i(TAG, "doInBackground: 8 ");
+                    while ((line = bufferedReader.readLine()) != null) {
+
+                        result += line;
+                        Log.i(TAG, "doInBackground: 9 ");
+
+                    }
+
+
+                    return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                }
-                Log.i("TAG", "doInBackground: 2 ");
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                Log.i("TAG", "doInBackground: 3 ");
-                httpURLConnection.setRequestMethod("GET");
-                Log.i("TAG", "doInBackground: 4 ");
-              //  httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-               // OutputStream outputStream = httpURLConnection.getOutputStream();
-              //  Log.i("TAG", "doInBackground: 5 ");
-             //   BufferedWriter bufferedWriter  = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
-//                String post_data = URLEncoder.encode("nam","UTF-8")+"="+URLEncoder.encode(nam,"UTF-8")+"&"+
-//                        URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8");
-                Log.i("TAG", "doInBackground: 6 ");
-              //  bufferedWriter.write(post_data);
-                Log.i("TAG", "doInBackground: 7 ");
-            //    bufferedWriter.flush();
-            //    bufferedWriter.close();
-              //  outputStream.close();
-
-                InputStream inputStream = httpURLConnection.getInputStream();
-
-
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
-               // BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream ));
-                String result=" ";
-                String line =" ";
-                String TAG = "Tag";
-                Log.i(TAG, "doInBackground: 8 ");
-                while( (line = bufferedReader.readLine()) != null){
-
-                    result += line;
-                    Log.i(TAG, "doInBackground: 9 ");
-
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
 
-                return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-
         }
 
 
@@ -113,9 +115,15 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("OutPut");
+        if (AppStatus.getInstance(context).isOnline()) {
+            if (progress == null) {
+                progress = AppUtils.createProgressDialog(context);
+                progress.show();
+            } else {
+                progress.show();
+            }
 
+        }
     }
 
     @Override
@@ -123,39 +131,14 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
 
         super.onPostExecute(aVoid);
+        if(progress != null && progress.isShowing())
+            progress.dismiss();
         if(aVoid != null) {
-            //  alertDialog.setMessage(aVoid);
-            //  alertDialog.show();
-//
+
            asyncResponse.processFinish(aVoid);  // asyncResponse interface call here
-//
-//            try {
-//                Log.i("TAG", "Post try ");
-//                JSONObject jsonRootObject = null;
-//                try {
-//                    jsonRootObject = new JSONObject(aVoid);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                Log.i("TAG", "Pot After ");
-//
-//                JSONArray jsonArray = jsonRootObject.getJSONArray("AllNotification");
-//
-//
-//                JSONObject jsonObject = jsonArray.getJSONObject(1);
-//                Toast.makeText(context,jsonObject.getString("email")+" "+jsonObject.getInt("id") ,Toast.LENGTH_LONG).show();
-//
-//            }
-//            catch (JSONException e)
-//            {
-//                e.printStackTrace();
-//            }
+
         }
-        else
-        {
-            alertDialog.setMessage("Pass Null here");
-            alertDialog.show();
-        }
+
     }
 
     @Override

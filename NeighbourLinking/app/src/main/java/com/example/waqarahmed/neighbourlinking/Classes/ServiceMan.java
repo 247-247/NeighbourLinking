@@ -7,12 +7,13 @@ package com.example.waqarahmed.neighbourlinking.Classes;
 public class ServiceMan {
 
     int id;
-   String  email,name,contact,skill,status,image_url,isAccountSetUp;
+   String  email,name,contact,skill,status,image_url,isAccountSetUp ,created_at,updated_at,password;
 
     public ServiceMan() {
     }
 
-    public ServiceMan(int id, String email, String name, String contact, String skill, String status, String image_url,String isAccountSetUp) {
+    public ServiceMan(int id, String email, String name, String contact, String skill, String status, String image_url,
+                      String isAccountSetUp,String created_at, String updated_at,String password) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -21,6 +22,9 @@ public class ServiceMan {
         this.status = status;
         this.image_url = image_url;
         this.isAccountSetUp = isAccountSetUp;
+        this.created_at=created_at;
+        this.updated_at=updated_at;
+        this.password = password;
     }
 
     public int getId() {
@@ -67,6 +71,7 @@ public class ServiceMan {
         return status;
     }
 
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -86,4 +91,27 @@ public class ServiceMan {
         this.isAccountSetUp = isAccountSetUp;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

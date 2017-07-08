@@ -69,7 +69,8 @@ public class PlaceRequestOnServer extends AsyncTask<String, Void,  Void> {
         powerMan_name = strings[7];
         powerMan_image_url = strings[8];
         poweMan_id = strings[9];
-        String url_string = "http://41196a3f.ngrok.io/Neighbour/public/newRequestInsert";
+        String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+        String url_string = baseUrl+"/Neighbour/public/newRequestInsert";
         try {
             Log.i("TAG", "doInBackground:  "+type+" "+cause+" "+sender_id+" "+owner_house_address);
             URL url = null;

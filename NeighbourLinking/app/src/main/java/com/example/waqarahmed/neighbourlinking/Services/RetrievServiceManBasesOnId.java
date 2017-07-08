@@ -11,6 +11,7 @@ import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForMenPowerList;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForServiceManProfile;
+import com.example.waqarahmed.neighbourlinking.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,7 +66,8 @@ public class RetrievServiceManBasesOnId extends AsyncTask<String, Void,  Service
       //  Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
         if (AppStatus.getInstance(context).isOnline())
         {
-        String url_string = "http://337cdc80.ngrok.io/Neighbour/public/getEmployeeBasesOnId";
+            String baseUrl = context.getResources().getString(R.string.baseUrl);
+        String url_string = baseUrl+"/Neighbour/public/getEmployeeBasesOnId";
         if(typ.equals("login")){   //http://localhost/ForJSONArray_push/index.php
             try {
                 Log.i("TAG", "doInBackground:  "+id);

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
@@ -32,13 +31,13 @@ import java.util.ArrayList;
  * Created by Waqar ahmed on 6/1/2017.
  */
 
-public class ServiceManSpecificRetrievAllRequestList extends AsyncTask<String, Void,  ArrayList<ServiceRequest>> {
+public class AcctveAndAcceptRequest extends AsyncTask<String, Void,  ArrayList<ServiceRequest>> {
     Context context;
     ProgressDialog progress ;
     ArrayList<ServiceRequest> manlist;
    // public AsyncResponseForRequest asyncResponse=null;
 
-    public ServiceManSpecificRetrievAllRequestList(Context ctx){
+    public AcctveAndAcceptRequest(Context ctx){
 
         context = ctx;
 
@@ -65,8 +64,10 @@ public class ServiceManSpecificRetrievAllRequestList extends AsyncTask<String, V
         String typ = params[0];
         String id = params[1];
         if (AppStatus.getInstance(context).isOnline()) {
+
+          //  String url_string = "http://0039fe5a.ngrok.io/Neighbour/public/getServiceManRequestBaseOnIdwhichNeedtoDo";
             String baseUrl = context.getResources().getString(R.string.baseUrl);
-            String url_string = baseUrl+"/Neighbour/public/getRequestBaseOnServiceManId";
+            String url_string = baseUrl+"/Neighbour/public/getServiceManRequestBaseOnIdwhichNeedtoDo";
             if (typ.equals("login")) {   //http://localhost/ForJSONArray_push/index.php
                 try {
                     Log.i("TAG", "doInBackground: 1 ");
@@ -161,11 +162,7 @@ public class ServiceManSpecificRetrievAllRequestList extends AsyncTask<String, V
                 }
             }
         }
-        else {
-            if (AppStatus.getInstance(context).isOnline())
-                progress.dismiss();
-        }
-
+        progress.dismiss();
         return null;
     }
 

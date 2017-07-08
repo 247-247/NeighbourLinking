@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
+import com.example.waqarahmed.neighbourlinking.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,8 +69,8 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
         serviceMan_password = strings[1];
         if (AppStatus.getInstance(cxt).isOnline()) {
             progress.show();
-
-            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/newBrandRegister";
+            String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/newBrandRegister";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;

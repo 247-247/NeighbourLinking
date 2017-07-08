@@ -3,6 +3,10 @@ package com.example.waqarahmed.neighbourlinking.Shared;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
+import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
+import com.google.gson.Gson;
+
 /**
  * Created by waqar on 6/28/2017.
  */
@@ -16,6 +20,8 @@ public class SharedPref {
   //  public static final String NAME = "NAME";
     public static final String ID = "ID";
     public static final String IS_SIGN_IN = "IS_SIGN_IN";
+    public static final  String OBJECT = "OBJECT";
+    public static final  String ACCOUNT = "ACCOUNT";
 
     private SharedPref()
     {
@@ -47,6 +53,25 @@ public class SharedPref {
         prefsEditor.putBoolean(key, value);
         prefsEditor.commit();
     }
+    public static ServiceMan readObject(String key, String defValue) {
+
+        Gson gson = new Gson();
+        String json= mSharedPref.getString(key, defValue);
+
+        ServiceMan obj = gson.fromJson(json, ServiceMan.class);
+        return obj;
+    }
+
+    public static void writeObject(String key, ServiceMan value) {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(value);
+
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, json);
+        prefsEditor.commit();
+    }
+
 
     public static int read(String key, int defValue) {
         return mSharedPref.getInt(key, defValue);

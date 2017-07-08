@@ -83,7 +83,8 @@ public class DeviceRegistrationRelated extends AsyncTask<Void,Void,Void>
         RequestBody body = new FormBody.Builder().add("device_token",token).add("email",mAuth.getCurrentUser().getEmail()).add("created_at",currentDateTime).add("updated_at",currentDateTime).build();
         Log.i("RRRRRRRRRRRGGRRRRRRRR", "registerToken: "+token);
         Log.i("RRRRRRRRRRRGGRRRRRRRR", "registerToken: "+currentDateTime);
-        Request request = new Request.Builder().url("http://41196a3f.ngrok.io/Neighbour/public/DeviceRegistration").post(body).build();
+        String baseUrl = context.getResources().getString(R.string.baseUrl);
+        Request request = new Request.Builder().url(baseUrl+"/Neighbour/public/DeviceRegistration").post(body).build();
 
         try {
             okhttp3.Response response= client.newCall(request).execute();

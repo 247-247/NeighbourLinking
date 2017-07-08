@@ -65,6 +65,7 @@ public class MainBrandActivity extends AppCompatActivity {
         if(isAccountSetup.equals("no")){
 
             startActivity(new Intent(MainBrandActivity.this,BrandProfileBuilding.class));
+            finish();
         }
         else{
 

@@ -111,7 +111,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 forgetPassword.setTextColor(Color.RED);
-                if(mEmailView.length()>6){
+                if(mEmailView.length()>=6){
                    if(awesomValidation.validate())
                     checkUserForforgetPassword(mEmailView.getText().toString());
                 }else{
@@ -129,7 +129,6 @@ public class SignInActivity extends AppCompatActivity {
     private void signInAsServiceMan(String e, String p) {
 
         SignInServiceMan signInServiceMan = new SignInServiceMan(this);
-
         signInServiceMan.execute(e,p);
 
     }

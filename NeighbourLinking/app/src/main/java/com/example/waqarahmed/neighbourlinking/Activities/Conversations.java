@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Adapter.ChatMessageAdapter;
 import com.example.waqarahmed.neighbourlinking.Classes.Message;
+import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,7 @@ private RecyclerView mRecyclerView;
     DatabaseReference mConversation , mUser;
     String currentUserId;
     FirebaseAuth mAuth;
+
 
     String chat_msg , chat_user_name;
     String room_1 , room_2;
@@ -77,30 +79,36 @@ private RecyclerView mRecyclerView;
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
             currentUserId = mAuth.getCurrentUser().getUid().toString();
+            mUser = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid());
+            mUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    userName = dataSnapshot.child("first_name").getValue().toString();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
         }
         else{
             SharedPref.init(this);
-            currentUserId = String.valueOf(SharedPref.read(SharedPref.ID,0));
+           // currentUserId = String.valueOf(SharedPref.read(SharedPref.ID,0));
+            ServiceMan serviceMan = SharedPref.readObject(SharedPref.OBJECT,null);
+            int id = serviceMan.getId();
+            currentUserId = String.valueOf(id);
+            userName = serviceMan.getName();
+
         }
 
-        room_1 = mAuth.getCurrentUser().getUid() + "_" + receiverId;
-        room_2 = receiverId + "_" + mAuth.getCurrentUser().getUid();
-//        room_1 = currentUserId + "_" + receiverId;
-//        room_2 = receiverId + "_" + currentUserId;
+//        room_1 = mAuth.getCurrentUser().getUid() + "_" + receiverId;
+//        room_2 = receiverId + "_" + mAuth.getCurrentUser().getUid();
+        room_1 = currentUserId + "_" + receiverId;
+        room_2 = receiverId + "_" + currentUserId;
         mConversation = FirebaseDatabase.getInstance().getReference().child("Conversation");
-        mUser = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid());
-        mUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userName = dataSnapshot.child("first_name").getValue().toString();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         mButtonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +124,7 @@ private RecyclerView mRecyclerView;
                             DatabaseReference msg_root = mConversation.child(room_1).child(key);
                             HashMap<String, Object> map2 = new HashMap<String, Object>();
                             map2.put("recverId", receiverId);
-                            map2.put("senderId", mAuth.getCurrentUser().getUid());
+                            map2.put("senderId", currentUserId);
                             map2.put("name", userName);
                             map2.put("msg", mEditTextMessage.getText().toString());
                             msg_root.updateChildren(map2);
@@ -141,7 +149,7 @@ private RecyclerView mRecyclerView;
                             DatabaseReference msg_root = mConversation.child(room_1).child(key);
                             HashMap<String, Object> map2 = new HashMap<String, Object>();
                             map2.put("recverId", receiverId);
-                            map2.put("senderId", mAuth.getCurrentUser().getUid());
+                            map2.put("senderId", currentUserId);
                             map2.put("name", userName);
                             map2.put("msg", mEditTextMessage.getText().toString());
                             msg_root.updateChildren(map2);
@@ -259,7 +267,7 @@ private RecyclerView mRecyclerView;
 
 
         mConversation.keepSynced(true);
-        mUser.keepSynced(true);
+      //  mUser.keepSynced(true);
     }
 
 

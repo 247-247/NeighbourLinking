@@ -84,7 +84,12 @@
         <activity android:name=".Activities.BrandActivities.BrandProfileBuilding" />
         <activity android:name=".Activities.ServiceManActivities.ServiceManProfileBuilding" />
         <activity android:name=".Activities.BrandActivities.AboutBrand" />
-        <activity android:name=".Activities.BrandActivities.UpDateBrandProfile"></activity>
+        <activity android:name=".Activities.BrandActivities.UpDateBrandProfile" />
+        <activity android:name=".Activities.ServiceManActivities.AboutServiceman" />
+        <activity
+            android:name=".Activities.ServiceManActivities.MainServiceManActivity"
+            android:label="@string/title_activity_main_service_man"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

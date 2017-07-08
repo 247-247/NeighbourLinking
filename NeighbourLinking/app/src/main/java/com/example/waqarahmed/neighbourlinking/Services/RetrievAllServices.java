@@ -58,7 +58,8 @@ public class RetrievAllServices extends AsyncTask<String, Void,  ArrayList<Servi
     @Override
     protected  ArrayList<ServicesTypes> doInBackground(String... params) {
         String typ = params[0];
-        String url_string ="http://41196a3f.ngrok.io/Neighbour/public/AllService";
+        String baseUrl = context.getResources().getString(R.string.baseUrl);
+        String url_string =baseUrl+"/Neighbour/public/AllService";
         if(typ.equals("login")){   //http://localhost/ForJSONArray_push/index.php
             try {
                 Log.i("TAG", "doInBackground: 1 ");

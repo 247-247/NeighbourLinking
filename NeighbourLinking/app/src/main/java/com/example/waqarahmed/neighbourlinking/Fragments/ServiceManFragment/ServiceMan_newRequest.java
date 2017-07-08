@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,7 +26,9 @@ import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.DeAvtiveRequest;
 import com.example.waqarahmed.neighbourlinking.Services.RetrievAllRequestList;
+import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.AccepRequestService;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.ServiceManSpecificRetrievAllRequestList;
+import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.setRejectRequestService;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Callback;
@@ -36,18 +39,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServiceMan_activeRequest extends Fragment
+public class ServiceMan_newRequest extends Fragment
 {
 
     RecyclerView recyclerView;
     TextView textView;
     RVAdapter rvAdapter;
+
     int p;  // position
     int currentUserId ;
     ArrayList<ServiceRequest> ActiveList;
-    public ServiceMan_activeRequest()
+    public ServiceMan_newRequest()
     {
-        // Required empty public constructor
+        // Required empty public constructor android.support.design.widget.CoordinatorLayout
     }
 
 
@@ -66,57 +70,68 @@ public class ServiceMan_activeRequest extends Fragment
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_active_request, container, false);
+        Log.i("TAGTAG","activeRequest onCreateView");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_activeList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        registerForContextMenu(recyclerView);
+       // registerForContextMenu(recyclerView);
         textView = (TextView) view.findViewById(R.id.messageView);
         SharedPref.init(getActivity().getApplicationContext());
         currentUserId = SharedPref.read(SharedPref.ID,0);
         ActiveList = new ArrayList<ServiceRequest>();
-        if(currentUserId != 0){
-        new ServiceManSpecificRetrievAllRequestList(getActivity())
-         {
-            @Override
-            protected void onPostExecute(ArrayList<ServiceRequest> s)
-             {
-                super.onPostExecute(s);
-                 for(int i=0; i<s.size(); i++)
-                 {
-                     if(s.get(i).getStatus().equals("active"))
-                        ActiveList.add(s.get(i));
-                 }
-
-                if(ActiveList.size()>0)
-                {
-                    textView.setVisibility(View.INVISIBLE);
-                     rvAdapter = new RVAdapter(ActiveList, getActivity().getApplicationContext());
-                    recyclerView.setAdapter(rvAdapter);
-                }
-                else
-                {
-
-                    recyclerView.setVisibility(View.INVISIBLE);
-
-                }
-
-             }
-         }.execute("login",String.valueOf(currentUserId));
-         }
+        rvAdapter = new RVAdapter(ActiveList , getActivity().getApplicationContext());
 
         return view;
     }
 
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-    }
 
     @Override
     public void onStart()
     {
         super.onStart();
+
+
+        if(currentUserId != 0)
+        {
+            new ServiceManSpecificRetrievAllRequestList(getActivity())
+            {
+                @Override
+                protected void onPostExecute(ArrayList<ServiceRequest> s) {
+                    super.onPostExecute(s);
+                    ActiveList.clear();
+                    if (s != null)
+                    {
+                        for (int i = 0; i < s.size(); i++) {
+                            if (s.get(i).getStatus().equals("active") && s.get(i).getStatus().equals("pending") )
+                                ActiveList.add(s.get(i));
+                        }
+
+                        if (ActiveList.size() > 0) {
+                            textView.setVisibility(View.INVISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            rvAdapter = new RVAdapter(ActiveList, getActivity());
+                            recyclerView.setAdapter(rvAdapter);
+                        } else {
+
+
+                            recyclerView.setVisibility(View.INVISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+
+                        }
+
+                    }else{
+                        textView.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.INVISIBLE);
+
+                    }
+                }
+
+
+            }.execute("login",String.valueOf(currentUserId));
+        }
+
+        Log.i("TAGTAG","activeRequest onStart");
+
 
     }
 
@@ -152,8 +167,7 @@ public class ServiceMan_activeRequest extends Fragment
         {
             ServiceRequest request = list.get(position);
 
-            if(request.getStatus().equals("active"))
-            {
+
                 holder.setServiceTaker_image(request.getOwner_image_url(), mContext);
                 holder.setServiceTaker_name(request.getOwner_name());
                 holder.setRequest_date(request.getCreated_at());
@@ -168,7 +182,7 @@ public class ServiceMan_activeRequest extends Fragment
                 });
 
 
-            }
+
 
 
         }
@@ -199,37 +213,57 @@ public class ServiceMan_activeRequest extends Fragment
             if(item.getTitle().equals("Message"))
             {
                 Intent convIntent = new Intent(getActivity().getApplicationContext(),Conversations.class);
-                convIntent.putExtra("receverId",serviceRequest.getId());
-                convIntent.putExtra("receverName",serviceRequest.getPowerMan_name());
+                convIntent.putExtra("receverId",serviceRequest.getSender_id());
+                convIntent.putExtra("receverName",serviceRequest.getOwner_name());
 
                 startActivity(convIntent);
             }
-            if(item.getTitle().equals("Accept it"))
+           else if(item.getTitle().equals("Accept it"))
             {
-//                     DeAvtiveRequest deAvtiveRequest = (DeAvtiveRequest) new DeAvtiveRequest(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
-//                     ActiveList.remove(p);
-//                     rvAdapter.notifyDataSetChanged();
+                     AccepRequestService Accep = (AccepRequestService) new AccepRequestService(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
+                     ActiveList.remove(p);
+                     rvAdapter.notifyDataSetChanged();
 
 
             }
-            if(item.getTitle().equals("Request Detail")){
-                Intent rDetailintent = new Intent(getActivity().getApplicationContext(),RequestDetailActivity.class);
-                rDetailintent.putExtra("rObject", serviceRequest);
+            else if(item.getTitle().equals("Reject it"))
+            {
+                setRejectRequestService Reject = (setRejectRequestService) new setRejectRequestService(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
+                ActiveList.remove(p);
+                rvAdapter.notifyDataSetChanged();
 
+
+            }
+         else    if(item.getTitle().equals("Request Detail")){
+                Intent rDetailintent = new Intent(getActivity().getApplicationContext(),RequestDetailActivity.class);
+                if(!serviceRequest.equals(null)) {
+                    rDetailintent.putExtra("rObject", serviceRequest);
+                }else{
+                    Toast.makeText(getActivity(),"Object null",Toast.LENGTH_SHORT).show();
+                }
 
                 startActivity(rDetailintent);
 
             }
-            if(item.getTitle().equals("Service Taker About"))
+        else  if(item.getTitle().equals("Service Taker About"))
             {
-                Intent rDetailintent = new Intent(getActivity().getApplicationContext(),About.class);
-                rDetailintent.putExtra("id", serviceRequest.getSender_id());
+                Intent rDetailintent = new Intent(getActivity(),About.class);
+                String id = serviceRequest.getSender_id();
+               rDetailintent.putExtra("id",id);
+            //    Toast.makeText(getActivity(),"Service Taker About",Toast.LENGTH_LONG).show();
+
+
               //  Toast.makeText(getActivity().getApplicationContext(), serviceRequest.getPowerMan_id(), Toast.LENGTH_SHORT).show();
                 startActivity(rDetailintent);
+
+            }
+            else{
+
             }
         }
 
-        public  class RequestViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener {
+        public  class RequestViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener
+        {
 
             View mView;
             ImageView imageView ;
@@ -288,9 +322,12 @@ public class ServiceMan_activeRequest extends Fragment
 
             @Override
             public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+
+
                 contextMenu.setHeaderTitle("Seleect Acton");
                 contextMenu.add(0,0,0,"Message");
                 contextMenu.add(0,0,0,"Accept it");
+                contextMenu.add(0,0,0,"Reject it");
                 contextMenu.add(0,0,0,"Request Detail");
                 contextMenu.add(0,0,0,"Service Taker About");
 
@@ -324,28 +361,29 @@ public class ServiceMan_activeRequest extends Fragment
         rvAdapter.getItemSelected(item);
         return false;
     }
-    public void showConformationDialog() {
-//        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity().getApplicationContext());
-//        builder1.setTitle("Delete Post");
-//        builder1.setMessage("Are you sure you want to delete this entry?");
-//        builder1.setCancelable(true);
-//
-//        builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        DeAvtiveRequest deAvtiveRequest = (DeAvtiveRequest) new DeAvtiveRequest(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
-//                          dialogInterface.dismiss();
-//
-//                    }
-//                });
-//        builder1.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                dialogInterface.dismiss();
-//            }
-//        });
-//        AlertDialog alert11 = builder1.create();
-//       alert11.show();
-//    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterForContextMenu(recyclerView);
+        Log.i("TAGTAG","activeRequest onPause");
+
     }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        registerForContextMenu(recyclerView);
+        Log.i("TAGTAG","activeRequest onResum");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        unregisterForContextMenu(recyclerView);
+        Log.i("TAGTAG","activeRequest onStop");
+    }
+
+
 }

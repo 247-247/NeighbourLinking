@@ -10,10 +10,12 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.MainServiceManActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
 import org.json.JSONException;
@@ -75,8 +77,8 @@ public class SignInServiceMan extends AsyncTask<String, Void, String> {
         serviceMan_password = strings[1];
         if (AppStatus.getInstance(cxt).isOnline())
         {
-
-            String url_string = "http://dfb75473.ngrok.io/Neighbour/public/getEmployeeBasesOnEmail";
+            String baseUrl = cxt.getResources().getString(R.string.baseUrl);
+            String url_string = baseUrl+"/Neighbour/public/getEmployeeBasesOnEmail";
             try {
                 Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
                 URL url = null;
@@ -133,6 +135,8 @@ public class SignInServiceMan extends AsyncTask<String, Void, String> {
                        JSONObject jsonObject = jsonRootObject.getJSONObject("EmployeeBaseOnEmail");
                     Log.i(TAG, "doInBackground: 13 "+ jsonObject.getString("status"));
                          String response = jsonObject.getString("status");
+
+                    String acc = jsonObject.getString("Account");
                     Log.i(TAG, "doInBackground: 14 ");
                     int employeeId = jsonObject.getInt("id");
 
@@ -141,6 +145,7 @@ public class SignInServiceMan extends AsyncTask<String, Void, String> {
                         SharedPref.init(cxt.getApplicationContext());
                         SharedPref.write(SharedPref.ID, employeeId);//save int in shared preference.
                         SharedPref.write(SharedPref.IS_SIGN_IN, true);//save boolean in shared preference.
+                        SharedPref.write(SharedPref.ACCOUNT,acc);
                         return "yes";
                     }
                     else{
@@ -182,7 +187,7 @@ public class SignInServiceMan extends AsyncTask<String, Void, String> {
                 progress.dismiss();
             if(s.equals("yes")){
                // Toast.makeText(cxt,"True",Toast.LENGTH_SHORT).show();
-                Intent ServicemainIntent = new Intent(cxt,ServiceMainActivity.class);
+                Intent ServicemainIntent = new Intent(cxt,MainServiceManActivity.class);
                 cxt.startActivity(ServicemainIntent);
 
 
