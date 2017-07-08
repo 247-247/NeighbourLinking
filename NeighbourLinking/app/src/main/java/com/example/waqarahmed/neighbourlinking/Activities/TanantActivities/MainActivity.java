@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainActivityAdmin;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.NewRegistrations;
+import com.example.waqarahmed.neighbourlinking.Activities.RequestRelatedDetail;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.MainServiceManActivity;
-import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.ShowAllServices;
+import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.Classes.BadgeUtils;
@@ -30,6 +34,7 @@ import com.example.waqarahmed.neighbourlinking.Classes.Pager;
 import com.example.waqarahmed.neighbourlinking.Classes.RoundedTransformation;
 import com.example.waqarahmed.neighbourlinking.R;
 
+import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
          tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -102,7 +108,8 @@ public class MainActivity extends AppCompatActivity
         //////////////
 
         mAuth = FirebaseAuth.getInstance();
-       //  mAuth.signOut();
+
+        // mAuth.signOut();
         SharedPref.init(getApplicationContext());
         BrandSharedPref.init(getApplicationContext());
         final boolean isServiceManSignIn = SharedPref.read(SharedPref.IS_SIGN_IN,false);
@@ -116,16 +123,25 @@ public class MainActivity extends AppCompatActivity
                 if(firebaseAuth.getCurrentUser() == null){  //if tanant not sign in
                     if(isServiceManSignIn){                 // then chk service man sign in
                         Intent servceManIntent = new Intent(MainActivity.this, MainServiceManActivity.class);
+                        servceManIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        servceManIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                         startActivity(servceManIntent);
 
                     }else{                              // then if service man not sign in
                         if(isBranSignIn){                 // chk for Brand sign in
                             Intent BrandMainIntent = new Intent(MainActivity.this, MainBrandActivity.class);
+                            BrandMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            BrandMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                             startActivity(BrandMainIntent);
-                        }else{                            // if brand not sign in
-                            Intent login = new Intent(MainActivity.this , SignInActivity.class);  // then call log in page
-                             login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                  startActivity(login);
+                        }else{  // if brand not sign in
+
+
+                                 Intent login = new Intent(MainActivity.this , SignInActivity.class);  // then call log in page
+                                  login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                  login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                                 login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                 startActivity(login);
+
 
                         }
                     }
@@ -139,6 +155,19 @@ public class MainActivity extends AppCompatActivity
 
 
                 }else{
+                    AdminSharedPref.init(MainActivity.this);
+                    String isAdminLogin = AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no");
+                    if(isAdminLogin.equals("yes")){
+                        Intent AdminMainIntent = new Intent(MainActivity.this, MainActivityAdmin.class);
+                        AdminMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        AdminMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                        startActivity(AdminMainIntent);
+
+                    }
+                    else{
+                         // running the simple tanant view
+                    }
+
 
                 }
 

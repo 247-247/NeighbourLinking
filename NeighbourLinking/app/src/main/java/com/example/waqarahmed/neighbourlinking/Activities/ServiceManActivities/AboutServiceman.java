@@ -9,14 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
-import com.example.waqarahmed.neighbourlinking.Classes.Brand;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.RetrievServiceProfileInfoForClient;
-import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;

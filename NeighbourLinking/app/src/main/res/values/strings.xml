@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="baseUrl">http://9ea1cbf4.ngrok.io</string>
+    <string name="baseUrl">http://28429370.ngrok.io</string>
 
 
     <string name="action_settings">Settings</string>
@@ -33,7 +33,8 @@
     <string name="emailerror">Enter a valid email</string>
     <string name="nameerror">Enter a valid name</string>
     <string name="mobileerror">Enter a valid mobile</string>
-
+    <string name="title_require">Title Required</string>
+    <string name="body_require">Disecripton Required</string>
 
     <string-array name="house_arrays">
         <item>C-1</item>

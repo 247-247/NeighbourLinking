@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
-import com.example.waqarahmed.neighbourlinking.Activities.Comments;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Comments;
 import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
 import com.example.waqarahmed.neighbourlinking.R;

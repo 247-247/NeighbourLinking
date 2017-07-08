@@ -17,10 +17,15 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainActivityAdmin;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Profile;
+import com.example.waqarahmed.neighbourlinking.Classes.Tanant;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.SignInServiceMan;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.SignInBrand;
 import com.example.waqarahmed.neighbourlinking.Services.DeviceRegistrationRelated;
+import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -147,6 +152,8 @@ public class SignInActivity extends AppCompatActivity {
                         mProg.dismiss();
                         DeviceRegistrationRelated backgroundWorker = new DeviceRegistrationRelated(getApplicationContext());
                         backgroundWorker.execute();
+
+
                         checkUserExists();
 
                     } else {
@@ -169,12 +176,28 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(mAuth.getCurrentUser() != null) {
+
                     String currentUserId = mAuth.getCurrentUser().getUid();
                     if (dataSnapshot.hasChild("image")) {
-                        Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-                        startActivity(mainIntent);
+                           if(dataSnapshot.child("isAdmin").getValue().toString().equals("Yes"))
+                           {
+                               AdminSharedPref.init(SignInActivity.this);
+                               AdminSharedPref.write(AdminSharedPref.IS_ADMIN,"yes");
+                               String img =dataSnapshot.child("image").getValue().toString();
+                              AdminSharedPref.write(AdminSharedPref.IMAGE,img);
+                               AdminSharedPref.write(AdminSharedPref.EMAIL,mAuth.getCurrentUser().getEmail());
+                               Intent mainIntent = new Intent(SignInActivity.this, MainActivityAdmin.class);
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                               startActivity(mainIntent);
+
+                           }else{
+                               Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                               startActivity(mainIntent);
+                           }
+
 
                     } else {
 

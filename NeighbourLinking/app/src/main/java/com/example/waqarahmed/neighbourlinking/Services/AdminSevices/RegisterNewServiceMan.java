@@ -7,13 +7,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
-import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
 import com.example.waqarahmed.neighbourlinking.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

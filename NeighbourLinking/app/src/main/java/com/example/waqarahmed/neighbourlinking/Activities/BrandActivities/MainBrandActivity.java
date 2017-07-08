@@ -20,17 +20,12 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
-import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Fragments.Home_Wall;
-import com.example.waqarahmed.neighbourlinking.Fragments.MyPosts;
 import com.example.waqarahmed.neighbourlinking.Fragments.UserProfile;
-import com.example.waqarahmed.neighbourlinking.Fragments._Home_wall;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfo;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
-import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
 public class MainBrandActivity extends AppCompatActivity {
 

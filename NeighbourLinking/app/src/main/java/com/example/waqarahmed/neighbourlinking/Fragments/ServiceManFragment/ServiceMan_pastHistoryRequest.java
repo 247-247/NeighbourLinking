@@ -16,14 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.About;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About;
 import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
 import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.AccepRequestService;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.ServiceManSpecificRetrievAllRequestList;
-import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.setRejectRequestService;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;

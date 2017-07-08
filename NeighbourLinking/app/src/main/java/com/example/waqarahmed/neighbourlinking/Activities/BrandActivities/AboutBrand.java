@@ -1,6 +1,5 @@
 package com.example.waqarahmed.neighbourlinking.Activities.BrandActivities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,14 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.About;
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;

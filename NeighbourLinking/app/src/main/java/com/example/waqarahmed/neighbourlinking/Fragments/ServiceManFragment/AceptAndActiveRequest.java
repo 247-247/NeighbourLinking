@@ -1,12 +1,8 @@
 package com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,14 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.About;
-import com.example.waqarahmed.neighbourlinking.Activities.Conversations;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
 import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
 import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.AcctveAndAcceptRequest;
-import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.ServiceManSpecificRetrievAllRequestList;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;

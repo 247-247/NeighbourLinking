@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,23 +20,16 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
-import com.example.waqarahmed.neighbourlinking.Activities.Profile;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.upLoadBranProfileInfo;
-import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class BrandProfileBuilding extends AppCompatActivity {
     ImageButton imageButton;

@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="5dp"
-    tools:context="com.example.waqarahmed.neighbourlinking.Activities.Announcements">
+    tools:context="com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Announcements">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

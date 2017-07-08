@@ -4,15 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.media.MediaBrowserCompat;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
-import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 

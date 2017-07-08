@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -9,17 +9,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Classes.Comment;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,10 +31,10 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-public class Comments extends AppCompatActivity {
-    RecyclerView mRecyclerComment;
+public class CommentsOnPost extends AppCompatActivity {
+  //
+  RecyclerView mRecyclerComment;
     EditText mCommentView;
     ImageButton mLeaveComment_btn;
     String post_key_string;
@@ -46,14 +43,13 @@ public class Comments extends AppCompatActivity {
     DatabaseReference mDatabaseReferenceUser;
     FirebaseAuth mAuth;
     String comment_body;
-    String currentUser;
     String snder_name , msgBody,sendingDate , sender_image_comment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comments);
+        setContentView(R.layout.activity_comments_on_post);
         getSupportActionBar().setTitle("Comment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -64,16 +60,9 @@ public class Comments extends AppCompatActivity {
         mCommentView = (EditText) findViewById(R.id.message_edit);
         mLeaveComment_btn = (ImageButton) findViewById(R.id.sendComment_btn);
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser() != null){
-            currentUser = mAuth.getCurrentUser().getUid().toString();
-        }
-        else{
-            BrandSharedPref.init(this);
-            currentUser = String.valueOf(BrandSharedPref.read(BrandSharedPref.ID,0));
-        }
 
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
-        mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Comment").child(post_key_string);
+        mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Post_Comment").child(post_key_string);
         if(mAuth.getCurrentUser() != null) {
             DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
             currentUser_Database.addValueEventListener(new ValueEventListener() {
@@ -88,42 +77,36 @@ public class Comments extends AppCompatActivity {
 
                 }
             });
-        }else {
-
-            Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
-            sender_image_comment = brand.getImage_url();
-            snder_name = brand.getName();
-
         }
 
 
-            mLeaveComment_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        mLeaveComment_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    msgBody = mCommentView.getText().toString();
-                    if(!TextUtils.isEmpty(msgBody)){
-                        DateFormat df = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm a");
-                        String date = df.format(Calendar.getInstance().getTime());
-                        DatabaseReference db =  mDatabaseComment.push();
+                msgBody = mCommentView.getText().toString();
+                if(!TextUtils.isEmpty(msgBody)){
+                    DateFormat df = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm a");
+                    String date = df.format(Calendar.getInstance().getTime());
+                    DatabaseReference db =  mDatabaseComment.push();
 
-                        db.child("comment_sender_name").setValue(snder_name);
-                        db.child("comment_sender_image").setValue(sender_image_comment);
-                        db.child("comment_body").setValue(msgBody);
-                        db.child("sending_date").setValue(date);
-                        db.child("sender_uid").setValue(currentUser);
-                        mCommentView.setText("");
-                        Toast.makeText(Comments.this,"Comment send",Toast.LENGTH_SHORT).show();
+                    db.child("comment_sender_name").setValue(snder_name);
+                    db.child("comment_sender_image").setValue(sender_image_comment);
+                    db.child("comment_body").setValue(msgBody);
+                    db.child("sending_date").setValue(date);
+                    db.child("sender_uid").setValue(mAuth.getCurrentUser().getUid());
+                    mCommentView.setText("");
+                    Toast.makeText(CommentsOnPost.this,"Comment send",Toast.LENGTH_SHORT).show();
 
 
-                    }else{
-                        mCommentView.setText("");
+                }else{
+                    mCommentView.setText("");
 
-                        Toast.makeText(Comments.this,post_key_string,Toast.LENGTH_SHORT).show();
-                    }
-
+                    Toast.makeText(CommentsOnPost.this,post_key_string,Toast.LENGTH_SHORT).show();
                 }
-            });
+
+            }
+        });
 
         mDatabaseReferenceUser.keepSynced(true);
         mDatabaseComment.keepSynced(true);
@@ -133,18 +116,18 @@ public class Comments extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<Comment, CommentViewHolder> firebaseRecyclerAdapterr = new FirebaseRecyclerAdapter<Comment, CommentViewHolder>
+        FirebaseRecyclerAdapter<Comment, CommentsOnPost.CommentViewHolder> firebaseRecyclerAdapterr = new FirebaseRecyclerAdapter<Comment, CommentsOnPost.CommentViewHolder>
                 (
 
-              Comment.class,
-                R.layout.comment_list_item,
-                CommentViewHolder.class,
-                mDatabaseComment
+                        Comment.class,
+                        R.layout.comment_list_item,
+                        CommentsOnPost.CommentViewHolder.class,
+                        mDatabaseComment
 
                 ) {
 
             @Override
-            protected void populateViewHolder(CommentViewHolder viewHolder, Comment model, int position) {
+            protected void populateViewHolder(CommentsOnPost.CommentViewHolder viewHolder, Comment model, int position) {
 
                 viewHolder.setComment_sender_image(model.getComment_sender_image(),getBaseContext());
                 viewHolder.setComment_sender_name(model.getComment_sender_name());
@@ -154,7 +137,7 @@ public class Comments extends AppCompatActivity {
                 viewHolder.Mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(Comments.this,"Helllll",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommentsOnPost.this,"Helllll",Toast.LENGTH_SHORT).show();
                     }
                 });
             }

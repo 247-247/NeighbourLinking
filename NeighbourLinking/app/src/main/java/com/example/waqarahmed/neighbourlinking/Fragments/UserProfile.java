@@ -13,14 +13,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.About;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.UpDateBrandProfile;
-import com.example.waqarahmed.neighbourlinking.Activities.Comments;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Comments;
 import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
-import com.example.waqarahmed.neighbourlinking.Activities.Post;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Blog;
 import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;

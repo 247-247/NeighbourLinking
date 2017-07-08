@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainActivityAdmin;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +50,7 @@ ImageView mSndrImageView,mPost_imageView;
          mDateView = (TextView) findViewById(R.id.senderDate_textView_dltActivity);
         mTitleView =  (TextView) findViewById(R.id.titleShow_textView_dltActivity);
         mDiscriptionView =  (TextView) findViewById(R.id.descShow_textView_dltActivity);
+        AdminSharedPref.init(this);
 
                 mDeletePost = (Button) findViewById(R.id.dlt_done);
         mAuth = FirebaseAuth.getInstance();
@@ -75,7 +79,11 @@ ImageView mSndrImageView,mPost_imageView;
                     mDeletePost.setVisibility(View.VISIBLE);
                     Log.i("Visiblity", "onDataChange: Visible call"+user_id+" "+user_id+" "+"current_User"+" "+mAuth.getCurrentUser().getUid().toString());
 
-                }else
+                }else if((AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no").equals("yes"))){
+
+                    mDeletePost.setVisibility(View.VISIBLE);
+                }
+                else
                 {
                     mDeletePost.setVisibility(View.INVISIBLE);
                     Log.i("Visiblity", "onDataChange: IN_Visible call"+"Sender Id"+" "+user_id+" "+"current_User"+" "+mAuth.getCurrentUser().getUid().toString());
@@ -113,9 +121,15 @@ ImageView mSndrImageView,mPost_imageView;
                                         if(task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(), "Successfully deleted", Toast.LENGTH_SHORT).show();
 
-                                            Intent mainIntent = new Intent(Delete_Post.this, MainActivity.class);
-                                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(mainIntent);
+
+                                            if(AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no").equals("yes")){
+                                                Intent mainIntent = new Intent(Delete_Post.this, MainActivityAdmin.class);
+                                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            }else{
+                                                Intent mainIntent = new Intent(Delete_Post.this, MainActivity.class);
+                                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(mainIntent);
+                                            }
                                         }
                                         else{
 

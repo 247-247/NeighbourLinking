@@ -1,6 +1,5 @@
 package com.example.waqarahmed.neighbourlinking.Services;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
-import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
-import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForServices;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 /**
  * Created by Waqar ahmed on 6/1/2017.

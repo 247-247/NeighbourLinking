@@ -3,19 +3,14 @@ package com.example.waqarahmed.neighbourlinking.Services.ServiceManServices;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.MainServiceManActivity;
-import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;

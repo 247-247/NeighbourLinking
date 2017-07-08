@@ -7,10 +7,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainActivityAdmin;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,28 +35,31 @@ import java.net.URLEncoder;
  * Created by Waqar ahmed on 6/1/2017.
  */
 
-public class RegisterNewBrand extends AsyncTask<String, Void, String> {
+public class uploadNotification extends AsyncTask<String, Void, String> {
 
     Context cxt;
     ProgressDialog progress ;
+    String image,email;
 
-    public RegisterNewBrand(Context context) {
+    public uploadNotification(Context context) {
         cxt=context;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        AdminSharedPref.init(cxt);
+              if (AppStatus.getInstance(cxt).isOnline()){
+                  if (progress == null) {
+                      image = AdminSharedPref.read(AdminSharedPref.IMAGE,null);
+                      email = AdminSharedPref.read(AdminSharedPref.EMAIL,null);
+                      progress = AppUtils.createProgressDialog(cxt);
+                      progress.show();
+                  } else {
+                      progress.show();
+                  }
 
-        if (AppStatus.getInstance(cxt).isOnline()){
-            if (progress == null) {
-                progress = AppUtils.createProgressDialog(cxt);
-                progress.show();
-            } else {
-                progress.show();
-            }
-
-        }
+              }
 
 
 
@@ -62,17 +67,17 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String serviceMan_email,type,serviceMan_password;
+        String title,type,disc;
 
 
-        serviceMan_email = strings[0];
-        serviceMan_password = strings[1];
-        if (AppStatus.getInstance(cxt).isOnline()) {
-            progress.show();
+        title = strings[0];
+        disc = strings[1];
+        if (AppStatus.getInstance(cxt).isOnline())
+        {
             String baseUrl = cxt.getResources().getString(R.string.baseUrl);
-            String url_string = baseUrl+"/Neighbour/public/newBrandRegister";
+            String url_string = baseUrl+"/Neighbour/public/InserNewNotificatationItem";
             try {
-                Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
+
                 URL url = null;
                 try {
                     url = new URL(url_string);
@@ -89,8 +94,10 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 Log.i("TAG", "doInBackground: 5 ");
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(serviceMan_email, "UTF-8") + "&" +
-                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(serviceMan_password, "UTF-8");
+                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
+                        URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(image, "UTF-8") + "&" +
+                        URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(title, "UTF-8")+ "&" +
+                        URLEncoder.encode("disc", "UTF-8") + "=" + URLEncoder.encode(disc, "UTF-8");
 
                 //  bufferedWriter.write(post_data);
                 bufferedWriter.write(post_data);
@@ -113,36 +120,6 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
 
                 }
 
-                try {
-                    JSONObject jsonRootObject = null;
-                    try {
-
-                        jsonRootObject = new JSONObject(result);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                       JSONObject jsonObject = jsonRootObject.getJSONObject("r");
-                         String response = jsonObject.getString("response");
-                    int employeeId = jsonObject.getInt("employeeId");
-
-                    if(response.equals("yes")){
-                        return "yes";
-                    }
-                    else{
-                        return "no";
-                    }
-
-
-
-
-
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
 
 
             } catch (UnsupportedEncodingException e) {
@@ -161,26 +138,10 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
 
         @Override
     protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-            if(progress != null && progress.isShowing())
+            super.onPostExecute(s);
+            if (progress != null && progress.isShowing())
                 progress.dismiss();
-            if(s.equals("yes")){
-               // Toast.makeText(cxt,"True",Toast.LENGTH_SHORT).show();
-                Intent mainIntent = new Intent(cxt,MainActivity.class);
-                cxt.startActivity(mainIntent);
-
-
-                // progress.dismiss();
-            }
-            else if(s.equals("no")){
-                Toast.makeText(cxt,"Brand Already exist",Toast.LENGTH_SHORT).show();
-
-
-            }else
-
-                Toast.makeText(cxt,"Network issue",Toast.LENGTH_SHORT).show();
-//
-
+            Toast.makeText(cxt,"Notification sended",Toast.LENGTH_SHORT).show();
 
 
         }

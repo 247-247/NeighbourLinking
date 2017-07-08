@@ -1,13 +1,9 @@
 package com.example.waqarahmed.neighbourlinking.Fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -17,12 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.AllContacts;
-import com.example.waqarahmed.neighbourlinking.Activities.Conversations;
-import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
-import com.example.waqarahmed.neighbourlinking.Activities.MainActivity;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
 import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManProfile;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
@@ -30,14 +22,11 @@ import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.DeAvtiveRequest;
 import com.example.waqarahmed.neighbourlinking.Services.RetrievAllRequestList;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.ManPowerList;
 import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForServices;
 import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListener;

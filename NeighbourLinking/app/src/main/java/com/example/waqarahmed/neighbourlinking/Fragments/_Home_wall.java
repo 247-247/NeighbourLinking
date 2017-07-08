@@ -2,7 +2,6 @@ package com.example.waqarahmed.neighbourlinking.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waqarahmed.neighbourlinking.Activities.Comments;
-import com.example.waqarahmed.neighbourlinking.Activities.CommentsOnPost;
-import com.example.waqarahmed.neighbourlinking.Activities.Delete_Post;
-import com.example.waqarahmed.neighbourlinking.Classes.Blog;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.CommentsOnPost;
 import com.example.waqarahmed.neighbourlinking.Classes.Post;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;

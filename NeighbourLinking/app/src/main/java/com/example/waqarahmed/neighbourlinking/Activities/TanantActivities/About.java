@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.R;
 import com.google.firebase.auth.FirebaseAuth;
