@@ -74,12 +74,14 @@
         <activity android:name=".Activities.NewRegistrations" />
         <activity android:name=".Activities.AdminActivities.NewTanantSignUp" />
         <activity
-            android:name=".Activities.AdminActivities.MainActivityAdmin"
+            android:name=".Activities.AdminActivities.MainServiceActivity_Admin"
             android:label="Admin"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.AdminActivities.AllServiceMenList"/>
+
         <activity
-            android:name=".Activities.ServiceManActivities.ServiceMainActivity"
-            android:label="@string/title_activity_service_main"
+            android:name=".Activities.AdminActivities.MainActivityAdmin"
+            android:label="Admin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.BrandActivities.MainBrandActivity"

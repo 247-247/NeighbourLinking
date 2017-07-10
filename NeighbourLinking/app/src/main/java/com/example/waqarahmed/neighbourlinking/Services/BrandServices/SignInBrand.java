@@ -8,13 +8,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
-import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceMainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
-import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
-import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;

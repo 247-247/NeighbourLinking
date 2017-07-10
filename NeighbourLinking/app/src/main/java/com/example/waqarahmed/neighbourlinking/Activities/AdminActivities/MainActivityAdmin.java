@@ -240,26 +240,10 @@ public class MainActivityAdmin extends AppCompatActivity
 //            Intent in = new Intent(MainActivity.this , Announcements.class);
 //            startActivity(in);
 //            return true;
-            Intent in = new Intent(MainActivityAdmin.this , RequestRelatedDetail.class);
-            startActivity(in);
-            return true;
-        }
-        if (id == R.id.action_logout) {
-            AdminSharedPref.init(this);
-            AdminSharedPref.write(AdminSharedPref.IS_ADMIN,"no");
-            AdminSharedPref.write(AdminSharedPref.EMAIL,null);
-            AdminSharedPref.write(AdminSharedPref.IMAGE,null);
-            mAuth.signOut();
-            return true;
-        }
-        if (id == R.id.action_post) {
-         //  Intent Post_Intent = new Intent(MainActivity.this, SettingActivity.class); // important
-        //    startActivity(Post_Intent);
-            Intent in = new Intent(MainActivityAdmin.this , NewRegistrations.class);
-            startActivity(in);
 
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -306,8 +290,11 @@ public class MainActivityAdmin extends AppCompatActivity
 
 
         } else if (id == R.id.nav_registaration) {
-            Intent in = new Intent(MainActivityAdmin.this , NewRegistrations.class);
+//            Intent in = new Intent(MainActivityAdmin.this , MainServiceActivity_Admin.class);
+//            startActivity(in);
+            Intent in = new Intent(MainActivityAdmin.this , AllServiceMenList.class);
             startActivity(in);
+
 
         }
 

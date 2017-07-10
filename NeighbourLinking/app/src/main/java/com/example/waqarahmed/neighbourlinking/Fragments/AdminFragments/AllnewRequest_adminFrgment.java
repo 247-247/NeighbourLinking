@@ -1,4 +1,4 @@
-package com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment;
+package com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
-import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
 import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.AllRequestList_Admin;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.AccepRequestService;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.ServiceManSpecificRetrievAllRequestList;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.setRejectRequestService;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServiceMan_newRequest extends Fragment
+public class AllnewRequest_adminFrgment extends Fragment
 {
 
     RecyclerView recyclerView;
@@ -44,7 +45,7 @@ public class ServiceMan_newRequest extends Fragment
     int p;  // position
     int currentUserId ;
     ArrayList<ServiceRequest> ActiveList;
-    public ServiceMan_newRequest()
+    public AllnewRequest_adminFrgment()
     {
         // Required empty public constructor android.support.design.widget.CoordinatorLayout
     }
@@ -71,8 +72,8 @@ public class ServiceMan_newRequest extends Fragment
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
        // registerForContextMenu(recyclerView);
         textView = (TextView) view.findViewById(R.id.messageView);
-        SharedPref.init(getActivity().getApplicationContext());
-        currentUserId = SharedPref.read(SharedPref.ID,0);
+//        SharedPref.init(getActivity().getApplicationContext());
+//        currentUserId = SharedPref.read(SharedPref.ID,0);
         ActiveList = new ArrayList<ServiceRequest>();
         rvAdapter = new RVAdapter(ActiveList , getActivity().getApplicationContext());
 
@@ -86,9 +87,9 @@ public class ServiceMan_newRequest extends Fragment
         super.onStart();
 
 
-        if(currentUserId != 0)
-        {
-            new ServiceManSpecificRetrievAllRequestList(getActivity())
+
+
+            new AllRequestList_Admin(getActivity())
             {
                 @Override
                 protected void onPostExecute(ArrayList<ServiceRequest> s) {
@@ -97,7 +98,7 @@ public class ServiceMan_newRequest extends Fragment
                     if (s != null)
                     {
                         for (int i = 0; i < s.size(); i++) {
-                            if (s.get(i).getStatus().equals("active") && s.get(i).getS().equals("pending") )
+                              if (s.get(i).getStatus().equals("active") && s.get(i).getS().equals("pending") )
                                 ActiveList.add(s.get(i));
                         }
 
@@ -122,8 +123,8 @@ public class ServiceMan_newRequest extends Fragment
                 }
 
 
-            }.execute("login",String.valueOf(currentUserId));
-        }
+            }.execute("login");
+
 
         Log.i("TAGTAG","activeRequest onStart");
 
@@ -205,29 +206,10 @@ public class ServiceMan_newRequest extends Fragment
         public void getItemSelected(MenuItem item)
         {
           //  Toast.makeText(mContext,name +" "+item.getTitle(),Toast.LENGTH_LONG).show();
-            if(item.getTitle().equals("Message"))
-            {
-                Intent convIntent = new Intent(getActivity().getApplicationContext(),Conversations.class);
-                convIntent.putExtra("receverId",serviceRequest.getSender_id());
-                convIntent.putExtra("receverName",serviceRequest.getOwner_name());
 
-                startActivity(convIntent);
-            }
-           else if(item.getTitle().equals("Accept it"))
-            {
-                     AccepRequestService Accep = (AccepRequestService) new AccepRequestService(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
-                     ActiveList.remove(p);
-                     rvAdapter.notifyDataSetChanged();
-
-
-            }
-            else if(item.getTitle().equals("Reject it"))
-            {
-                setRejectRequestService Reject = (setRejectRequestService) new setRejectRequestService(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
-                ActiveList.remove(p);
-                rvAdapter.notifyDataSetChanged();
-
-
+            if(item.getTitle().equals("Delete")) {
+//                AccepRequestService Accep = (AccepRequestService) new AccepRequestService(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
+//                ActiveList.remove(p);
             }
          else    if(item.getTitle().equals("Request Detail")){
                 Intent rDetailintent = new Intent(getActivity().getApplicationContext(),RequestDetailActivity.class);
@@ -278,15 +260,15 @@ public class ServiceMan_newRequest extends Fragment
                 nameView = (TextView) itemView.findViewById(R.id.RequestTypeName_textView_requestView);
                 dateView = (TextView)itemView.findViewById(R.id.Requestcreated_date_requesttView);
             }
-            public void setServiceTaker_name(String name) {
-
-                nameView.setText(name);
-
-            }
 
 
             public  void setLongClickListener(LongClickListener lc){
                 this.longClickListener = lc;
+            }
+            public void setServiceTaker_name(String name) {
+
+                nameView.setText(name);
+
             }
 
 
@@ -320,9 +302,7 @@ public class ServiceMan_newRequest extends Fragment
 
 
                 contextMenu.setHeaderTitle("Seleect Acton");
-                contextMenu.add(0,0,0,"Message");
-                contextMenu.add(0,0,0,"Accept it");
-                contextMenu.add(0,0,0,"Reject it");
+                contextMenu.add(0,0,0,"Delete");
                 contextMenu.add(0,0,0,"Request Detail");
                 contextMenu.add(0,0,0,"Service Taker About");
 

@@ -89,7 +89,7 @@ public class AceptAndActiveRequest extends android.support.v4.app.Fragment {
 
                     for(int i=0; i<s.size(); i++)
                     {
-                        if(s.get(i).getStatus().equals("active"))
+                        if(s.get(i).getStatus().equals("active") && s.get(i).getS().equals("Accept"))
                             ActiveList.add(s.get(i));
                     }
 
