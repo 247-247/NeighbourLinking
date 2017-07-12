@@ -88,7 +88,7 @@ public class MainServiceManActivity extends AppCompatActivity {
                             .commit();
                 }
                 if(position == 1){
-                    ServiceMan_newRequest sserviceMan_newRequest = new ServiceMan_newRequest();
+                    AceptAndActiveRequest sserviceMan_newRequest = new AceptAndActiveRequest();
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container, sserviceMan_newRequest)
                             .commit();

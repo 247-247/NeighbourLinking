@@ -240,6 +240,7 @@ public class MainActivityAdmin extends AppCompatActivity
 //            Intent in = new Intent(MainActivity.this , Announcements.class);
 //            startActivity(in);
 //            return true;
+            mAuth.signOut();   // ToDo Later leter change its llogic
 
             return true;
         }
@@ -292,7 +293,11 @@ public class MainActivityAdmin extends AppCompatActivity
         } else if (id == R.id.nav_registaration) {
 //            Intent in = new Intent(MainActivityAdmin.this , MainServiceActivity_Admin.class);
 //            startActivity(in);
-            Intent in = new Intent(MainActivityAdmin.this , AllServiceMenList.class);
+//            Intent in = new Intent(MainActivityAdmin.this , AllServiceMenList.class);
+//            startActivity(in);
+//            Intent in = new Intent(MainActivityAdmin.this , AdminMainServiceManActivty.class);
+//           startActivity(in);
+            Intent in = new Intent(MainActivityAdmin.this , AdminMainBrandActivty.class);
             startActivity(in);
 
 

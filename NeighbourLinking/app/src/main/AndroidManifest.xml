@@ -77,8 +77,7 @@
             android:name=".Activities.AdminActivities.MainServiceActivity_Admin"
             android:label="Admin"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.AdminActivities.AllServiceMenList"/>
-
+        <activity android:name=".Activities.AdminActivities.AllServiceMenList" />
         <activity
             android:name=".Activities.AdminActivities.MainActivityAdmin"
             android:label="Admin"
@@ -96,7 +95,19 @@
             android:name=".Activities.ServiceManActivities.MainServiceManActivity"
             android:label="@string/title_activity_main_service_man"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.AdminActivities.CreateNotification"></activity>
+        <activity android:name=".Activities.AdminActivities.CreateNotification" />
+        <!--<activity-->
+            <!--android:name=".Activities.AdminActivities.AdminViewEmployeeList"-->
+            <!--android:label="@string/title_activity_admin_view_employee_list"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <activity
+            android:name=".Activities.AdminActivities.AdminMainServiceManActivty"
+            android:label="@string/title_activity_admin_main_service_man_activty"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.AdminActivities.AdminMainBrandActivty"
+            android:label="@string/title_activity_admin_main_service_man_activty"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
