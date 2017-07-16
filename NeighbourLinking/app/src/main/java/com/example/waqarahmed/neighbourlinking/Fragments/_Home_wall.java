@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.CommentsOnPost;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Delete_Tanant_Post;
 import com.example.waqarahmed.neighbourlinking.Classes.Post;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -95,11 +96,14 @@ public class _Home_wall extends Fragment {
 
                 viewHolder.setMlikebtn(post_key);
 
-                viewHolder.post_title.setOnClickListener(new View.OnClickListener() {
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String post = getRef(position).toString();
-                        Toast.makeText(getActivity(),post_key,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), Delete_Tanant_Post.class);
+                        intent.putExtra("post_key",post_key);
+                       startActivity(intent);
+                     //   Toast.makeText(getActivity(),post_key,Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -165,23 +169,27 @@ public class _Home_wall extends Fragment {
 public static class PostViewHolder extends RecyclerView.ViewHolder{
 
     View mView;
-    TextView post_title;
+    TextView post_title,likeCount,commentCount;
     ImageView post_desc;
     ImageButton mlikebtn;
     ImageButton mComment;
     FirebaseAuth mAuth;
     DatabaseReference mDatabasePostLike;
+    DatabaseReference mDatabasePostCommment;
 
     public PostViewHolder(View itemView) {
         super(itemView);
 
         mView = itemView;
+
         mComment = (ImageButton) mView.findViewById(R.id.comment_btn_post_row);
         post_title = (TextView) mView.findViewById(R.id.titleShow_post_row);
-
+         likeCount = (TextView) mView.findViewById(R.id.like_count);
+        commentCount = (TextView) mView.findViewById(R.id.comment_count);
         mlikebtn = (ImageButton) itemView.findViewById(R.id.like_btn_post_row);
         mAuth = FirebaseAuth.getInstance();
         mDatabasePostLike = FirebaseDatabase.getInstance().getReference().child("Post_Like");
+        mDatabasePostCommment = FirebaseDatabase.getInstance().getReference().child("Post_Comment");
         mDatabasePostLike.keepSynced(true);
     }
     public void setMlikebtn(final String post_key){
@@ -191,11 +199,36 @@ public static class PostViewHolder extends RecyclerView.ViewHolder{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(mAuth.getCurrentUser() != null){
                     if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                        likeCount.setText("likes"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
+                        commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                         mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
+                        mDatabasePostCommment.child(post_key).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                commentCount.setText("comments"+" "+String.valueOf(dataSnapshot.getChildrenCount()));
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }else{
-
+                        likeCount.setText("Like"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                         mlikebtn.setImageResource(R.drawable.thumb_up_blck);
+                        mDatabasePostCommment.child(post_key).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                commentCount.setText("comments"+" "+String.valueOf(dataSnapshot.getChildrenCount()));
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }
                 }
 

@@ -82,13 +82,15 @@ public class AllContacts extends AppCompatActivity {
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot d = iterator.next();
-                    Contact c = d.getValue(Contact.class);
-                    if (!TextUtils.equals(c.getUid(), mAuth.getCurrentUser().getUid())) {
+                    if (d.hasChild("image")) {
+                        Contact c = d.getValue(Contact.class);
+                        if (!TextUtils.equals(c.getUid(), mAuth.getCurrentUser().getUid())) {
 
-                        list.add(c);
-                        Log.i("HHHHHHWWWWW", "onDataChange: " + c.getFirst_name());
+                            list.add(c);
+                            Log.i("HHHHHHWWWWW", "onDataChange: " + c.getFirst_name());
 
 
+                        }
                     }
                 }
             }

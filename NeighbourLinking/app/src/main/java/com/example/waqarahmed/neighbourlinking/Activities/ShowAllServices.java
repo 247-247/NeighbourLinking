@@ -49,7 +49,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
                     public void onItemClick(View view, int position) {
 
                         ServicesTypes s = Serviceslist.get(position);
-                        Toast.makeText(ShowAllServices.this," "+s.getSkill(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(ShowAllServices.this," "+s.getSkill(), Toast.LENGTH_LONG).show();
 
                         Intent RetrievServiceManListInrent = new Intent(ShowAllServices.this,ManPowerList.class);
                         RetrievServiceManListInrent.putExtra("Skill",s.getSkill());

@@ -127,6 +127,7 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
                         man.setName(jsonObject.getString("name"));
                         man.setSkill(jsonObject.getString("skill"));
                         man.setContact(jsonObject.getString("contact"));
+                        man.setStatus(jsonObject.getString("status"));
                         man.setIsAccountSetUp(jsonObject.getString("isAccountSetUp"));
 
 
@@ -134,6 +135,7 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
 
                         manlist.add(man);
                     }
+                   // return manlist;
                 }
                 catch (JSONException e)
                 {
@@ -142,7 +144,7 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
 
 
                 //-----------
-                return manlist;
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -152,16 +154,20 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
         }else{
 
         }
-        return null;
+        if(progress.isShowing())
+            progress.dismiss();
+        return manlist;
     }
 
     @Override
     protected void onPostExecute( ArrayList<ServiceMan> s) {
         super.onPostExecute(s);
 
-
+        if(s != null)
         if(!s.isEmpty()) {
+            if(progress.isShowing())
             progress.dismiss();
+            Log.e("TAG", "doInBackground: 11" );
             asyncResponse.processFinish(s);
 
 
@@ -169,6 +175,9 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
 
         else
         {
+            Log.e("TAG", "doInBackground: 12" );
+            asyncResponse.processFinish(null);
+            if(progress.isShowing())
             progress.dismiss();
     }
     }

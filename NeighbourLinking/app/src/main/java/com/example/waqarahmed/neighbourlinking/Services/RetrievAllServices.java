@@ -106,6 +106,7 @@ public class RetrievAllServices extends AsyncTask<String, Void,  ArrayList<Servi
                         e.printStackTrace();
                     }
                     JSONArray jsonArray = jsonRootObject.getJSONArray("AllServieses");
+                    if(jsonArray != null)
                     for (int i=jsonArray.length()-1; i>=0; i--){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         ServicesTypes service = new ServicesTypes();
@@ -119,6 +120,7 @@ public class RetrievAllServices extends AsyncTask<String, Void,  ArrayList<Servi
 
                         Serviceslist.add(service);
                     }
+                  //  return Serviceslist;
                 }
                 catch (JSONException e)
                 {
@@ -127,7 +129,7 @@ public class RetrievAllServices extends AsyncTask<String, Void,  ArrayList<Servi
 
 
                 //-----------
-                return Serviceslist;
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -135,14 +137,14 @@ public class RetrievAllServices extends AsyncTask<String, Void,  ArrayList<Servi
                 e.printStackTrace();
             }
         }
-        return null;
+        return Serviceslist;
     }
 
     @Override
     protected void onPostExecute( ArrayList<ServicesTypes> s) {
         super.onPostExecute(s);
 
-
+         if(s!= null)
         if(!s.isEmpty()) {
             progress.dismiss();
             asyncResponse.processFinish(s);

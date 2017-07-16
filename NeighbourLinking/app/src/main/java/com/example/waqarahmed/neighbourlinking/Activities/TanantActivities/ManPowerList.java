@@ -96,11 +96,12 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
 
     @Override
     public void processFinish(ArrayList<ServiceMan> Manlist) {
-        if(Manlist.size() != 0) {
+        menlist.clear();
+        if(Manlist != null) {
 
           for(int i = 0; i<Manlist.size(); i++){
-            if(Manlist.get(i).getStatus().equals("active") && Manlist.get(i).getIsAccountSetUp().equals("yes")) {
-                String s = Manlist.get(i).getIsAccountSetUp();
+            if(Manlist.get(i).getStatus().equals("active") && Manlist.get(i).getIsAccountSetUp().equals("yes") ) {
+          //      String s = Manlist.get(i).getIsAccountSetUp();
                 Log.e("TAG", "processFinish: " );
                 menlist.add(Manlist.get(i));
             }
@@ -112,21 +113,21 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
                   menPowerList_recyclerView.setVisibility(View.VISIBLE);
                   textView.setVisibility(View.INVISIBLE);
                  // this.menlist = Manlist;
-                  RVAdapterForMenList rvAdapterForMenList = new RVAdapterForMenList(Manlist, this);
+                  RVAdapterForMenList rvAdapterForMenList = new RVAdapterForMenList(menlist, this);
                   menPowerList_recyclerView.setAdapter(rvAdapterForMenList);
-                  onStart();
+
               }
               else{
                   menPowerList_recyclerView.setVisibility(View.INVISIBLE);
                   textView.setVisibility(View.VISIBLE);
-                  onStart();
+
               }
 
         }
         else{
             menPowerList_recyclerView.setVisibility(View.INVISIBLE);
             textView.setVisibility(View.VISIBLE);
-            onStart();
+
 
         }
     }

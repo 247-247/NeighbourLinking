@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView  xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/boarder_arround_blog_item"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.waqarahmed.neighbourlinking.Activities.Delete_Post">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +22,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/senderImage_imageView"
+                android:id="@+id/senderImage_imageView_dltActivity"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_margin="10dp" />
@@ -28,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/senderName_textView"
+                    android:id="@+id/senderName_textView_dltActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -40,7 +45,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/sender_date"
+                    android:id="@+id/senderDate_textView_dltActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -51,7 +56,7 @@
 
 
         <TextView
-            android:id="@+id/titleShow"
+            android:id="@+id/titleShow_textView_dltActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -61,16 +66,9 @@
 
             />
 
-        <ImageView
-            android:id="@+id/imageShow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:adjustViewBounds="true"
-            tools:layout_height="250dp" />
 
         <TextView
-            android:id="@+id/descShow"
+            android:id="@+id/descShow_textView_dltActivity"
             android:layout_marginTop="10dp"
 
             android:layout_width="match_parent"
@@ -78,39 +76,27 @@
             android:textAlignment="viewStart"
             tools:textSize="40sp" />
 
-        <LinearLayout
+<Button
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/customborder_for_blog_row"
+
+    android:id="@+id/dlt_done"
+    android:text="Delete Post"/>
+        <TextView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/border_arround_blog_btn"
-
-            android:weightSum="1">
-
-            <ImageButton
-                android:id="@+id/like_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".50"
-                android:padding="10dp"
-                android:src="@drawable/thumb_up_blck" />
-
-            <ImageButton
-                android:id="@+id/comment_btn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.50"
-                android:padding="10dp"
-
-                android:src="@mipmap/msg" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:background="#FFFFFF"/>
+            android:layout_marginBottom="5dp"
+            />
+
+
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+
+
+
+
+</RelativeLayout>
+</ScrollView>

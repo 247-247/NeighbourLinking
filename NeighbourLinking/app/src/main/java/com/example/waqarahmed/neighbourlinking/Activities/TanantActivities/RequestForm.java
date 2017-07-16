@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class RequestForm extends AppCompatActivity {
     ImageView serviceMan_imageView;
@@ -46,7 +47,18 @@ public class RequestForm extends AppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendRequestOnServer();
+                if(causeEdit.length()>0){
+                    if(contactEdit.length()==11){
+                        sendRequestOnServer();
+                    }else{
+                        contactEdit.setError("Enter Correct Contact!!!");
+                    }
+
+                }else {
+
+                    causeEdit.setError("Cause Require!!!");
+                }
+
 
             }
         });
@@ -79,6 +91,7 @@ public class RequestForm extends AppCompatActivity {
                         Address = (String) dataSnapshot.child("address").getValue();
                         f_name = (String) dataSnapshot.child("first_name").getValue();
                         image = (String) dataSnapshot.child("image").getValue();
+                        //Picasso.with(RequestForm.this).load(image).placeholder(R.mipmap.ic_launcher).centerCrop().into(serviceMan_imageView);
                         // Toast.makeText(RequestForm.this," "+user_id+Address+f_name+image,Toast.LENGTH_LONG).show();
 
                         PlaceRequestOnServer placeRequestOnServer = new PlaceRequestOnServer(RequestForm.this);

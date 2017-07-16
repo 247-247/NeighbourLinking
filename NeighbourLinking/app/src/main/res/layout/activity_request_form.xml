@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
             android:id="@+id/cause_edit"
             android:background="@drawable/customborder_for_blog_row"
             android:hint="Cause..."/>
@@ -34,6 +35,7 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:id="@+id/contact_edit"
             android:background="@drawable/customborder_for_blog_row"
             android:hint="Contact..."/>
