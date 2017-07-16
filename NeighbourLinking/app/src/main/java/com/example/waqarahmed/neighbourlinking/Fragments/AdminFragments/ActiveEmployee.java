@@ -75,12 +75,13 @@ public class ActiveEmployee extends Fragment {
              @Override
              protected void onPostExecute(ArrayList<ServiceMan> serviceMen) {
                  super.onPostExecute(serviceMen);
+                 menlist.clear();
                  if(serviceMen != null) {
                      menPowerList_recyclerView.setVisibility(View.VISIBLE);
                      textView.setVisibility(View.INVISIBLE);
                      for(int i = 0; i < serviceMen.size(); i++){
                         // ServiceMan s = serviceMen.get(i);
-                         if(serviceMen.get(i).getStatus().equals("active")){
+                         if(serviceMen.get(i).getStatus().equals("active") && serviceMen.get(i).getIsAccountSetUp().equals("yes")){
                              menlist.add(serviceMen.get(i));
                          }
 
@@ -186,6 +187,7 @@ public class ActiveEmployee extends Fragment {
             if(item.getTitle().equals("Block Service man")){
                new setDeActiveServiceMan (getActivity()).execute("login", String.valueOf(serviceMan2.getId()));
                 list.remove(serviceMan2);
+                rvAdapterForMenList.notifyDataSetChanged();
 
 
             }

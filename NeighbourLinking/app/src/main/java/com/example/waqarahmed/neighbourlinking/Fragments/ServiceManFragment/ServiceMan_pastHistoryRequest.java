@@ -81,7 +81,7 @@ public class ServiceMan_pastHistoryRequest extends Fragment
     public void onStart()
     {
         super.onStart();
-
+        ActiveList.clear();
 
         if(currentUserId != 0)
         {

@@ -127,9 +127,10 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
                         man.setName(jsonObject.getString("name"));
                         man.setSkill(jsonObject.getString("skill"));
                         man.setContact(jsonObject.getString("contact"));
+                        man.setIsAccountSetUp(jsonObject.getString("isAccountSetUp"));
 
 
-
+                        Log.e(TAG, "doInBackground: " );
 
                         manlist.add(man);
                     }
@@ -148,6 +149,8 @@ public class RetrievAllMenPowerList extends AsyncTask<String, Void,  ArrayList<S
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else{
+
         }
         return null;
     }

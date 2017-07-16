@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DeActiveRequests extends Fragment {
+public class pendingActiveRequests extends Fragment {
     RecyclerView recyclerView;
     TextView textView;
     FirebaseAuth mAuth;
-    ArrayList<ServiceRequest> deActiveList;
+    ArrayList<ServiceRequest> pendindActiveList;
 
 
     @Override
@@ -45,34 +45,38 @@ public class DeActiveRequests extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_activeList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        getActivity().setTitle("De Active");
+       // getActivity().setTitle("Pending Request");
 
         textView = (TextView) view.findViewById(R.id.messageView);
         mAuth = FirebaseAuth.getInstance();
-        deActiveList = new ArrayList<ServiceRequest>();
+        pendindActiveList = new ArrayList<ServiceRequest>();
         new RetrievAllRequestList(getActivity()){
             @Override
             protected void onPostExecute(ArrayList<ServiceRequest> s) {
                 super.onPostExecute(s);
 
-                //   Toast.makeText(getActivity().getApplicationContext()," "+s.get(1).getCause().toString(),Toast.LENGTH_LONG).show();
+    if(s!= null) {
+        for (int i = 0; i < s.size(); i++) {
+            if (s.get(i).getStatus().equals("DeActive") || s.get(i).getS().equals("Reject"))
+                pendindActiveList.add(s.get(i));
+        }
 
-                for(int i=0; i<s.size(); i++){
-                    if(s.get(i).getStatus().equals("DeActive"))
-                    deActiveList.add(s.get(i));
-                }
+        if (pendindActiveList.size() > 0) {
+            textView.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            RVAdapter rvAdapter = new RVAdapter(pendindActiveList, getActivity());
+            recyclerView.setAdapter(rvAdapter);
+        } else {
+            textView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
 
-                if(deActiveList.size()>0) {
-                    textView.setVisibility(View.INVISIBLE);
-                    RVAdapter rvAdapter = new RVAdapter(deActiveList, getActivity().getApplicationContext());
-                    recyclerView.setAdapter(rvAdapter);
-                }else{
+        }
+    }else{
+        textView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
 
-                    recyclerView.setVisibility(View.INVISIBLE);
+    }
 
-                }
-                // onStart();
-                //  progress.dismiss();
             }
         }.execute("login",mAuth.getCurrentUser().getUid().toString());
 
@@ -126,19 +130,11 @@ public class DeActiveRequests extends Fragment {
         @Override
         public void onBindViewHolder(RVAdapter.RequestViewHolder holder, int position) {
             ServiceRequest request = list.get(position);
-            if(request.getStatus().equals("DeActive")) {
-                holder.setServiceMan_image(request.getPowerMan_image_url(), mContext);
+                           holder.setServiceMan_image(request.getPowerMan_image_url(), mContext);
                 holder.setServiceType_name(request.getType());
                 holder.setRequest_date(request.getCreated_at());
-            }
-            else{
 
-            }
-
-            // holder.setContact_name(contact.getFirst_name());
-            // holder.setContact_image(contact.getImage(),mContext);
-            // holder.setContact_date(contact.getAddress());
-        }
+                    }
 
         @Override
         public int getItemCount() {

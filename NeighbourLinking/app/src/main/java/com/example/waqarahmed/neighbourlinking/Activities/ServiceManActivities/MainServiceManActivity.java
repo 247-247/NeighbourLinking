@@ -94,7 +94,7 @@ public class MainServiceManActivity extends AppCompatActivity {
                             .commit();
                 }
                 if(position ==2) {
-                  PastHistoryRequest_adminFragment history = new PastHistoryRequest_adminFragment();
+                  ServiceMan_pastHistoryRequest history = new ServiceMan_pastHistoryRequest();
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container, history)
                             .commit();
@@ -127,9 +127,7 @@ public class MainServiceManActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         if (id == R.id.action_about) {
 
             Intent serviceProfile = new Intent(MainServiceManActivity.this,AboutServiceman.class);

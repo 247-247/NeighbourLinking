@@ -150,7 +150,7 @@
         <LinearLayout
             style="@style/linealayoutUseInAbout">
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"

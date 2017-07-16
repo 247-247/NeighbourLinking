@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
 import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManProfile;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
 import com.example.waqarahmed.neighbourlinking.Classes.ServiceRequest;
 import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class activeRequest extends Fragment {
+public class historyRequest_tanantFragment extends Fragment {
 
     RecyclerView recyclerView;
     TextView textView;
@@ -42,7 +42,7 @@ public class activeRequest extends Fragment {
 
 
 
-    public activeRequest() {
+    public historyRequest_tanantFragment() {
         // Required empty public constructor
     }
 
@@ -71,39 +71,35 @@ public class activeRequest extends Fragment {
         ActiveList = new ArrayList<ServiceRequest>();
         new RetrievAllRequestList(getActivity()){
             @Override
-            protected void onPostExecute(ArrayList<ServiceRequest> s)
-            {
+            protected void onPostExecute(ArrayList<ServiceRequest> s) {
                 super.onPostExecute(s);
                 textView.setVisibility(View.INVISIBLE);
                 recyclerView.setVisibility(View.INVISIBLE);
-                if (s != null) {
+      if(s != null) {
 
-                    for (int i = 0; i < s.size(); i++) {
-                        if (s.get(i).getStatus().equals("active") && s.get(i).getS().equals("pending"))
-                            ActiveList.add(s.get(i));
-                    }
+          for (int i = 0; i < s.size(); i++) {
 
-                    if (ActiveList.size() > 0) {
-                        textView.setVisibility(View.INVISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        rvAdapter = new RVAdapter(ActiveList, getActivity());
-                        recyclerView.setAdapter(rvAdapter);
-                    } else {
+              if (s.get(i).getStatus().equals("active") && s.get(i).getS().equals("Accept"))
+                  ActiveList.add(s.get(i));
+          }
 
-                        textView.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.INVISIBLE);
+          if (ActiveList.size() > 0) {
+              textView.setVisibility(View.INVISIBLE);
+              recyclerView.setVisibility(View.VISIBLE);
+              rvAdapter = new RVAdapter(ActiveList, getActivity());
+              recyclerView.setAdapter(rvAdapter);
+          } else {
+              textView.setVisibility(View.VISIBLE);
+              recyclerView.setVisibility(View.INVISIBLE);
 
-                    }
+          }
+      }else {
 
-                }
-                else
-                {
-                    textView.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.INVISIBLE);
-                }
+          textView.setVisibility(View.VISIBLE);
+          recyclerView.setVisibility(View.INVISIBLE);
+      }
+
             }
-
-
         }.execute("login",mAuth.getCurrentUser().getUid().toString());
 
         return view;
@@ -199,26 +195,6 @@ public class activeRequest extends Fragment {
         public void getItemSelected(MenuItem item)
         {
 
-            if(item.getTitle().equals("Message")){
-                Intent convIntent = new Intent(getActivity().getApplicationContext(),Conversations.class);
-                convIntent.putExtra("receverId",serviceRequest.getId());
-                convIntent.putExtra("receverName",serviceRequest.getPowerMan_name());
-
-                startActivity(convIntent);
-
-            }
-            if(item.getTitle().equals("De Active")) {
-                        DeAvtiveRequest deAvtiveRequest = (DeAvtiveRequest) new DeAvtiveRequest(getActivity().getApplicationContext()).execute("login", String.valueOf(serviceRequest.getId()));
-                     ActiveList.remove(p);
-                   rvAdapter.notifyDataSetChanged();
-
-
-            }
-
-
-
-
-
             if(item.getTitle().equals("Request Detail"))
             {
                 Intent rDetailintent = new Intent(getActivity().getApplicationContext(),RequestDetailActivity.class);
@@ -232,10 +208,6 @@ public class activeRequest extends Fragment {
             {
                 Intent rDetailintent = new Intent(getActivity().getApplicationContext(),ServiceManProfile.class);
                 rDetailintent.putExtra("id", serviceRequest.getPowerMan_id());
-
-
-
-
                 startActivity(rDetailintent);
 
             }
@@ -308,8 +280,8 @@ public class activeRequest extends Fragment {
             public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo)
             {
                 contextMenu.setHeaderTitle("Seleect Acton");
-                contextMenu.add(0,0,0,"Message");
-                contextMenu.add(0,0,0,"De Active");
+
+
                 contextMenu.add(0,0,0,"Request Detail");
                 contextMenu.add(0,0,0,"Service Man's About");
 

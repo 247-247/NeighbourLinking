@@ -75,19 +75,27 @@ public class ActiveBrand extends Fragment {
              @Override
              protected void onPostExecute(ArrayList<Brand> s) {
                  super.onPostExecute(s);
+                 brandlist.clear();
                  if(s != null) {
-                     menPowerList_recyclerView.setVisibility(View.VISIBLE);
-                     textView.setVisibility(View.INVISIBLE);
+
                      for(int i = 0; i < s.size(); i++){
                         // ServiceMan s = serviceMen.get(i);
-                         if(s.get(i).getStatus().equals("active")){
+                         if(s.get(i).getStatus().equals("active") && s.get(i).getIsAccountSetUp().equals("yes")){
                              brandlist.add(s.get(i));
                          }
 
                      }
+                     if(brandlist.size()>0){
+                         menPowerList_recyclerView.setVisibility(View.VISIBLE);
+                         textView.setVisibility(View.INVISIBLE);
+                         rvAdapterForMenList = new RVAdapterForMenList(brandlist, getActivity());
+                         menPowerList_recyclerView.setAdapter(rvAdapterForMenList);
+
+                     }else{
+                         menPowerList_recyclerView.setVisibility(View.INVISIBLE);
+                         textView.setVisibility(View.VISIBLE);
+                     }
                      //menlist = serviceMen;
-                     rvAdapterForMenList = new RVAdapterForMenList(brandlist, getActivity());
-                     menPowerList_recyclerView.setAdapter(rvAdapterForMenList);
 
 
 

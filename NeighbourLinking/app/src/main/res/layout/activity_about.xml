@@ -130,7 +130,7 @@
                 android:layout_width="0dp"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
-                android:text="City:"
+                android:text="Contact:"
                 android:layout_weight=".40"/>
             <EditText
                 android:layout_width="0dp"
@@ -187,7 +187,7 @@
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/gender_textview_aboutActivity"
-                android:text="Gender:"
+                android:text="City:"
                 android:layout_weight=".40"/>
             <EditText
                 android:layout_width="0dp"

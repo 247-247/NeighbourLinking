@@ -52,6 +52,7 @@ public class AceptAndActiveRequest extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_acept_and_active_request, container, false);
         Log.i("TAGTAG","AceptAndActiveRequest onCreateView");
         activeAndAccept_ReclerView = (RecyclerView) view.findViewById(R.id.activeAndAcept_rcyclrView);
+        textView = (TextView) view.findViewById(R.id.messageView);
         activeAndAccept_ReclerView.setHasFixedSize(true);
         activeAndAccept_ReclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
        // registerForContextMenu(activeAndAccept_ReclerView);
@@ -81,24 +82,38 @@ public class AceptAndActiveRequest extends android.support.v4.app.Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ActiveList.clear();
         if(currentUserId != 0){
             new AcctveAndAcceptRequest(getActivity()){
                 @Override
                 protected void onPostExecute(ArrayList<ServiceRequest> s) {
                     super.onPostExecute(s);
+              if(s != null) {
+                  textView.setVisibility(View.INVISIBLE);
+                  activeAndAccept_ReclerView.setVisibility(View.INVISIBLE);
+                  for (int i = 0; i < s.size(); i++) {
+                      if (s.get(i).getStatus().equals("active") && s.get(i).getS().equals("Accept"))
+                          ActiveList.add(s.get(i));
+                  }
 
-                    for(int i=0; i<s.size(); i++)
-                    {
-                        if(s.get(i).getStatus().equals("active") && s.get(i).getS().equals("Accept"))
-                            ActiveList.add(s.get(i));
-                    }
+                  if (ActiveList.size() > 0) {
+                      activeAndAccept_ReclerView.setVisibility(View.VISIBLE);
+                       textView.setVisibility(View.INVISIBLE);
+                      activeAndAcceptRequestRVA = new ActiveAndAcceptRequestRVA(ActiveList, getActivity());
+                      activeAndAccept_ReclerView.setAdapter(activeAndAcceptRequestRVA);
+                  }
+                  else {
+                      textView.setVisibility(View.VISIBLE);
+                      activeAndAccept_ReclerView.setVisibility(View.INVISIBLE);
 
-                    if(ActiveList.size()>0)
-                    {
-                        // textView.setVisibility(View.INVISIBLE);
-                        activeAndAcceptRequestRVA = new ActiveAndAcceptRequestRVA(ActiveList, getActivity());
-                        activeAndAccept_ReclerView.setAdapter(activeAndAcceptRequestRVA);
-                    }
+                  }
+
+              }else{
+                  textView.setVisibility(View.VISIBLE);
+                  activeAndAccept_ReclerView.setVisibility(View.INVISIBLE);
+
+
+              }
 
                 }
             }.execute("login", String.valueOf(currentUserId));

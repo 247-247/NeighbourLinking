@@ -122,6 +122,7 @@ public class RetrievAllMenPowerList_admin extends AsyncTask<Void, Void,  ArrayLi
                         man.setSkill(jsonObject.getString("skill"));
                         man.setContact(jsonObject.getString("contact"));
                         man.setStatus(jsonObject.getString("status"));
+                        man.setIsAccountSetUp(jsonObject.getString("isAccountSetUp"));
 
 
                         manlist.add(man);

@@ -257,26 +257,26 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
 
-        if (id == R.id.action_settings) {
+      //  if (id == R.id.action_settings) {
 //            Intent in = new Intent(MainActivity.this , Announcements.class);
 //            startActivity(in);
 //            return true;
-            Intent in = new Intent(MainActivity.this , RequestRelatedDetail.class);
-            startActivity(in);
-            return true;
-        }
+//            Intent in = new Intent(MainActivity.this , RequestRelatedDetail.class);
+//            startActivity(in);
+//            return true;
+      //  }
         if (id == R.id.action_logout) {
             mAuth.signOut();
             return true;
         }
-        if (id == R.id.action_post) {
+      //  if (id == R.id.action_post) {
          //  Intent Post_Intent = new Intent(MainActivity.this, SettingActivity.class); // important
         //    startActivity(Post_Intent);
-            Intent in = new Intent(MainActivity.this , NewRegistrations.class);
-            startActivity(in);
+       //     Intent in = new Intent(MainActivity.this , NewRegistrations.class);
+       //     startActivity(in);
 
-            return true;
-        }
+      //      return true;
+      //  }
 
         return super.onOptionsItemSelected(item);
     }
@@ -317,9 +317,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(in);
         }
 
-        else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+         else if (id == R.id.nav_send) {
+            Intent in = new Intent(MainActivity.this , Requests_Tanants.class);
+            startActivity(in);
 
         }
 

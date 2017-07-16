@@ -225,7 +225,7 @@ public class MainActivityAdmin extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_admin_activity, menu);
 
         return true;
     }
@@ -236,11 +236,17 @@ public class MainActivityAdmin extends AppCompatActivity
         int id = item.getItemId();
 
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sign_out) {
 //            Intent in = new Intent(MainActivity.this , Announcements.class);
 //            startActivity(in);
 //            return true;
-            mAuth.signOut();   // ToDo Later leter change its llogic
+            AdminSharedPref.init(MainActivityAdmin.this);
+            AdminSharedPref.write(AdminSharedPref.IS_ADMIN,"no");
+
+            AdminSharedPref.write(AdminSharedPref.IMAGE,null);
+            AdminSharedPref.write(AdminSharedPref.EMAIL,null);
+            mAuth.signOut();
+
 
             return true;
         }
@@ -291,15 +297,34 @@ public class MainActivityAdmin extends AppCompatActivity
 
 
         } else if (id == R.id.nav_registaration) {
-//            Intent in = new Intent(MainActivityAdmin.this , MainServiceActivity_Admin.class);
-//            startActivity(in);
+            Intent in = new Intent(MainActivityAdmin.this , NewRegistrations.class);
+            startActivity(in);
+
+
+
+
+        }
+        else if (id == R.id.nav_servicemanlst) {
 //            Intent in = new Intent(MainActivityAdmin.this , AllServiceMenList.class);
 //            startActivity(in);
-//            Intent in = new Intent(MainActivityAdmin.this , AdminMainServiceManActivty.class);
-//           startActivity(in);
+         Intent in = new Intent(MainActivityAdmin.this , AdminMainServiceManActivty.class);
+           startActivity(in);
+
+
+        }
+        else if (id == R.id.nav_brandlst) {
             Intent in = new Intent(MainActivityAdmin.this , AdminMainBrandActivty.class);
             startActivity(in);
 
+
+        }
+        else if (id == R.id.nav_requestlst) {
+            Intent in = new Intent(MainActivityAdmin.this , MainServiceActivity_Admin.class);
+           startActivity(in);
+
+
+        }
+        else{
 
         }
 

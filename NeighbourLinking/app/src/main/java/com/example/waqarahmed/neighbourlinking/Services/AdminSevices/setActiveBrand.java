@@ -1,10 +1,14 @@
 package com.example.waqarahmed.neighbourlinking.Services.AdminSevices;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
+import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 
 import java.io.BufferedReader;
@@ -18,16 +22,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by Waqar ahmed on 6/1/2017.
  */
 
-public class SetActiveServiceMan extends AsyncTask<String, Void,  String> {
+public class setActiveBrand extends AsyncTask<String, Void,  String> {
     Context context;
 
 
-    public SetActiveServiceMan(Context ctx){
+
+    public setActiveBrand(Context ctx){
 
         context = ctx;
 
@@ -37,7 +43,8 @@ public class SetActiveServiceMan extends AsyncTask<String, Void,  String> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-          }
+
+    }
 
     @Override
     protected  String doInBackground(String... params) {
@@ -45,7 +52,7 @@ public class SetActiveServiceMan extends AsyncTask<String, Void,  String> {
         String id = params[1];
         String baseUrl = context.getResources().getString(R.string.baseUrl);
         if(AppStatus.getInstance(context).isOnline()) {
-            String url_string = baseUrl + "/Neighbour/public/setEmployeeStausActive";
+            String url_string = baseUrl+"/Neighbour/public/setBrandStausActive";
             if (typ.equals("login")) {   //http://localhost/ForJSONArray_push/index.php
                 try {
                     Log.i("TAG", "doInBackground: 1 ");
@@ -99,6 +106,7 @@ public class SetActiveServiceMan extends AsyncTask<String, Void,  String> {
                 }
             }
         }else{
+            Toast.makeText(context,"You are Ofline",Toast.LENGTH_SHORT).show();
 
         }
         return null;

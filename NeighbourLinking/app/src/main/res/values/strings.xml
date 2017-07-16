@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="baseUrl">http://1ed8e9e6.ngrok.io</string>
+    <string name="baseUrl">http://b4e4891c.ngrok.io</string>
 
 
     <string name="action_settings">Settings</string>
@@ -60,5 +60,6 @@
     <string name="title_activity_admin_view_employee_list">AdminViewEmployeeList</string>
     <string name="title_activity_main_service_man_list_admin">MainServiceManList_admin</string>
     <string name="title_activity_admin_main_service_man_activty">AdminMainServiceManActivty</string>
+    <string name="title_activity_requests__tanants">Requests_Tanants</string>
 
 </resources>

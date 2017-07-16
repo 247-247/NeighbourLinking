@@ -85,7 +85,7 @@ public class ServiceMan_newRequest extends Fragment
     {
         super.onStart();
 
-
+      ActiveList.clear();
         if(currentUserId != 0)
         {
             new ServiceManSpecificRetrievAllRequestList(getActivity())

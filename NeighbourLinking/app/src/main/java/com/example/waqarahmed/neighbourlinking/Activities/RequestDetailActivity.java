@@ -37,21 +37,6 @@ public class RequestDetailActivity extends AppCompatActivity {
         mCreateField = (EditText) findViewById(R.id.createDate_editiew_rAActivity);
         serviceRequest = (ServiceRequest) getIntent().getSerializableExtra("rObject");
         setDisplayValue(serviceRequest);
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(12000);
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-       // setDisplayValue();
-
-      //  Toast.makeText(RequestDetailActivity.this,""+serviceRequest.getCause(),Toast.LENGTH_LONG).show();
-
 
 
 

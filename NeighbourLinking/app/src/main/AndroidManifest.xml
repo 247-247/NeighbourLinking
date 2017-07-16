@@ -96,17 +96,21 @@
             android:label="@string/title_activity_main_service_man"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.AdminActivities.CreateNotification" />
-        <!--<activity-->
-            <!--android:name=".Activities.AdminActivities.AdminViewEmployeeList"-->
-            <!--android:label="@string/title_activity_admin_view_employee_list"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!-- <activity -->
+        <!-- android:name=".Activities.AdminActivities.AdminViewEmployeeList" -->
+        <!-- android:label="@string/title_activity_admin_view_employee_list" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <activity
             android:name=".Activities.AdminActivities.AdminMainServiceManActivty"
             android:label="@string/title_activity_admin_main_service_man_activty"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.AdminActivities.AdminMainBrandActivty"
             android:label="@string/title_activity_admin_main_service_man_activty"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.TanantActivities.Requests_Tanants"
+            android:label="@string/title_activity_requests__tanants"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

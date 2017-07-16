@@ -42,6 +42,9 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
 
         container = (FrameLayout) findViewById(R.id.container);
@@ -114,7 +117,10 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
+        if(id == android.R.id.home) {
+            this.onBackPressed();
+            return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -160,6 +166,15 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
             mDropDownHelper.setDropDownViewTheme(theme);
         }
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+
 
 
 

@@ -1,12 +1,10 @@
-package com.example.waqarahmed.neighbourlinking.Activities.AdminActivities;
+package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
-import android.content.Context;
-import android.content.res.Resources.Theme;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.support.v7.widget.Toolbar;
+
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,20 +14,23 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.content.Context;
+import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.content.res.Resources.Theme;
+
 import android.widget.TextView;
 
-import com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments.ActiveBrand;
-import com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments.ActiveEmployee;
-import com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments.DeActiveBrand;
-import com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments.DeActiveEmployee;
+import com.example.waqarahmed.neighbourlinking.Fragments.historyRequest_tanantFragment;
+import com.example.waqarahmed.neighbourlinking.Fragments.pendingActiveRequests;
+import com.example.waqarahmed.neighbourlinking.Fragments.activeRequest;
 import com.example.waqarahmed.neighbourlinking.R;
 
-public class AdminMainBrandActivty extends AppCompatActivity {
+public class Requests_Tanants extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main_service_man_activty);
+        setContentView(R.layout.activity_requests__tanants);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,11 +43,10 @@ public class AdminMainBrandActivty extends AppCompatActivity {
         spinner.setAdapter(new MyAdapter(
                 toolbar.getContext(),
                 new String[]{
-                        "Active Brand",
-                        "De Active Brand",
-
+                        "New Request",
+                        "History",
+                        "Pending Request"
                 }));
-
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -55,22 +55,31 @@ public class AdminMainBrandActivty extends AppCompatActivity {
                 // container view.
 
                 if(position == 0){
-                    ActiveBrand activeBrand = new ActiveBrand();
+                    activeRequest a = new activeRequest();
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container, activeBrand)
-                            .commit();
-                }
-                else if(position == 1){
-                   DeActiveBrand DeActiveEmployee = new DeActiveBrand();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container, DeActiveEmployee)
-                            .commit();
-                }else{
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                            .replace(R.id.container, a)  // history
                             .commit();
 
                 }
+                if(position == 1){
+                    pendingActiveRequests deActiveRequests = new pendingActiveRequests();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, deActiveRequests)   // history
+                            .commit();
+
+                }
+                if(position == 2){
+                    historyRequest_tanantFragment his = new historyRequest_tanantFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container,his)     // pending
+                            .commit();
+
+                }
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+//                            .commit();
+
+
             }
 
             @Override
@@ -80,38 +89,34 @@ public class AdminMainBrandActivty extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_admin_main_service_man_activty, menu);
+        getMenuInflater().inflate(R.menu.menu_requests__tanants, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == android.R.id.home) {
+            this.onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
-        private final Helper mDropDownHelper;
+        private final ThemedSpinnerAdapter.Helper mDropDownHelper;
 
         public MyAdapter(Context context, String[] objects) {
             super(context, android.R.layout.simple_list_item_1, objects);
-            mDropDownHelper = new Helper(context);
+            mDropDownHelper = new ThemedSpinnerAdapter.Helper(context);
         }
 
         @Override
@@ -172,11 +177,15 @@ public class AdminMainBrandActivty extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_admin_main_service_man_activty, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_requests__tanants, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }

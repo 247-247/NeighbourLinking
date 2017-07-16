@@ -43,7 +43,24 @@
                 android:id="@+id/nav_registaration"
                 android:icon="@drawable/ic_menu_send"
                 android:title="New Registration" />
-        </menu>
+
+            <item
+                android:id="@+id/nav_servicemanlst"
+                android:icon="@drawable/ic_menu_send"
+                android:title="All Service man" />
+            <item
+                android:id="@+id/nav_brandlst"
+                android:icon="@drawable/ic_menu_send"
+                android:title="All Brands" />
+            <item
+                android:id="@+id/nav_requestlst"
+                android:icon="@drawable/ic_menu_send"
+                android:title="All Requests" />
+</menu>
+
+
+
+
     </item>
 
 </menu>

@@ -14,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.AboutServiceman;
-import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.AboutBrand;
+import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.Interfaces.LongClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
-import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.RetrievAllMenPowerList_admin;
-import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.SetActiveServiceMan;
-import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.setDeActiveServiceMan;
+import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.RetrievAllBrandList_admin;
+import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.setActiveBrand;
+import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.setDeActiveBrand;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -29,16 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DeActiveEmployee extends Fragment {
+public class DeActiveBrand extends Fragment {
 
     String getIntent_skillName;
     RecyclerView menPowerList_recyclerView;
     TextView textView;
-    ArrayList<ServiceMan> menlist;
+    ArrayList<Brand> brandlist;
     int p;  // position
     RVAdapterForMenList rvAdapterForMenList;
 
-    public DeActiveEmployee() {
+    public DeActiveBrand() {
         // Required empty public constructor
     }
 
@@ -58,35 +58,32 @@ public class DeActiveEmployee extends Fragment {
         textView = (TextView) view.findViewById(R.id.messageView);
         menPowerList_recyclerView.setHasFixedSize(true);
         menPowerList_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        menlist = new ArrayList<ServiceMan>();
+        brandlist = new ArrayList<Brand>();
         registerForContextMenu(menPowerList_recyclerView);
-        rvAdapterForMenList = new RVAdapterForMenList(menlist,getActivity());
+        rvAdapterForMenList = new RVAdapterForMenList(brandlist,getActivity());
 
 
 
-
-         new RetrievAllMenPowerList_admin(getActivity()){
+         new RetrievAllBrandList_admin(getActivity()){
 
              @Override
-             protected void onPostExecute(ArrayList<ServiceMan> serviceMen) {
-                 super.onPostExecute(serviceMen);
-                 menlist.clear();
-                 if(serviceMen != null)
-                 {
-                     menPowerList_recyclerView.setVisibility(View.INVISIBLE);
-                     textView.setVisibility(View.INVISIBLE);
-                     for(int i = 0; i < serviceMen.size(); i++){
+             protected void onPostExecute(ArrayList<Brand> s) {
+                 super.onPostExecute(s);
+                 brandlist.clear();
+                 if(s != null) {
 
-                         if(serviceMen.get(i).getStatus().equals("deActive") && serviceMen.get(i).getIsAccountSetUp().equals("yes")){
-                             menlist.add(serviceMen.get(i));
+                     for(int i = 0; i < s.size(); i++){
+                        // ServiceMan s = serviceMen.get(i);
+                         if(s.get(i).getStatus().equals("deActive") && s.get(i).getIsAccountSetUp().equals("yes")){
+                             brandlist.add(s.get(i));
                          }
 
                      }
-                     //menlist = serviceMen;
-                     if(menlist.size()>0){
+
+                     if(brandlist.size()>0){
                          menPowerList_recyclerView.setVisibility(View.VISIBLE);
                          textView.setVisibility(View.INVISIBLE);
-                         rvAdapterForMenList = new RVAdapterForMenList(menlist, getActivity());
+                         rvAdapterForMenList = new RVAdapterForMenList(brandlist, getActivity());
                          menPowerList_recyclerView.setAdapter(rvAdapterForMenList);
 
                      }else{
@@ -127,12 +124,12 @@ public class DeActiveEmployee extends Fragment {
     public class RVAdapterForMenList extends RecyclerView.Adapter<RVAdapterForMenList.contactViewHolder> {
 
 
-        List<ServiceMan> list;
+        List<Brand> list;
         Context mContext;
-        ServiceMan serviceMan2;  // use for Contextual menue
+        Brand brand2;  // use for Contextual menue
 
-        RVAdapterForMenList(List<ServiceMan> userList, Context context) {
-            list = userList;
+        RVAdapterForMenList(List<Brand> bList, Context context) {
+            list = bList;
             mContext = context;
         }
 
@@ -146,16 +143,16 @@ public class DeActiveEmployee extends Fragment {
 
         @Override
         public void onBindViewHolder(RVAdapterForMenList.contactViewHolder holder, int position) {
-            ServiceMan serviceMan = list.get(position);
+            Brand brnd = list.get(position);
 
-            holder.setContact_name(serviceMan.getName());
-            holder.setContact_image(serviceMan.getImage_url(), mContext);
-            holder.setContact_no(serviceMan.getContact());
+            holder.setContact_name(brnd.getName());
+            holder.setContact_image(brnd.getImage_url(), mContext);
+            holder.setContact_no(brnd.getContact());
             holder.setLongClickListener(new LongClickListener() {
                 @Override
                 public void onItemLongClick(int pos) {
                     p = pos;
-                    serviceMan2 = list.get(pos);    // here get position of selected recycler item position
+                    brand2 = list.get(pos);    // here get position of selected recycler item position
                 }
             });
         }
@@ -184,16 +181,17 @@ public class DeActiveEmployee extends Fragment {
             //  Toast.makeText(mContext,"hello" +" "+item.getTitle(),Toast.LENGTH_LONG).show();
             if (item.getTitle().equals("About")) {
 
-                Intent intent = new Intent(mContext, AboutServiceman.class);
-                intent.putExtra("id", String.valueOf(serviceMan2.getId()));
+                Intent intent = new Intent(mContext, AboutBrand.class);
+                intent.putExtra("id", String.valueOf(brand2.getId()));
                 startActivity(intent);
-            }  if(item.getTitle().equals("Un Block it")){
-                new SetActiveServiceMan(getActivity()).execute("login", String.valueOf(serviceMan2.getId()));
-                list.remove(serviceMan2);
+            }
+            if(item.getTitle().equals("UnBlock it")){
+               new setActiveBrand(getActivity()).execute("login", String.valueOf(brand2.getId()));
+                list.remove(brand2);
                 rvAdapterForMenList.notifyDataSetChanged();
 
-
             }
+
         }
 
         public class contactViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnCreateContextMenuListener {
@@ -257,7 +255,8 @@ public class DeActiveEmployee extends Fragment {
 
                 contextMenu.setHeaderTitle("Seleect Acton");
                 contextMenu.add("About");
-                contextMenu.add("Un Block it");
+                contextMenu.add("UnBlock it");
+
 
             }
 

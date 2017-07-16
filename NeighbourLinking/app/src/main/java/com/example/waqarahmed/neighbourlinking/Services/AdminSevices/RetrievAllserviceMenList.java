@@ -124,6 +124,7 @@ public class RetrievAllserviceMenList extends AsyncTask<Void, Void,  ArrayList<S
                         man.setName(jsonObject.getString("name"));
                         man.setSkill(jsonObject.getString("skill"));
                         man.setContact(jsonObject.getString("contact"));
+                        man.setIsAccountSetUp(jsonObject.getString("isAccountSetUp"));
 
 
 
