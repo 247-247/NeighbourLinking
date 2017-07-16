@@ -50,8 +50,8 @@ public class DeviceRegistrationRelated extends AsyncTask<Void,Void,Void>
     protected void onPreExecute() {
         super.onPreExecute();
         mAuth = FirebaseAuth.getInstance();
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        currentDateTime = dateFormat.format(new Date());
+//        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        currentDateTime = dateFormat.format(new Date());
     }
 
     @Override
