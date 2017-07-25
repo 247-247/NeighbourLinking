@@ -192,13 +192,14 @@ public class Home_Wall extends Fragment {
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
-        TextView post_title;
+        TextView post_title,likeCount,commentCount;
         ImageView post_image;
         ImageButton mlikebtn;
         ImageButton mComment;
         FirebaseAuth mAuth;
         ImageView   imageView1 ;
         DatabaseReference mDatabaseLike;
+        DatabaseReference mDatabaseComment;
 
         public BlogViewHolder(View itemView) {
             super(itemView);
@@ -206,8 +207,11 @@ public class Home_Wall extends Fragment {
             mComment = (ImageButton) mView.findViewById(R.id.comment_btn);
             post_title = (TextView) mView.findViewById(R.id.titleShow);
             post_image = (ImageView) mView.findViewById(R.id.imageShow);
+            likeCount = (TextView) mView.findViewById(R.id.like_count);
+            commentCount = (TextView) mView.findViewById(R.id.comment_count);
             mlikebtn = (ImageButton) itemView.findViewById(R.id.like_btn);
               imageView1 = (ImageView) mView.findViewById(R.id.senderImage_imageView);
+            mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Comment");
             mAuth = FirebaseAuth.getInstance();
             mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
             mDatabaseLike.keepSynced(true);
@@ -233,11 +237,36 @@ public class Home_Wall extends Fragment {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if( currentUserId != null){
                         if(dataSnapshot.child(post_key).hasChild(currentUserId)){
+                            likeCount.setText("likes"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
+                           // commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                             mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
+                            mDatabaseComment.child(post_key).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    commentCount.setText("comments"+" "+String.valueOf(dataSnapshot.getChildrenCount()));
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
 
                         }else{
-
+                            likeCount.setText("Like"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                             mlikebtn.setImageResource(R.drawable.thumb_up_blck);
+                            mDatabaseComment.child(post_key).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    commentCount.setText("comments"+" "+String.valueOf(dataSnapshot.getChildrenCount()));
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }
                     }
 

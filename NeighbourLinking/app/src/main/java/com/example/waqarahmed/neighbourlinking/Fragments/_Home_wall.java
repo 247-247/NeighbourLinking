@@ -200,7 +200,7 @@ public static class PostViewHolder extends RecyclerView.ViewHolder{
                 if(mAuth.getCurrentUser() != null){
                     if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
                         likeCount.setText("likes"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
-                        commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
+                       // commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                         mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
                         mDatabasePostCommment.child(post_key).addValueEventListener(new ValueEventListener() {
                             @Override
