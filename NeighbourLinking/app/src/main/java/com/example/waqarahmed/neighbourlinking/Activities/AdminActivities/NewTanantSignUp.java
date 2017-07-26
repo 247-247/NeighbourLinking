@@ -47,9 +47,11 @@ public class NewTanantSignUp extends AppCompatActivity {
 FirebaseAuth mmAuth;
     Spinner spnr;
     CheckBox isAdmin;
+    Intent intent ;
     Calendar c;
     DatabaseReference mDatabaseReferenceUser;
     RadioGroup radioGroup;
+    FirebaseApp myApp;
 
     private AwesomeValidation awesomValidation;
 
@@ -70,6 +72,7 @@ FirebaseAuth mmAuth;
         mProg = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
          c = Calendar.getInstance();
+        intent = getIntent();
         int seconds = c.get(Calendar.SECOND);
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -140,7 +143,7 @@ FirebaseAuth mmAuth;
                 .setApiKey("AIzaSyCPrpBFuYu6A1T2E8jf1O1zVScSQ8gU-F8")  // web api key
                 .setApplicationId("neighbourlinking-d0561").build();  // project id
         int seconds = c.get(Calendar.SECOND);
-        FirebaseApp myApp = FirebaseApp.initializeApp(getApplicationContext(),firebaseOptions,
+          myApp = FirebaseApp.initializeApp(getApplicationContext(),firebaseOptions,
                 " NeighbourLinking"+seconds );  // app name
 
         mmAuth = FirebaseAuth.getInstance(myApp);
@@ -163,6 +166,8 @@ FirebaseAuth mmAuth;
                         } else {
                             // If sign in fails, display a message to the user.
                             mProg.dismiss();
+                            finish();
+                            startActivity(intent);
                             Toast.makeText(NewTanantSignUp.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }

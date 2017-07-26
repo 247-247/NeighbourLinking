@@ -7,10 +7,13 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainActivityAdmin;
+import com.example.waqarahmed.neighbourlinking.Activities.NewRegistrations;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.Classes.AppStatus;
 import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,28 +36,31 @@ import java.net.URLEncoder;
  * Created by Waqar ahmed on 6/1/2017.
  */
 
-public class RegisterNewBrand extends AsyncTask<String, Void, String> {
+public class uploadNewServiceType extends AsyncTask<String, Void, String> {
 
     Context cxt;
     ProgressDialog progress ;
+    String image,email;
 
-    public RegisterNewBrand(Context context) {
+    public uploadNewServiceType(Context context) {
         cxt=context;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        AdminSharedPref.init(cxt);
+              if (AppStatus.getInstance(cxt).isOnline()){
+                  if (progress == null) {
 
-        if (AppStatus.getInstance(cxt).isOnline()){
-            if (progress == null) {
-                progress = AppUtils.createProgressDialog(cxt);
-                progress.show();
-            } else {
-                progress.show();
-            }
+                      progress = AppUtils.createProgressDialog(cxt);
+                      progress.show();
+                 }
+//                 else {
+//                      progress.show();
+//                  }
 
-        }
+              }
 
 
 
@@ -62,17 +68,17 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String serviceMan_email,type,serviceMan_password;
+        String title,title_skill,image_skill;
 
 
-        serviceMan_email = strings[0];
-        serviceMan_password = strings[1];
-        if (AppStatus.getInstance(cxt).isOnline()) {
-            progress.show();
+        title_skill = strings[0];
+        image_skill = strings[1];
+        if (AppStatus.getInstance(cxt).isOnline())
+        {
             String baseUrl = cxt.getResources().getString(R.string.baseUrl);
-            String url_string = baseUrl+"/Neighbour/public/newBrandRegister";
+            String url_string = baseUrl+"/Neighbour/public/InserNewService";
             try {
-                Log.i("TAG", "doInBackground:  " + serviceMan_email + serviceMan_password);
+
                 URL url = null;
                 try {
                     url = new URL(url_string);
@@ -89,8 +95,8 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 Log.i("TAG", "doInBackground: 5 ");
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(serviceMan_email, "UTF-8") + "&" +
-                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(serviceMan_password, "UTF-8");
+                String post_data = URLEncoder.encode("skill", "UTF-8") + "=" + URLEncoder.encode(title_skill, "UTF-8") + "&" +
+                        URLEncoder.encode("img_url", "UTF-8") + "=" + URLEncoder.encode(image_skill, "UTF-8");
 
                 //  bufferedWriter.write(post_data);
                 bufferedWriter.write(post_data);
@@ -123,9 +129,9 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
                     }
 
 
-                       JSONObject jsonObject = jsonRootObject.getJSONObject("r");
-                         String response = jsonObject.getString("response");
-                    int employeeId = jsonObject.getInt("employeeId");
+                    JSONObject jsonObject = jsonRootObject.getJSONObject("r");
+                    String response = jsonObject.getString("response");
+
 
                     if(response.equals("yes")){
                         return "yes";
@@ -145,6 +151,8 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
                 }
 
 
+
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ProtocolException e) {
@@ -161,27 +169,23 @@ public class RegisterNewBrand extends AsyncTask<String, Void, String> {
 
         @Override
     protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-            if(progress != null && progress.isShowing())
+            super.onPostExecute(s);
+            if (progress != null && progress.isShowing())
                 progress.dismiss();
             if(s.equals("yes")){
-               // Toast.makeText(cxt,"True",Toast.LENGTH_SHORT).show();
-                Intent mainIntent = new Intent(cxt,MainActivity.class);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-                cxt.startActivity(mainIntent);
+                Toast.makeText(cxt,"Sending Successfull",Toast.LENGTH_SHORT).show();
+                Intent RegisterIntent = new Intent(cxt,MainActivityAdmin.class);
+                RegisterIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                RegisterIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                cxt.startActivity(RegisterIntent);
 
-
-                // progress.dismiss();
             }
             else if(s.equals("no")){
-                Toast.makeText(cxt,"Brand Already exist",Toast.LENGTH_SHORT).show();
-
-
-            }else
-
+                Toast.makeText(cxt,"Skill already exist",Toast.LENGTH_SHORT).show();
+            }
+                else{
                 Toast.makeText(cxt,"Network issue",Toast.LENGTH_SHORT).show();
-//
+            }
 
 
 

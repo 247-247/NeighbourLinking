@@ -13,7 +13,9 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/img_sample"
+            android:padding="5dp"
+
+            android:src="@mipmap/ic_launcher"
             android:id="@+id/image_service_item"/>
 
        <LinearLayout
@@ -30,6 +32,10 @@
                android:layout_height="wrap_content"
                android:id="@+id/name_service_item"
                android:text="Any Name"/>
+           <TextView
+               android:layout_width="2dp"
+               android:layout_height="2dp"
+               android:background="@color/cardview_dark_background"/>
 
 
 

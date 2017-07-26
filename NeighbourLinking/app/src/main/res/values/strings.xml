@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="baseUrl">http://5500415b.ngrok.io</string>
+    <string name="baseUrl">http://c1196449.ngrok.io</string>
 
 
     <string name="action_settings">Settings</string>
@@ -42,9 +42,9 @@
         <item>C-3</item>
         <item>C-4</item>
         <item>C-5</item>
-        <item>C-5</item>
         <item>C-6</item>
         <item>C-7</item>
+        <item>C-8</item>
     </string-array>
 
     <string-array name="skill_list">

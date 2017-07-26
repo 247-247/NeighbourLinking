@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.NewTanantSignUp;
+import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.UploadSkillActivity;
 import com.example.waqarahmed.neighbourlinking.R;
 
 public class NewRegistrations extends AppCompatActivity {
 
-    Button tanantBtn, brandBtn;
+    Button tanantBtn, newServiceBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +24,9 @@ public class NewRegistrations extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tanantBtn = (Button) findViewById(R.id.newTanant);
-        brandBtn = (Button) findViewById(R.id.newBrand);
+        newServiceBtn = (Button) findViewById(R.id.newBrand);
         tanantBtnListener();
+        newServiceBtnListener();
 
     }
 
@@ -38,7 +40,17 @@ public class NewRegistrations extends AppCompatActivity {
             }
         });
 
+    }
+    private void newServiceBtnListener() {
+        newServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newTanant = new Intent(NewRegistrations.this , UploadSkillActivity.class);
+                startActivity(newTanant);
 
+
+            }
+        });
 
     }
     @Override

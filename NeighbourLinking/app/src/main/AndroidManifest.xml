@@ -68,7 +68,7 @@
             android:label="@string/title_activity_request_related_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.RequestDetailActivity" />
-        <activity android:name=".Activities.TanantActivities.Delete_Tanant_Post"></activity>
+        <activity android:name=".Activities.TanantActivities.Delete_Tanant_Post" />
         <activity android:name=".Activities.ServiceManProfile" />
         <activity android:name=".Activities.SettingActivity" />
         <activity android:name=".Activities.ChangePasswordActivity" />
@@ -112,7 +112,8 @@
         <activity
             android:name=".Activities.TanantActivities.Requests_Tanants"
             android:label="@string/title_activity_requests__tanants"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.AdminActivities.UploadSkillActivity"></activity>
     </application>
 
 </manifest>
