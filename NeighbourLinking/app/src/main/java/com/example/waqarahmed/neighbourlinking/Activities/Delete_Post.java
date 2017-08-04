@@ -2,6 +2,7 @@ package com.example.waqarahmed.neighbourlinking.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ ImageView mSndrImageView,mPost_imageView;
         getSupportActionBar().setTitle("Delete Post");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
         post_key = getIntent().getExtras().getString("post_key");
         mSndrImageView = (ImageView) findViewById(R.id.senderImage_imageView_dltActivity);
         mPost_imageView = (ImageView) findViewById(R.id.imageShow_imageView_dltActivity);

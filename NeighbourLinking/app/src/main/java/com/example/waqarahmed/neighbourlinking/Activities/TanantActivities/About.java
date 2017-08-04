@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -152,6 +153,7 @@ public class About extends AppCompatActivity {
     }
 
     public void onIntentReceived(String id){
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.serviceman_toolbr)));
         if(!userId.equals(null))
         {
             mProg.show();
@@ -220,6 +222,12 @@ public class About extends AppCompatActivity {
             mDatabaseReferenceCurrentUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                    if(isAdmin.equals("Yes")){
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                    }else {
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                    }
                     String f_name = (String) dataSnapshot.child("first_name").getValue();
                     getSupportActionBar().setTitle(f_name);
                     String  s_name= (String)dataSnapshot.child("last_name").getValue();

@@ -38,6 +38,7 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".Activities.TanantActivities.Post" />
+        <activity android:name=".Activities.AdminActivities.ShowAllServices_admin" />
         <activity android:name=".Activities.Delete_Post" />
         <activity android:name=".Activities.TanantActivities.About" />
         <activity android:name=".Activities.TanantActivities.Comments" />
@@ -74,6 +75,7 @@
         <activity android:name=".Activities.ChangePasswordActivity" />
         <activity android:name=".Activities.NewRegistrations" />
         <activity android:name=".Activities.AdminActivities.NewTanantSignUp" />
+        <activity android:name=".Activities.AdminActivities.ManPowerList_admin"></activity>
         <activity
             android:name=".Activities.AdminActivities.MainServiceActivity_Admin"
             android:label="Admin"

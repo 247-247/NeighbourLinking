@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.BrandActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -51,6 +52,7 @@ public class MainBrandActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brand_toolbr)));
         setTitle("N 2 N");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -78,7 +80,7 @@ public class MainBrandActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
+        tabLayout.setBackground(new ColorDrawable(getResources().getColor(R.color.brand_toolbr)));
 
 
     }
@@ -222,5 +224,7 @@ public class MainBrandActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+    public void RefreshActivity(){ onRestart();
     }
 }

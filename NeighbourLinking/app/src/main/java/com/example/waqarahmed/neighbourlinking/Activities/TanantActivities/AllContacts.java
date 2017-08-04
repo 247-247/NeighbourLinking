@@ -2,6 +2,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +51,25 @@ public class AllContacts extends AppCompatActivity {
         contectRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
+        mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
+        DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
+        currentUser_Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                if(isAdmin.equals("Yes")){
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                }else {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         contectRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {

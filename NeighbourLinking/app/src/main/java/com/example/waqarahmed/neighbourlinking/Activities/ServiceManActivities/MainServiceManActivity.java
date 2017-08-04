@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.content.res.Resources.Theme;
 
 import android.widget.TextView;
 
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManProfile;
 import com.example.waqarahmed.neighbourlinking.Activities.SignInActivity;
 import com.example.waqarahmed.neighbourlinking.Fragments.AdminFragments.PastHistoryRequest_adminFragment;
 import com.example.waqarahmed.neighbourlinking.Fragments.ServiceManFragment.AceptAndActiveRequest;
@@ -42,6 +44,7 @@ public class MainServiceManActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.serviceman_toolbr)));
         SharedPref.init(this);
         String isAccountSetup = SharedPref.read(SharedPref.ACCOUNT,"no");
         if(isAccountSetup.equals("no")){
@@ -130,7 +133,7 @@ public class MainServiceManActivity extends AppCompatActivity {
 
         if (id == R.id.action_about) {
 
-            Intent serviceProfile = new Intent(MainServiceManActivity.this,AboutServiceman.class);
+            Intent serviceProfile = new Intent(MainServiceManActivity.this,ServiceManProfile.class);
             startActivity(serviceProfile);
             return true;
         }

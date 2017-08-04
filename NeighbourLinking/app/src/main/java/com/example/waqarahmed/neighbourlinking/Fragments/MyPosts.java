@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.CommentsOnPost;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities._Post_simpleWall;
@@ -71,6 +72,7 @@ public class MyPosts extends Fragment {
         //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+
      //   recyclerView = (RecyclerView) view.findViewById(R.id.recyclrProfile);
         mCurrentUser_imageView = (ImageView) view.findViewById(R.id.currentUser_imageView);
         mCurrentUserName_textView= (TextView) view.findViewById(R.id.currentUserName_textView);
@@ -318,5 +320,9 @@ public class MyPosts extends Fragment {
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        onCreate(null);
+    }
 }

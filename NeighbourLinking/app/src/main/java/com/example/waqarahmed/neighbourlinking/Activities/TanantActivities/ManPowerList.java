@@ -2,6 +2,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Services Men");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
         menPowerList_recyclerView= (RecyclerView) findViewById(R.id.recyclerView_menPower);
         textView = (TextView) findViewById(R.id.messageView);
         menPowerList_recyclerView.setHasFixedSize(true);

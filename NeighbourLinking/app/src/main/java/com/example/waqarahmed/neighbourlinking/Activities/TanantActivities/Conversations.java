@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
@@ -84,6 +85,12 @@ private RecyclerView mRecyclerView;
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     userName = dataSnapshot.child("first_name").getValue().toString();
+                    String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                    if(isAdmin.equals("Yes")){
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                    }else {
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                    }
                 }
 
                 @Override
@@ -97,6 +104,7 @@ private RecyclerView mRecyclerView;
             SharedPref.init(this);
            // currentUserId = String.valueOf(SharedPref.read(SharedPref.ID,0));
             ServiceMan serviceMan = SharedPref.readObject(SharedPref.OBJECT,null);
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.serviceman_toolbr)));
             int id = serviceMan.getId();
             currentUserId = String.valueOf(id);
             userName = serviceMan.getName();

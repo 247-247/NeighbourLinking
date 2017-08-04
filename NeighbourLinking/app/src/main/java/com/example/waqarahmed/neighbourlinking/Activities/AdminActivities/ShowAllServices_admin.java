@@ -1,11 +1,11 @@
-package com.example.waqarahmed.neighbourlinking.Activities;
+package com.example.waqarahmed.neighbourlinking.Activities.AdminActivities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.ManPowerList;
 import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
@@ -29,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllServices extends AppCompatActivity implements AsynResonseForServices{
+public class ShowAllServices_admin extends AppCompatActivity implements AsynResonseForServices{
     RecyclerView servicesType_recyclerView;
     ArrayList<ServicesTypes> Serviceslist;
     AlertDialog alertDialog;
@@ -40,7 +39,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Offered Services");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
         servicesType_recyclerView= (RecyclerView) findViewById(R.id.recyclerView_serviceType);
         servicesType_recyclerView.setHasFixedSize(true);
         servicesType_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -53,7 +52,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
                         ServicesTypes s = Serviceslist.get(position);
                        // Toast.makeText(ShowAllServices.this," "+s.getSkill(), Toast.LENGTH_LONG).show();
 
-                        Intent RetrievServiceManListInrent = new Intent(ShowAllServices.this,ManPowerList.class);
+                        Intent RetrievServiceManListInrent = new Intent(ShowAllServices_admin.this,ManPowerList_admin.class);
                         RetrievServiceManListInrent.putExtra("Skill",s.getSkill());
                         startActivity(RetrievServiceManListInrent);
 
@@ -99,7 +98,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
 
     }
 
-    public static class ServiceTypesRVA extends RecyclerView.Adapter<ShowAllServices.ServiceViewHolder>{
+    public static class ServiceTypesRVA extends RecyclerView.Adapter<ShowAllServices_admin.ServiceViewHolder>{
         List<ServicesTypes> AllServices;
         Context mContext;
 
@@ -112,7 +111,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
         @Override
         public ServiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_single_item, parent, false);
-            ShowAllServices.ServiceViewHolder Svh = new ServiceViewHolder(v);
+            ShowAllServices_admin.ServiceViewHolder Svh = new ServiceViewHolder(v);
             return Svh ;
         }
 

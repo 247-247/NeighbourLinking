@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.AboutServiceman;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.Conversations;
 import com.example.waqarahmed.neighbourlinking.Activities.RequestDetailActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.ServiceManProfile;
@@ -230,7 +231,7 @@ public class activeRequest extends Fragment {
             }
             if(item.getTitle().equals("Service Man's About"))
             {
-                Intent rDetailintent = new Intent(getActivity().getApplicationContext(),ServiceManProfile.class);
+                Intent rDetailintent = new Intent(getActivity().getApplicationContext(),AboutServiceman.class);
                 rDetailintent.putExtra("id", serviceRequest.getPowerMan_id());
 
 

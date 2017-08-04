@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,12 @@ import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListene
 import com.example.waqarahmed.neighbourlinking.Services.BackgroundWorker;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsyncResponse;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -35,6 +42,8 @@ import java.util.List;
 public class Announcements extends AppCompatActivity implements AsyncResponse{
 RecyclerView announcement_recyclerView;
     ArrayList<Announcement> listAnnouncement;
+    String currentUserId;
+    DatabaseReference  mUser;
   //  RetriveAllAnnouncementsBackgroundWorker retriveAllAnnouncementsBackgroundWorker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,29 @@ RecyclerView announcement_recyclerView;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Notifications");
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null) {
+            currentUserId = mAuth.getCurrentUser().getUid().toString();
+            mUser = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid());
+            mUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                    if (isAdmin.equals("Yes")) {
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                    } else {
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
        // retriveAllAnnouncementsBackgroundWorker = new RetriveAllAnnouncementsBackgroundWorker();
      listAnnouncement = new ArrayList<Announcement>();
         announcement_recyclerView = (RecyclerView) findViewById(R.id.recyclerView_announcement);

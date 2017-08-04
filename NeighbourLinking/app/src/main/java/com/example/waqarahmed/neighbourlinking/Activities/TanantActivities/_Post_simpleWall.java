@@ -2,6 +2,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class _Post_simpleWall extends AppCompatActivity {
         getSupportActionBar().setTitle("New Post");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         mTitle = (EditText) findViewById(R.id.title_edit_post);
         mDescription = (EditText) findViewById(R.id.desc_edit_post);
         mSubmit = (Button) findViewById(R.id.done_post_post);
@@ -52,6 +54,24 @@ public class _Post_simpleWall extends AppCompatActivity {
         dbRefPost= FirebaseDatabase.getInstance().getReference().child("Post");
         dbRefPost.keepSynced(true);
         mCurrenUser = FirebaseDatabase.getInstance().getReference().child("User").child(firebaseUser.getUid());
+        mCurrenUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                if(isAdmin.equals("Yes")){
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                }else {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

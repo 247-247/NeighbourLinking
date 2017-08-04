@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,6 +71,12 @@ public class CommentsOnPost extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     sender_image_comment = (String) dataSnapshot.child("image").getValue();
                     snder_name = (String) dataSnapshot.child("first_name").getValue();
+                    String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                    if(isAdmin.equals("Yes")){
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                    }else {
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                    }
                 }
 
                 @Override

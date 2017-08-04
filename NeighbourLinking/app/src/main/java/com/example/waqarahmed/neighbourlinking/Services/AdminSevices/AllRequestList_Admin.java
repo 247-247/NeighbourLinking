@@ -155,8 +155,12 @@ public class AllRequestList_Admin extends AsyncTask<String, Void,  ArrayList<Ser
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                    if (AppStatus.getInstance(context).isOnline())
+                        progress.dismiss();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    if (AppStatus.getInstance(context).isOnline())
+                        progress.dismiss();
                 }
             }
         }
@@ -164,7 +168,8 @@ public class AllRequestList_Admin extends AsyncTask<String, Void,  ArrayList<Ser
             if (AppStatus.getInstance(context).isOnline())
                 progress.dismiss();
         }
-
+        if (AppStatus.getInstance(context).isOnline())
+            progress.dismiss();
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
@@ -15,8 +16,11 @@ import com.example.waqarahmed.neighbourlinking.Classes.Pager_offers;
 import com.example.waqarahmed.neighbourlinking.Fragments.Home_Wall;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Offers extends AppCompatActivity {
 
@@ -49,6 +53,24 @@ public class Offers extends AppCompatActivity {
 //        tabLayout_offer.setOnTabSelectedListener(new Offers.TabListners());
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
+        DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
+        currentUser_Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                if(isAdmin.equals("Yes")){
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                }else {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Home_Wall home_wall = new Home_Wall();
         fragmentTransaction.replace(R.id.fragment_container,home_wall);

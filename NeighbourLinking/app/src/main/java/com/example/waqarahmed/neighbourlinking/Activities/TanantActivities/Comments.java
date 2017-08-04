@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,7 @@ public class Comments extends AppCompatActivity {
     ImageButton mLeaveComment_btn;
     String post_key_string;
     DatabaseReference mDatabaseComment;
+
     DatabaseReference mDatabaseCommentts;
     DatabaseReference mDatabaseReferenceUser;
     FirebaseAuth mAuth;
@@ -61,9 +63,31 @@ public class Comments extends AppCompatActivity {
         mRecyclerComment.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mCommentView = (EditText) findViewById(R.id.message_edit);
         mLeaveComment_btn = (ImageButton) findViewById(R.id.sendComment_btn);
+        mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
             currentUser = mAuth.getCurrentUser().getUid().toString();
+
+                DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
+                currentUser_Database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                        if(isAdmin.equals("Yes")){
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                        }else {
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
         }
         else{
             BrandSharedPref.init(this);

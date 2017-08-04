@@ -125,6 +125,8 @@ public class UserProfile extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        onStart();
+        onCreate(null);
 
     }
 

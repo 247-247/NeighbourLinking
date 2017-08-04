@@ -3,6 +3,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.BrandActivities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class BrandProfileBuilding extends AppCompatActivity {
         getSupportActionBar().setTitle("Account setup");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brand_toolbr)));
         imageButton = (ImageButton) findViewById(R.id.image_brandPfofile);
         nameEdit = (EditText) findViewById(R.id.name_brandProfile);
         ContactEdit = (EditText) findViewById(R.id.contact_brandProfile);

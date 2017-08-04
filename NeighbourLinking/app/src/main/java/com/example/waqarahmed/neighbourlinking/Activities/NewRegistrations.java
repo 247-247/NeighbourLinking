@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ public class NewRegistrations extends AppCompatActivity {
         getSupportActionBar().setTitle("Admin View");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
         tanantBtn = (Button) findViewById(R.id.newTanant);
         newServiceBtn = (Button) findViewById(R.id.newBrand);
         tanantBtnListener();

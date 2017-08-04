@@ -1,5 +1,6 @@
 package com.example.waqarahmed.neighbourlinking.Activities.AdminActivities;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -29,8 +30,8 @@ EditText titleEdit,discEdit;
         getSupportActionBar().setTitle("New Notification");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorMaster));
         sndBtn = (Button) findViewById( R.id.send_btn_notification);
         sndBtn.setOnClickListener(new View.OnClickListener() {
             @Override

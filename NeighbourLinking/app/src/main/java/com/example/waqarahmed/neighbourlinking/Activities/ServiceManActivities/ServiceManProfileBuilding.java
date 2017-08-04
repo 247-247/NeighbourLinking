@@ -3,6 +3,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class ServiceManProfileBuilding extends AppCompatActivity {
         getSupportActionBar().setTitle("Account setup");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.serviceman_toolbr)));
         imageButton = (ImageButton) findViewById(R.id.image_servicePfofile);
         nameEdit = (EditText) findViewById(R.id.name_serviceProfile);
         ContactEdit = (EditText) findViewById(R.id.contact_serviceProfile);

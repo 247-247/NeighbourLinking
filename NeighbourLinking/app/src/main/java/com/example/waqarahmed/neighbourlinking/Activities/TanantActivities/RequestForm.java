@@ -1,5 +1,6 @@
 package com.example.waqarahmed.neighbourlinking.Activities.TanantActivities;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,7 +38,7 @@ public class RequestForm extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Request");
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
         serviceMan_imageView = (ImageView) findViewById(R.id.serviceMan_imageview);
         causeEdit = (EditText) findViewById(R.id.cause_edit);
         contactEdit = (EditText) findViewById(R.id.contact_edit);

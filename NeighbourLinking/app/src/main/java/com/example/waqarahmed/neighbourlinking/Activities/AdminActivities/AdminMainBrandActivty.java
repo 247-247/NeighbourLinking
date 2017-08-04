@@ -2,6 +2,7 @@ package com.example.waqarahmed.neighbourlinking.Activities.AdminActivities;
 
 import android.content.Context;
 import android.content.res.Resources.Theme;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class AdminMainBrandActivty extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
 
         // Setup spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner);

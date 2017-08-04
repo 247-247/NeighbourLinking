@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -45,6 +46,8 @@ public class UploadSkillActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("New Skill");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorMaster));
         skillNAmeEdit = (EditText) findViewById(R.id.skilname_editview_skillAvtivty);
         doneButton = (Button) findViewById(R.id.done_btn_skillAvtivty);
         doneButton.setOnClickListener(new View.OnClickListener() {

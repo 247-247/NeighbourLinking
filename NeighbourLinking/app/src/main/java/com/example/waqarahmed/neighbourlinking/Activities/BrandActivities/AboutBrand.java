@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.BrandActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +15,12 @@ import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -23,7 +30,8 @@ public class AboutBrand extends AppCompatActivity {
     TextView mHeadName, mHeadDate;
     EditText mFirstName,mContact,mEmail,mAddress,mCreatedAt,mStatus;
     Brand brandRecvdFromAsyc = null;
-
+    DatabaseReference mDatabaseReferenceUser , mDatabaseCurrentUser;
+    FirebaseAuth mAuth;
 
     String userId;
 
@@ -50,10 +58,33 @@ public class AboutBrand extends AppCompatActivity {
         BrandSharedPref.init(this);
         int i = BrandSharedPref.read(BrandSharedPref.ID,0);
         if(i != 0){
-
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brand_toolbr)));
             userId = String.valueOf(i);
             onIfUserItselfLogin(userId);
         }else {
+            mAuth = FirebaseAuth.getInstance();
+            if(mAuth.getCurrentUser() != null){
+
+                mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
+                DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
+                currentUser_Database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                        if(isAdmin.equals("Yes")){
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                        }else {
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
             userId = getIntent().getStringExtra("id");
           //  Toast.makeText(AboutBrand.this,userId,Toast.LENGTH_LONG).show();
             onIntentReceived(userId);

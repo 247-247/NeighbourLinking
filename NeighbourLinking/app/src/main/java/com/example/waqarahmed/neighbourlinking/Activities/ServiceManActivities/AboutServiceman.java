@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +15,12 @@ import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.RetrievServiceProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -24,6 +31,8 @@ public class AboutServiceman extends AppCompatActivity {
     EditText mFirstName,mContact,mEmail,mSkill,mCreatedAt,mStatus;
     ServiceMan serviceManRecvdFromAsyc = null;
     String userId;
+    DatabaseReference mDatabaseReferenceUser , mDatabaseCurrentUser;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,30 @@ public class AboutServiceman extends AppCompatActivity {
             userId = String.valueOf(i);
             onIfUserItselfLogin(userId);
         }else {
+            mAuth = FirebaseAuth.getInstance();
+            if(mAuth.getCurrentUser() != null){
+
+                mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
+                DatabaseReference currentUser_Database = mDatabaseReferenceUser.child(mAuth.getCurrentUser().getUid().toString());
+                currentUser_Database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String isAdmin = (String) dataSnapshot.child("isAdmin").getValue();
+                        if(isAdmin.equals("Yes")){
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+                        }else {
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
             userId = getIntent().getStringExtra("id");
             //  Toast.makeText(AboutBrand.this,userId,Toast.LENGTH_LONG).show();
             onIntentReceived(userId);
@@ -111,6 +144,7 @@ public class AboutServiceman extends AppCompatActivity {
         SharedPref.init(this);
         final ServiceMan serviceMan = SharedPref.readObject(SharedPref.OBJECT,null);
        // Toast.makeText(AboutServiceman.this,serviceMan.getSkill(),Toast.LENGTH_LONG).show();
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.serviceman_toolbr)));
         Picasso.with(AboutServiceman.this).load(serviceMan.getImage_url()).placeholder(R.mipmap.ic_launcher).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUserImage , new Callback() {
             @Override
             public void onSuccess() {

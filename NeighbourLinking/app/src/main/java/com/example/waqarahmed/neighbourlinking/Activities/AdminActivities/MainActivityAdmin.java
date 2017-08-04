@@ -1,6 +1,7 @@
 package com.example.waqarahmed.neighbourlinking.Activities.AdminActivities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -71,8 +72,12 @@ public class MainActivityAdmin extends AppCompatActivity
         setContentView(R.layout.activity_main_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
+
+
 
          tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setBackground(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout.addTab(tabLayout.newTab().setText("Home"));
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
@@ -287,7 +292,7 @@ public class MainActivityAdmin extends AppCompatActivity
             startActivity(in);
         }
         else if (id == R.id.nav_service) {
-            Intent in = new Intent(MainActivityAdmin.this , ShowAllServices.class);
+            Intent in = new Intent(MainActivityAdmin.this , ShowAllServices_admin.class);
             startActivity(in);
         }
 
