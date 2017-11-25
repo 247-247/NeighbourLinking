@@ -96,8 +96,6 @@ public class SignInActivity extends AppCompatActivity {
 
                             }
 
-
-
                         }else{
                             mPasswordView.setError("Password should more than 6 character lenght");
                         }

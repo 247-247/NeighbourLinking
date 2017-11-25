@@ -59,8 +59,6 @@ public class AllServiceMenList extends AppCompatActivity implements AsynResonseF
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Services Men");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
-
-
         menPowerList_recyclerView= (RecyclerView) findViewById(R.id.recyclerView_menPower);
         textView = (TextView) findViewById(R.id.messageView);
         menPowerList_recyclerView.setHasFixedSize(true);
@@ -68,9 +66,7 @@ public class AllServiceMenList extends AppCompatActivity implements AsynResonseF
         menlist = new ArrayList<ServiceMan>();
         registerForContextMenu(menPowerList_recyclerView);
         rvAdapterForMenList = new RVAdapterForMenList(menlist,this);
-
-
-       RetrievAllserviceMenList retrievAllserviceMenList =new RetrievAllserviceMenList(this);
+        RetrievAllserviceMenList retrievAllserviceMenList =new RetrievAllserviceMenList(this);
         retrievAllserviceMenList.asyncResponse= this;
         retrievAllserviceMenList.execute();
 

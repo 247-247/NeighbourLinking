@@ -57,7 +57,6 @@ ImageView mSndrImageView,mPost_imageView;
                 mDeletePost = (Button) findViewById(R.id.dlt_done);
         mAuth = FirebaseAuth.getInstance();
         mDatabaseBlog = FirebaseDatabase.getInstance().getReference().child("Blog").child(post_key);
-        Log.i("Single View Activity", "onDataChange:Post key "+post_key);
         mDatabaseBlog.addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -71,15 +70,9 @@ ImageView mSndrImageView,mPost_imageView;
                 user_name = (String)dataSnapshot.child("username").getValue();
                 sender_image =(String) dataSnapshot.child("sender_image").getValue();
                 post_date =(String) dataSnapshot.child("send_date").getValue();
-                Log.i("Single View Activity", "onDataChange:title " +title);
-                Log.i("Single View Activity", "onDataChange:Description "+desc);
-                Log.i("Single View Activity", "onDataChange:Image "+post_image);
-                Log.i("Single View Activity", "onDataChange:USer_Id "+user_id);
-                Log.i("Single View Activity", "onDataChange:User_NAME "+user_name);
                 if(mAuth.getCurrentUser().getUid().toString().equals(user_id))
                 {
                     mDeletePost.setVisibility(View.VISIBLE);
-                    Log.i("Visiblity", "onDataChange: Visible call"+user_id+" "+user_id+" "+"current_User"+" "+mAuth.getCurrentUser().getUid().toString());
 
                 }else if((AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no").equals("yes"))){
 
@@ -88,7 +81,7 @@ ImageView mSndrImageView,mPost_imageView;
                 else
                 {
                     mDeletePost.setVisibility(View.INVISIBLE);
-                    Log.i("Visiblity", "onDataChange: IN_Visible call"+"Sender Id"+" "+user_id+" "+"current_User"+" "+mAuth.getCurrentUser().getUid().toString());
+
                 }
                 Picasso.with(Delete_Post.this).load(sender_image).centerCrop().resize(75,75).into(mSndrImageView);
                 mNameView.setText(user_name);

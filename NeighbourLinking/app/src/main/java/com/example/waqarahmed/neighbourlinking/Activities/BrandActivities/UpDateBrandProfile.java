@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,10 @@ import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.upLoadBranProfileInfo;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,6 +48,9 @@ public class UpDateBrandProfile extends AppCompatActivity {
     Button donrBtn;
     Spinner spinner;
     String spnrValue;
+    ProgressDialog mProg;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     public static final int GALLARY_CODE = 1;
     Uri resultUri;
     String img;
@@ -113,6 +121,32 @@ public class UpDateBrandProfile extends AppCompatActivity {
                 }
             }
         });
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+        //end ads
+    }
+    public  void showInternialAd()
+    {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
     }
     private void showPopupMenue() {
 
@@ -232,7 +266,9 @@ public class UpDateBrandProfile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        showInternialAd();
     }
 
 

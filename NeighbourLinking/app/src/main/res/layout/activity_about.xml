@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
     android:orientation="vertical"
     tools:context="com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About">
-
-
-        <LinearLayout
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/currentUser_imageView_aboutActivity"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_margin="10dp" />
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/currentUserName_textView_aboutActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="serif"
                     android:text="Hellllo"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="18dp"/>
 
                 <TextView
                     android:id="@+id/accountCreated_date_aboutActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="12/11/2017" />
-
-
-
             </LinearLayout>
 
         </LinearLayout>
@@ -64,9 +62,7 @@
         android:orientation="vertical">
 
       <LinearLayout
-
-          style="@style/linealayoutUseInAbout"
-          >
+          style="@style/linealayoutUseInAbout">
 
           <TextView
               android:layout_width="0dp"
@@ -141,7 +137,6 @@
                 android:layout_weight=".60"/>
 
         </LinearLayout>
-
         <LinearLayout
             style="@style/linealayoutUseInAbout">
 
@@ -158,7 +153,6 @@
                 android:id="@+id/createDate_editiew_aboutActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
         <LinearLayout
             style="@style/linealayoutUseInAbout">
@@ -196,14 +190,17 @@
                 android:id="@+id/gender_editiew_aboutActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
-
-
-
     </LinearLayout>
-
-
-
 </LinearLayout>
-    </ScrollView>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
+</RelativeLayout>

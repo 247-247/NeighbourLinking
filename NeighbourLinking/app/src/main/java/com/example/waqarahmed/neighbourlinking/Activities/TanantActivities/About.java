@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.waqarahmed.neighbourlinking.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +33,9 @@ public class About extends AppCompatActivity {
     DatabaseReference mDatabaseReferenceCurrentUser;
     FirebaseAuth mAuth;
     ProgressDialog mProg;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     String userId;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +43,7 @@ public class About extends AppCompatActivity {
         getSupportActionBar().setTitle("About");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-    mCurrentUserImage = (ImageView) findViewById(R.id.currentUser_imageView_aboutActivity);
+        mCurrentUserImage = (ImageView) findViewById(R.id.currentUser_imageView_aboutActivity);
         mHeadName = (TextView) findViewById(R.id.currentUserName_textView_aboutActivity);
         mHeadDate= (TextView) findViewById(R.id.accountCreated_date_aboutActivity);
         mFirstName= (EditText) findViewById(R.id.firstName_editiew_aboutActivity);
@@ -65,12 +68,6 @@ public class About extends AppCompatActivity {
            onIntentReceived(userId);
       //      Toast.makeText(About.this,userId , Toast.LENGTH_SHORT).show();
         }
-
-
-
-
-
-
 //        if(!userId.equals(null))
 //        {
 //            mProg.show();
@@ -123,16 +120,39 @@ public class About extends AppCompatActivity {
 //
 //
 //        }
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+        //end ads
 
+
+    }
+    public  void showInternialAd()
+    {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
 
 
     }
@@ -148,8 +168,10 @@ public class About extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
+        showInternialAd();
     }
 
     public void onIntentReceived(String id){
@@ -206,12 +228,7 @@ public class About extends AppCompatActivity {
 
                 }
             });
-
-
         }
-
-
-
     }
     public void onIfUserItselfLogin(String userId){
         if(!userId.equals(null))

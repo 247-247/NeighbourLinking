@@ -239,7 +239,7 @@ public class Home_Wall extends Fragment {
                         if(dataSnapshot.child(post_key).hasChild(currentUserId)){
                             likeCount.setText("likes"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                            // commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
-                            mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
+                            mlikebtn.setImageResource(R.drawable.icon_blue_like_24);
                             mDatabaseComment.child(post_key).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -254,7 +254,7 @@ public class Home_Wall extends Fragment {
 
                         }else{
                             likeCount.setText("Like"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
-                            mlikebtn.setImageResource(R.drawable.thumb_up_blck);
+                            mlikebtn.setImageResource(R.drawable.icon_black_like_24);
                             mDatabaseComment.child(post_key).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {

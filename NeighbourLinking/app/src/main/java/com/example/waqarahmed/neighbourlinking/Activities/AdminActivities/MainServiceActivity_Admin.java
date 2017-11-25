@@ -46,8 +46,6 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
-
-
         container = (FrameLayout) findViewById(R.id.container);
 
         // Setup spinner
@@ -91,33 +89,24 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
                             .replace(R.id.container, serviceMan_pastHistoryRequest)
                             .commit();
                 }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
-
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_service_man, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         if(id == android.R.id.home) {
             this.onBackPressed();
             return true;
@@ -129,8 +118,6 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
     private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
         private final Helper mDropDownHelper;
 
@@ -167,16 +154,9 @@ public class MainServiceActivity_Admin extends AppCompatActivity {
             mDropDownHelper.setDropDownViewTheme(theme);
         }
     }
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
-
-
 
 }

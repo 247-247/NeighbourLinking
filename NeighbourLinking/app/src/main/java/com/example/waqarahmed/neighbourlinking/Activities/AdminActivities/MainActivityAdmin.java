@@ -73,15 +73,11 @@ public class MainActivityAdmin extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
-
-
-
-         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setBackground(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout.addTab(tabLayout.newTab().setText("Home"));
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
@@ -89,38 +85,26 @@ public class MainActivityAdmin extends AppCompatActivity
         BadgeUtils.clearBadge(this);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabListner());
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         int m = navigationView.getMenu().findItem(R.id.nav_announcements).getItemId();
         View headerView = navigationView.getHeaderView(0);
         mHeaderImgView = (ImageView) headerView.findViewById(R.id.imageView);
-         mHeaderName = (TextView) headerView.findViewById(R.id.header_name);
-         mHeaderCity = (TextView) headerView.findViewById(R.id.textView);
+        mHeaderName = (TextView) headerView.findViewById(R.id.header_name);
+        mHeaderCity = (TextView) headerView.findViewById(R.id.textView);
       //  announcements_drwr= (TextView) navigationView.getMenu().findItem(R.id.nav_announcements);
        setMenuCounter(m,2);
-
-
-
-
-
-        //////////////
-
         mAuth = FirebaseAuth.getInstance();
        //  mAuth.signOut();
         SharedPref.init(getApplicationContext());
         BrandSharedPref.init(getApplicationContext());
         final boolean isServiceManSignIn = SharedPref.read(SharedPref.IS_SIGN_IN,false);
         final boolean isBranSignIn = BrandSharedPref.read(BrandSharedPref.IS_SIGN_IN,false);
-
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -143,18 +127,9 @@ public class MainActivityAdmin extends AppCompatActivity
                         }
                     }
 
-
-
-
-//                    Intent login = new Intent(MainActivity.this , SignInActivity.class);
-//                    login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(login);
-
-
                 }else{
 
                 }
-
             }
         };
 
@@ -171,26 +146,24 @@ public class MainActivityAdmin extends AppCompatActivity
                   String mName = dataSnapshot.child("first_name").getValue().toString();
                   String mCity = dataSnapshot.child("city").getValue().toString();
                   Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4))
-                          .centerCrop().resize(60, 60).networkPolicy(NetworkPolicy.OFFLINE).into(mHeaderImgView, new Callback() {
+                          .centerCrop().resize(70, 70).networkPolicy(NetworkPolicy.OFFLINE).into(mHeaderImgView, new Callback() {
                       @Override
                       public void onSuccess() {
 
-
                       }
-
                       @Override
                       public void onError() {
-                          Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4)).centerCrop().resize(60, 60).into(mHeaderImgView);
+                          Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4)).centerCrop().resize(80, 80).into(mHeaderImgView);
                       }
                   });
                   mHeaderName.setText(mName);
                   mHeaderCity.setText("Admin");
-              }else{
-
+              }
+              else
+                 {
                      Intent intent = new Intent(MainActivityAdmin.this,Profile.class);  // build profile
                      startActivity(intent);
-
-          }
+                 }
               }
 
               @Override
@@ -198,25 +171,14 @@ public class MainActivityAdmin extends AppCompatActivity
 
               }
           });
-
-
-          //
       }
       checkUserExists();
 
-
     }
-
-
-
     private void setMenuCounter(@IdRes int itemId, int count) {
-
         TextView view = (TextView) navigationView.getMenu().findItem(itemId).getActionView();
-
         view.setText(count > 0 ? String.valueOf(count) : null);
     }
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -226,7 +188,6 @@ public class MainActivityAdmin extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -234,29 +195,18 @@ public class MainActivityAdmin extends AppCompatActivity
 
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
-
-        if (id == R.id.action_sign_out) {
-//            Intent in = new Intent(MainActivity.this , Announcements.class);
-//            startActivity(in);
-//            return true;
+        if (id == R.id.action_sign_out)
+        {
             AdminSharedPref.init(MainActivityAdmin.this);
             AdminSharedPref.write(AdminSharedPref.IS_ADMIN,"no");
-
             AdminSharedPref.write(AdminSharedPref.IMAGE,null);
             AdminSharedPref.write(AdminSharedPref.EMAIL,null);
             mAuth.signOut();
-
-
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -273,19 +223,14 @@ public class MainActivityAdmin extends AppCompatActivity
         } else if (id == R.id.nav_wall) {
 
 
-
         } else if (id == R.id.nav_announcements) {
             Intent in = new Intent(MainActivityAdmin.this , Announcements.class);
             startActivity(in);
-
-
 
         } else if (id == R.id.nav_message)
         {
             Intent in = new Intent(MainActivityAdmin.this , AllContacts.class);
             startActivity(in);
-
-
         }
         else if (id == R.id.nav_offer) {
             Intent in = new Intent(MainActivityAdmin.this , Offers.class);
@@ -304,10 +249,6 @@ public class MainActivityAdmin extends AppCompatActivity
         } else if (id == R.id.nav_registaration) {
             Intent in = new Intent(MainActivityAdmin.this , NewRegistrations.class);
             startActivity(in);
-
-
-
-
         }
         else if (id == R.id.nav_servicemanlst) {
 //            Intent in = new Intent(MainActivityAdmin.this , AllServiceMenList.class);
@@ -326,8 +267,6 @@ public class MainActivityAdmin extends AppCompatActivity
         else if (id == R.id.nav_requestlst) {
             Intent in = new Intent(MainActivityAdmin.this , MainServiceActivity_Admin.class);
            startActivity(in);
-
-
         }
         else{
 
@@ -343,17 +282,8 @@ public class MainActivityAdmin extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         connectionCheck();
-
         mAuth.addAuthStateListener(authStateListener);
-
-
-
-
-
     }
-
-
-
     private void checkUserExists() {
         mDatabaseReferenceUser.addValueEventListener(new ValueEventListener() {
             @Override
@@ -370,9 +300,7 @@ public class MainActivityAdmin extends AppCompatActivity
 
 
                 }
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

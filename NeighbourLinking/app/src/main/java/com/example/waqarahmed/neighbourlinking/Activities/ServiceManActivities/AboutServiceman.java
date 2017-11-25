@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +16,10 @@ import com.example.waqarahmed.neighbourlinking.Classes.ServiceMan;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.ServiceManServices.RetrievServiceProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Shared.SharedPref;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +36,8 @@ public class AboutServiceman extends AppCompatActivity {
     EditText mFirstName,mContact,mEmail,mSkill,mCreatedAt,mStatus;
     ServiceMan serviceManRecvdFromAsyc = null;
     String userId;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     DatabaseReference mDatabaseReferenceUser , mDatabaseCurrentUser;
     FirebaseAuth mAuth;
 
@@ -87,6 +94,33 @@ public class AboutServiceman extends AppCompatActivity {
             onIntentReceived(userId);
         }
 
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+      //end ads
+
+    }
+
+    public  void showInternialAd()
+    {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
     }
     private void onIntentReceived(String userId) {
@@ -190,8 +224,10 @@ public class AboutServiceman extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
+        showInternialAd();
     }
 
 

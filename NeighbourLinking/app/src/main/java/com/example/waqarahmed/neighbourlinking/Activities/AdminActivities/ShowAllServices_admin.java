@@ -151,7 +151,8 @@ public class ShowAllServices_admin extends AppCompatActivity implements AsynReso
 
         }
 
-        public void setService_type_image(final String service_type_image , final Context c) {
+        public void setService_type_image(final String service_type_image , final Context c)
+        {
             Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).centerCrop().resize(60,60).networkPolicy(NetworkPolicy.OFFLINE).into(serviceTypeImage, new Callback() {
                 @Override
                 public void onSuccess() {

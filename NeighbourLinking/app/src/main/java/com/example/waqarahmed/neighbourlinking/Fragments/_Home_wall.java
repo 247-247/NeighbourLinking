@@ -201,7 +201,7 @@ public static class PostViewHolder extends RecyclerView.ViewHolder{
                     if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
                         likeCount.setText("likes"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
                        // commentCount.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
-                        mlikebtn.setImageResource(R.drawable.thumb_up_like_colored);
+                        mlikebtn.setImageResource(R.drawable.icon_blue_like_24);
                         mDatabasePostCommment.child(post_key).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -216,7 +216,7 @@ public static class PostViewHolder extends RecyclerView.ViewHolder{
 
                     }else{
                         likeCount.setText("Like"+" "+String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
-                        mlikebtn.setImageResource(R.drawable.thumb_up_blck);
+                        mlikebtn.setImageResource(R.drawable.icon_black_like_24);
                         mDatabasePostCommment.child(post_key).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {

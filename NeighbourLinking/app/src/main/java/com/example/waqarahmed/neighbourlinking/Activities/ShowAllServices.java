@@ -17,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.ManPowerList;
+import com.example.waqarahmed.neighbourlinking.Classes.RoundedTransformation;
 import com.example.waqarahmed.neighbourlinking.Classes.ServicesTypes;
 import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForServices;
 import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.RetrievAllServices;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -32,6 +35,7 @@ import java.util.List;
 public class ShowAllServices extends AppCompatActivity implements AsynResonseForServices{
     RecyclerView servicesType_recyclerView;
     ArrayList<ServicesTypes> Serviceslist;
+    private AdView mAdView;
     AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,10 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
                     }
                 })
         );
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         String type = "login";
@@ -153,7 +161,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
         }
 
         public void setService_type_image(final String service_type_image , final Context c) {
-            Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).centerCrop().resize(60,60).networkPolicy(NetworkPolicy.OFFLINE).into(serviceTypeImage, new Callback() {
+            Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).networkPolicy(NetworkPolicy.OFFLINE).into(serviceTypeImage, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -161,7 +169,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
 
                 @Override
                 public void onError() {
-                    Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).centerCrop().resize(60,60).into(serviceTypeImage);
+                    Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).into(serviceTypeImage);
                 }
             });
 

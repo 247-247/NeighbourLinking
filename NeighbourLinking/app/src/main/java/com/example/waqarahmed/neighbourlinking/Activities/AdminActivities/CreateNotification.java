@@ -14,10 +14,16 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.uploadNotification;
 import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class CreateNotification extends AppCompatActivity {
 EditText titleEdit,discEdit;
     Button sndBtn;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     private AwesomeValidation awesomValidation;
 
     @Override
@@ -39,6 +45,11 @@ EditText titleEdit,discEdit;
                 sendNotification();
             }
         });
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        //end ads
     }
 
     private void sendNotification() {
@@ -62,11 +73,6 @@ EditText titleEdit,discEdit;
             }
 
         }
-
-
-
-
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

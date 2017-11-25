@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="baseUrl">http://c062b53c.ngrok.io</string>
+    <string name="baseUrl">http://42314e4d.ngrok.io</string>
 
 
     <string name="action_settings">Settings</string>
@@ -48,10 +48,12 @@
     </string-array>
 
     <string-array name="skill_list">
-        <item>Plumber</item>
         <item>Electration</item>
-        <item>Architect</item>
-        <item>Sweeper</item>
+        <item>Plumber</item>
+        <item>Painter</item>
+        <item>Bike Mechanic</item>
+        <item>Car Mechanic</item>
+        <item>Wood Work</item>
 
     </string-array>
     <string name="title_activity_service_main">ServiceMainActivity</string>

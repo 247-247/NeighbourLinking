@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.example.waqarahmed.neighbourlinking.Classes.Contact;
 import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +39,7 @@ public class AllContacts extends AppCompatActivity {
     RecyclerView contectRecyclerView;
     DatabaseReference mDatabaseReferenceUser;
     FirebaseAuth mAuth;
+    private AdView mAdView;
     List<Contact> list = new ArrayList<Contact>();
     List<String> mStringList = new ArrayList<>();
     @Override
@@ -87,6 +90,11 @@ public class AllContacts extends AppCompatActivity {
                 })
         );
 
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
     }
 
@@ -120,20 +128,8 @@ public class AllContacts extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
         RVAdapter rvAdapter = new RVAdapter(list , getApplicationContext());
         contectRecyclerView.setAdapter(rvAdapter);
-
-
-
-
-
-
     }
 
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.contactViewHolder> {

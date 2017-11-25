@@ -26,6 +26,9 @@ import android.widget.Toast;
 
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.AdminSevices.uploadNewServiceType;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -35,6 +38,8 @@ public class UploadSkillActivity extends AppCompatActivity {
     Button doneButton;
     ProgressDialog mProg;
     String skillname, imgeurl;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     public static final int GALLARY_CODE = 1;
     Uri resultUri;
 
@@ -47,7 +52,7 @@ public class UploadSkillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.admin_toolbar)));
-        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorMaster));
+       // getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorMaster));
         skillNAmeEdit = (EditText) findViewById(R.id.skilname_editview_skillAvtivty);
         doneButton = (Button) findViewById(R.id.done_btn_skillAvtivty);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +69,9 @@ public class UploadSkillActivity extends AppCompatActivity {
                 showPopupMenue();
             }
         });
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 

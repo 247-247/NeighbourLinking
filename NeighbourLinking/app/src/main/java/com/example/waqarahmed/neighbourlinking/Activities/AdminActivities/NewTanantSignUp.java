@@ -45,7 +45,7 @@ public class NewTanantSignUp extends AppCompatActivity {
     Button saveBtn;
     ProgressDialog mProg;
     FirebaseAuth mAuth;
-FirebaseAuth mmAuth;
+    FirebaseAuth mmAuth;
     Spinner spnr;
     CheckBox isAdmin;
     Intent intent ;
@@ -53,9 +53,7 @@ FirebaseAuth mmAuth;
     DatabaseReference mDatabaseReferenceUser;
     RadioGroup radioGroup;
     FirebaseApp myApp;
-
     private AwesomeValidation awesomValidation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,21 +77,14 @@ FirebaseAuth mmAuth;
         int seconds = c.get(Calendar.SECOND);
         mDatabaseReferenceUser = FirebaseDatabase.getInstance().getReference().child("User");
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-
-
-
-
         BtnSaveFunction();
 
     }
 
     private void BtnSaveFunction() {
-
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String e , p;
                 e = emai.getText().toString();
                 if(emai.length()>0){

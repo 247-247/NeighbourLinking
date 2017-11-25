@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +16,10 @@ import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.RetrievBranProfileInfoForClient;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +37,8 @@ public class AboutBrand extends AppCompatActivity {
     Brand brandRecvdFromAsyc = null;
     DatabaseReference mDatabaseReferenceUser , mDatabaseCurrentUser;
     FirebaseAuth mAuth;
-
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     String userId;
 
 
@@ -90,14 +96,35 @@ public class AboutBrand extends AppCompatActivity {
             onIntentReceived(userId);
         }
 
-
-
-
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+        //end ads
+    }
+    public  void showInternialAd()
+    {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
     }
 
     private void onIntentReceived(String userId) {
-
 
         new RetrievBranProfileInfoForClient(this){
             @Override
@@ -131,8 +158,6 @@ public class AboutBrand extends AppCompatActivity {
                             Picasso.with(AboutBrand.this).load(brandRecvdFromAsyc.getImage_url()).placeholder(R.mipmap.ic_launcher).centerCrop().resize(75,75).into(mCurrentUserImage );
                         }
                     });
-
-
                     mHeadName.setText(brandRecvdFromAsyc.getName());
                     mHeadDate.setText(brandRecvdFromAsyc.getCreated_at());
                     mAddress.setText(brandRecvdFromAsyc.getAddress());
@@ -142,16 +167,10 @@ public class AboutBrand extends AppCompatActivity {
                     mFirstName.setText(brandRecvdFromAsyc.getName());
                     mEmail.setText(brandRecvdFromAsyc.getEmail());
 
-
-
-
                 }
 
             }
         }.execute(userId);
-
-
-
 
     }
 
@@ -170,7 +189,6 @@ public class AboutBrand extends AppCompatActivity {
             }
         });
 
-
         mHeadName.setText(brand.getName());
         mHeadDate.setText(brand.getCreated_at());
         mAddress.setText(brand.getAddress());
@@ -179,16 +197,10 @@ public class AboutBrand extends AppCompatActivity {
         mCreatedAt.setText(brand.getCreated_at());
         mFirstName.setText(brand.getName());
         mEmail.setText(brand.getEmail());
-
-
     }
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
-
 
     }
     @Override
@@ -204,7 +216,9 @@ public class AboutBrand extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        showInternialAd();
     }
 
 }

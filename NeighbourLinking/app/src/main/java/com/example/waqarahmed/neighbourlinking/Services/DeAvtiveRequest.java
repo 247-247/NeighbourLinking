@@ -60,19 +60,14 @@ public class DeAvtiveRequest extends AsyncTask<String, Void,  ArrayList<ServiceR
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
-                Log.i("TAG", "doInBackground: 2 ");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                Log.i("TAG", "doInBackground: 3 ");
                 httpURLConnection.setRequestMethod("POST");
-                Log.i("TAG", "doInBackground: 4 ");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
                  OutputStream outputStream = httpURLConnection.getOutputStream();
-                  Log.i("TAG", "doInBackground: 5 ");
                    BufferedWriter bufferedWriter  = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 String post_data = URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8");
                   bufferedWriter.write(post_data);
-                Log.i("TAG", "doInBackground: 7 ");
                    bufferedWriter.flush();
                     bufferedWriter.close();
                   outputStream.close();
@@ -83,12 +78,9 @@ public class DeAvtiveRequest extends AsyncTask<String, Void,  ArrayList<ServiceR
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
                 String result=" ";
                 String line =" ";
-                String TAG = "Tag";
-                Log.i(TAG, "doInBackground: 8 ");
                 while( (line = bufferedReader.readLine()) != null){
 
                     result += line;
-                    Log.i(TAG, "doInBackground: 9 ");
 
                 }
 
@@ -110,10 +102,7 @@ public class DeAvtiveRequest extends AsyncTask<String, Void,  ArrayList<ServiceR
     protected void onPostExecute( ArrayList<ServiceRequest> s) {
         super.onPostExecute(s);
 
-
-
-
-        }
+    }
 
 
     }

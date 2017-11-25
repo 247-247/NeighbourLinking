@@ -49,9 +49,6 @@ public class MyPosts extends Fragment {
     DatabaseReference mCurrentUserProfileDatabaseRefence;
     DatabaseReference mCurrentUserInFo_fireBaseDbRef;
     Query  mCurrentUserProfileQuery;
-
-
-
     public MyPosts() {
         // Required empty public constructor
     }
@@ -77,7 +74,6 @@ public class MyPosts extends Fragment {
         mCurrentUser_imageView = (ImageView) view.findViewById(R.id.currentUser_imageView);
         mCurrentUserName_textView= (TextView) view.findViewById(R.id.currentUserName_textView);
         mAccountCreated_date_textView = (TextView) view.findViewById(R.id.accountCreated_date);
-
         mCurrentUserAbout_btn= (Button) view.findViewById(R.id.currentUserAbout);
         mCurrentUserUpdatetd_btn = (Button) view.findViewById(R.id.currentUserUpdatetd);
         mCurrentUserPost_btn= (Button) view.findViewById(R.id.currentUserPost);
@@ -108,7 +104,6 @@ public class MyPosts extends Fragment {
 
             currentUserId = mAuth.getCurrentUser().getUid();
             mCurrentUserInFo_fireBaseDbRef = mDatabaseReferenceUser.child(currentUserId);
-
             mCurrentUserInFo_fireBaseDbRef.keepSynced(true);
         }
 
@@ -136,17 +131,16 @@ public class MyPosts extends Fragment {
 
         if(mAuth.getCurrentUser() != null){
             if(!currentUserId.equals(null)) {
-
                 mCurrentUserInFo_fireBaseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild("image")) {
-                            String name = dataSnapshot.child("first_name").getValue().toString();
+                              String name = dataSnapshot.child("first_name").getValue().toString();
                               String create_date = dataSnapshot.child("create_date").getValue().toString();
-                            final String imageUrl = dataSnapshot.child("image").getValue().toString();
-                                   mCurrentUserName_textView.setText(name);
-                                   mAccountCreated_date_textView.setText(create_date);
-                            Picasso.with(getActivity().getApplicationContext()).load(imageUrl).centerCrop().resize(75, 75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
+                              final String imageUrl = dataSnapshot.child("image").getValue().toString();
+                              mCurrentUserName_textView.setText(name);
+                              mAccountCreated_date_textView.setText(create_date);
+                              Picasso.with(getActivity().getApplicationContext()).load(imageUrl).centerCrop().resize(75, 75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
                                 @Override
                                 public void onSuccess() {
 
@@ -181,9 +175,7 @@ public class MyPosts extends Fragment {
                         viewHolder.setTitle(model.getTitle());
                         viewHolder.setDesc(model.getDesc());
                         viewHolder.setDate(model.getSend_date());
-
                         viewHolder.setMlikebtn(post_key);
-
                         viewHolder.post_title.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -274,8 +266,6 @@ public class MyPosts extends Fragment {
                     }
 
                 }
-
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 

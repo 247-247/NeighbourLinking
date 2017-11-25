@@ -56,29 +56,17 @@ public class ManPowerList_admin extends AppCompatActivity implements AsynResonse
                     public void onItemClick(View view, int position) {
 
 
-
-
                     }
                 })
         );
-
-
-
-
-//        Toast.makeText(ManPowerList.this,getIntent_skillName,Toast.LENGTH_LONG).show();
         String type = "login";
         RetrievAllMenPowerList retrievdAllMenList = new RetrievAllMenPowerList(this);
         retrievdAllMenList.asyncResponse = this;
         retrievdAllMenList.execute(type,getIntent_skillName);
-
-
-
     }
-
     @Override
     protected void onStart() {
         super.onStart();
-
 
 
     }
@@ -96,9 +84,7 @@ public class ManPowerList_admin extends AppCompatActivity implements AsynResonse
             }
 
           }
-
-
-              if(menlist.size()>0) {
+          if(menlist.size()>0) {
                   menPowerList_recyclerView.setVisibility(View.VISIBLE);
                   textView.setVisibility(View.INVISIBLE);
                  // this.menlist = Manlist;
@@ -192,11 +178,6 @@ public class ManPowerList_admin extends AppCompatActivity implements AsynResonse
                 dateView.setText(no);
 
             }
-
-
-
-
-
         }
 }
     @Override
