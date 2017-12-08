@@ -16,6 +16,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:orientation="vertical">
+       <!-- image-->
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -23,6 +24,7 @@
             android:id="@+id/image_brandPfofile"
             android:src="@drawable/profile_image_selection"
             android:layout_gravity="center_horizontal"/>
+       <!-- name edit-->
         <EditText
             android:layout_marginTop="10dp"
             android:id="@+id/name_brandProfile"
@@ -31,6 +33,7 @@
             android:inputType="textPersonName"
             android:hint="Name..."
             android:background="@drawable/customborder_for_blog_row"/>
+        <!-- contect edit-->
         <EditText
             android:layout_marginTop="10dp"
             android:id="@+id/contact_brandProfile"
@@ -39,7 +42,7 @@
             android:hint="Contact..."
             android:inputType="phone"
             android:background="@drawable/customborder_for_blog_row"/>
-
+      <!--  house no spinner-->
         <Spinner
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -47,6 +50,7 @@
             android:id="@+id/shopNo_brandProfile"
             android:background="@drawable/gradient_spinner"
             android:entries="@array/house_arrays"></Spinner>
+       <!-- save button-->
         <Button
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
@@ -54,16 +58,6 @@
             android:layout_gravity="center_horizontal"
             android:text="Save"
             android:id="@+id/doneBtn_brandProfile"/>
-
-
-
     </LinearLayout>
-
-
-
-
-
-
-
 </RelativeLayout>
 </ScrollView>

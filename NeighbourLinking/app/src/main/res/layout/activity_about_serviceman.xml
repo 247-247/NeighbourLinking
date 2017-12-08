@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"  android:layout_height="match_parent">-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:weightSum="1"
     tools:context="com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.AboutServiceman">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight=".88"
+        android:layout_height="0dp">
+   <!-- inner main container-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,31 +23,34 @@
         android:layout_marginLeft="5dp"
         android:id="@+id/inner_parent_root"
         android:orientation="vertical">
+        <!-- image name and date created container-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <!--profile name-->
             <ImageView
                 android:id="@+id/currentUser_imageView_brandAboutActivity"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_margin="10dp" />
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp" />
+            <!--name and date conatner-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+                <!--name tv-->
                 <TextView
                     android:id="@+id/currentUserName_textView_brandAboutActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="serif"
+                    android:layout_marginTop="20dp"
                     android:text=""
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="16dp" />
+                <!--created date tv-->
                  <TextView
                     android:id="@+id/accountCreated_date_brandAboutActivity"
                     android:layout_width="wrap_content"
@@ -48,24 +59,22 @@
                     android:layout_marginTop="5dp"
                     android:text="" />
             </LinearLayout>
-
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
             android:background="@color/cardview_dark_background"/>
+       <!-- othet about info container-->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <!-- name container-->
             <LinearLayout
-
-                style="@style/linealayoutUseInAbout"
-                >
-
+                style="@style/linealayoutUseInAbout">
+                <!--name tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:textSize="20dp"
@@ -73,6 +82,7 @@
                     android:id="@+id/firstName_textView_brandAboutActivity"
                     android:text="Name:"
                     android:layout_weight=".40"/>
+               <!-- name edit-->
                 <EditText
                     android:enabled="false"
                     android:layout_width="0dp"
@@ -80,17 +90,18 @@
                     android:layout_weight=".60"
                     android:background="@drawable/customborder_for_blog_row"
                     android:id="@+id/firstName_editiew_brandAboutActivity"/>
-
             </LinearLayout>
+            <!-- contact container-->
             <LinearLayout
                 style="@style/linealayoutUseInAbout">
-
+                <!--contact tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:textSize="20dp"
                     android:layout_height="wrap_content"
                     android:text="Contact:"
                     android:layout_weight=".40"/>
+                <!-- contact edit-->
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -98,18 +109,18 @@
                     android:background="@drawable/customborder_for_blog_row"
                     android:enabled="false"
                     android:layout_weight=".60"/>
-
             </LinearLayout>
-
+            <!-- skill container-->
             <LinearLayout
                 style="@style/linealayoutUseInAbout">
-
+                <!--skill tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Skill:"
                     android:textSize="20dp"
                     android:layout_weight=".40"/>
+                <!-- skill edit-->
                 <EditText
                     android:layout_width="0dp"
                     android:enabled="false"
@@ -117,19 +128,18 @@
                     android:id="@+id/skill_editiew_brandAboutActivity"
                     android:background="@drawable/customborder_for_blog_row"
                     android:layout_weight=".60"/>
-
             </LinearLayout>
-
-
+            <!-- created at date container-->
             <LinearLayout
                 style="@style/linealayoutUseInAbout">
-
+                <!--created at tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:textSize="20dp"
                     android:layout_height="wrap_content"
                     android:text="Created at:"
                     android:layout_weight=".40"/>
+                <!-- created at edit-->
                 <EditText
                     android:layout_width="0dp"
                     android:enabled="false"
@@ -137,10 +147,11 @@
                     android:id="@+id/createDate_editiew_brandAboutActivity"
                     android:background="@drawable/customborder_for_blog_row"
                     android:layout_weight=".60"/>
-
             </LinearLayout>
+            <!-- email container-->
             <LinearLayout
                 style="@style/linealayoutUseInAbout">
+                <!--email tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:textSize="20dp"
@@ -148,6 +159,7 @@
                     android:id="@+id/email_view_aboutActivity"
                     android:text="Email:"
                     android:layout_weight=".40"/>
+                <!-- email edit-->
                 <EditText
                     android:enabled="false"
                     android:layout_width="0dp"
@@ -155,11 +167,11 @@
                     android:id="@+id/emailName_editiew_brandAboutActivity"
                     android:background="@drawable/customborder_for_blog_row"
                     android:layout_weight=".60"/>
-
             </LinearLayout>
+            <!-- status container-->
             <LinearLayout
                 style="@style/linealayoutUseInAbout">
-
+                <!--status tv-->
                 <TextView
                     android:layout_width="0dp"
                     android:textSize="20dp"
@@ -167,6 +179,7 @@
                     android:id="@+id/status_textview_brandAboutActivity"
                     android:text="Status:"
                     android:layout_weight=".40"/>
+                <!-- stAtus edit-->
                 <EditText
                     android:layout_width="0dp"
                     android:enabled="false"
@@ -177,18 +190,17 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+    </ScrollView>
+   <!-- google ad-->
     <com.google.android.gms.ads.AdView
-
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
+        android:layout_weight=".12"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
     </com.google.android.gms.ads.AdView>
-</RelativeLayout>
-<!--
-</ScrollView>-->
+</LinearLayout>
+

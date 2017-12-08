@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         android:layout_marginRight="5dp"
         android:orientation="vertical">
-        <ImageButton
+      <!--  <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
             android:id="@+id/image_brandPfofile"
             android:src="@drawable/profile_image_selection"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"/>-->
         <EditText
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/name_brandProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

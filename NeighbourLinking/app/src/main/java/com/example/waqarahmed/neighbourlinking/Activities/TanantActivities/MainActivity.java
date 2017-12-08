@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
     ImageView mHeaderImgView;
     TextView mHeaderName;
     TextView mHeaderCity;
-
     FirebaseAuth.AuthStateListener authStateListener;
     TabLayout.OnTabSelectedListener tabSelectedListener;
     static ViewPager viewPager;
@@ -70,8 +69,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tanat_toolbar)));
-
-         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout.addTab(tabLayout.newTab().setText("Home"));
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
@@ -83,31 +81,20 @@ public class MainActivity extends AppCompatActivity
         BadgeUtils.clearBadge(this);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabListner());
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         int m = navigationView.getMenu().findItem(R.id.nav_announcements).getItemId();
         View headerView = navigationView.getHeaderView(0);
         mHeaderImgView = (ImageView) headerView.findViewById(R.id.imageView);
-         mHeaderName = (TextView) headerView.findViewById(R.id.header_name);
-         mHeaderCity = (TextView) headerView.findViewById(R.id.textView);
+        mHeaderName = (TextView) headerView.findViewById(R.id.header_name);
+        mHeaderCity = (TextView) headerView.findViewById(R.id.textView);
       //  announcements_drwr= (TextView) navigationView.getMenu().findItem(R.id.nav_announcements);
-       setMenuCounter(m,2);
-
-
-
-
-
-        //////////////
-
+        setMenuCounter(m,2);
         mAuth = FirebaseAuth.getInstance();
 
         // mAuth.signOut();
@@ -126,6 +113,7 @@ public class MainActivity extends AppCompatActivity
                         Intent servceManIntent = new Intent(MainActivity.this, MainServiceManActivity.class);
                         servceManIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         servceManIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                        servceManIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(servceManIntent);
 
                     }else{                              // then if service man not sign in
@@ -133,27 +121,16 @@ public class MainActivity extends AppCompatActivity
                             Intent BrandMainIntent = new Intent(MainActivity.this, MainBrandActivity.class);
                             BrandMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             BrandMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                            BrandMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(BrandMainIntent);
                         }else{  // if brand not sign in
-
-
-                                 Intent login = new Intent(MainActivity.this , SignInActivity.class);  // then call log in page
-                                  login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                  login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-                                 login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                 startActivity(login);
-
-
+                            Intent login = new Intent(MainActivity.this , SignInActivity.class);  // then call log in page
+                            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(login);
                         }
                     }
-
-
-
-
-//                    Intent login = new Intent(MainActivity.this , SignInActivity.class);
-//                    login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(login);
-
 
                 }else{
                     AdminSharedPref.init(MainActivity.this);
@@ -162,16 +139,13 @@ public class MainActivity extends AppCompatActivity
                         Intent AdminMainIntent = new Intent(MainActivity.this, MainActivityAdmin.class);
                         AdminMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         AdminMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                        AdminMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(AdminMainIntent);
-
                     }
                     else{
                          // running the simple tanant view
                     }
-
-
                 }
-
             }
         };
 
@@ -187,17 +161,18 @@ public class MainActivity extends AppCompatActivity
                   final String mImageURL = dataSnapshot.child("image").getValue().toString();
                   String mName = dataSnapshot.child("first_name").getValue().toString();
                   String mCity = dataSnapshot.child("city").getValue().toString();
+                     // Header image
                   Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4))
-                          .centerCrop().resize(60, 60).networkPolicy(NetworkPolicy.OFFLINE).into(mHeaderImgView, new Callback() {
+                          .centerCrop().resize(65, 65).networkPolicy(NetworkPolicy.OFFLINE).into(mHeaderImgView, new Callback() {
                       @Override
                       public void onSuccess() {
 
-
+                           //todo
                       }
 
                       @Override
                       public void onError() {
-                          Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4)).centerCrop().resize(60, 60).into(mHeaderImgView);
+                          Picasso.with(getApplicationContext()).load(mImageURL).transform(new RoundedTransformation(50, 4)).centerCrop().resize(65, 65).into(mHeaderImgView);
                       }
                   });
                   mHeaderName.setText(mName);
@@ -206,8 +181,7 @@ public class MainActivity extends AppCompatActivity
 
                      Intent intent = new Intent(MainActivity.this,Profile.class);  // build profile
                      startActivity(intent);
-
-          }
+                 }
               }
 
               @Override
@@ -216,23 +190,15 @@ public class MainActivity extends AppCompatActivity
               }
           });
 
-
-          //
       }
       checkUserExists();
 
-
     }
-
-
-
     private void setMenuCounter(@IdRes int itemId, int count) {
 
         TextView view = (TextView) navigationView.getMenu().findItem(itemId).getActionView();
-
         view.setText(count > 0 ? String.valueOf(count) : null);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -256,28 +222,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
-
-      //  if (id == R.id.action_settings) {
-//            Intent in = new Intent(MainActivity.this , Announcements.class);
-//            startActivity(in);
-//            return true;
-//            Intent in = new Intent(MainActivity.this , RequestRelatedDetail.class);
-//            startActivity(in);
-//            return true;
-      //  }
         if (id == R.id.action_logout) {
             mAuth.signOut();
             return true;
         }
-      //  if (id == R.id.action_post) {
-         //  Intent Post_Intent = new Intent(MainActivity.this, SettingActivity.class); // important
-        //    startActivity(Post_Intent);
-       //     Intent in = new Intent(MainActivity.this , NewRegistrations.class);
-       //     startActivity(in);
-
-      //      return true;
-      //  }
 
         return super.onOptionsItemSelected(item);
     }
@@ -294,20 +242,15 @@ public class MainActivity extends AppCompatActivity
             startActivity(in);
         } else if (id == R.id.nav_wall) {
 
-
+          //todo
 
         } else if (id == R.id.nav_announcements) {
             Intent in = new Intent(MainActivity.this , Announcements.class);
             startActivity(in);
-
-
-
         } else if (id == R.id.nav_message)
         {
             Intent in = new Intent(MainActivity.this , AllContacts.class);
             startActivity(in);
-
-
         }
         else if (id == R.id.nav_offer) {
             Intent in = new Intent(MainActivity.this , Offers.class);
@@ -328,23 +271,12 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
     @Override
     protected void onStart() {
         super.onStart();
         connectionCheck();
-
         mAuth.addAuthStateListener(authStateListener);
-
-
-
-
-
     }
-
-
-
     private void checkUserExists() {
         mDatabaseReferenceUser.addValueEventListener(new ValueEventListener() {
             @Override
@@ -355,11 +287,10 @@ public class MainActivity extends AppCompatActivity
                         Intent AccuntSetupIntent = new Intent(MainActivity.this, Profile.class);
                         AccuntSetupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(AccuntSetupIntent);
-
                     }
                 }else{
 
-
+                       //todo
                 }
 
             }
@@ -395,7 +326,6 @@ public class MainActivity extends AppCompatActivity
 
 
         } else {
-
 
             Toast.makeText(MainActivity.this,"You are Offline!!!",Toast.LENGTH_LONG).show();
         }

@@ -3,35 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.waqarahmed.neighbourlinking.Activities.Delete_Post">
-
-    <LinearLayout
+     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
-
+        <!-- sender profile header detaitl container-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
+            <!--sender image view-->
             <ImageView
                 android:id="@+id/senderImage_imageView_dltActivity"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_margin="10dp" />
-
+           <!-- name and date container-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+               <!-- sender name tv-->
                 <TextView
                     android:id="@+id/senderName_textView_dltActivity"
                     android:layout_width="wrap_content"
@@ -43,18 +41,16 @@
                     android:textColor="@android:color/black"
                     android:textSize="20dp"
                     android:textStyle="bold" />
-
+               <!-- date tv-->
                 <TextView
                     android:id="@+id/senderDate_textView_dltActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="12/11/2017" />
-
             </LinearLayout>
         </LinearLayout>
-
-
+         <!--post title-->
         <TextView
             android:id="@+id/titleShow_textView_dltActivity"
             android:layout_width="match_parent"
@@ -62,41 +58,28 @@
             android:layout_marginTop="8dp"
             android:paddingLeft="5dp"
             android:textColor="@android:color/black"
-            tools:textSize="20dp"
-
-            />
-
-
+            tools:textSize="20dp" />
+        <!-- description title-->
         <TextView
             android:id="@+id/descShow_textView_dltActivity"
             android:layout_marginTop="10dp"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
             tools:textSize="40sp" />
-
-<Button
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/customborder_for_blog_row"
-
-    android:id="@+id/dlt_done"
-    android:text="Delete Post"/>
+         <!--delete buton-->
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder_for_blog_row"
+            android:id="@+id/dlt_done"
+            android:text="Delete Post"/>
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            />
-
-
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
-
-
-
-
-
-</RelativeLayout>
+ </RelativeLayout>
 </ScrollView>

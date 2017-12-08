@@ -86,8 +86,6 @@ public class Comments extends AppCompatActivity {
 
                     }
                 });
-
-
         }
         else{
             BrandSharedPref.init(this);
@@ -117,9 +115,7 @@ public class Comments extends AppCompatActivity {
             snder_name = brand.getName();
 
         }
-
-
-            mLeaveComment_btn.setOnClickListener(new View.OnClickListener() {
+        mLeaveComment_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -128,7 +124,6 @@ public class Comments extends AppCompatActivity {
                         DateFormat df = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm a");
                         String date = df.format(Calendar.getInstance().getTime());
                         DatabaseReference db =  mDatabaseComment.push();
-
                         db.child("comment_sender_name").setValue(snder_name);
                         db.child("comment_sender_image").setValue(sender_image_comment);
                         db.child("comment_body").setValue(msgBody);
@@ -158,7 +153,7 @@ public class Comments extends AppCompatActivity {
         FirebaseRecyclerAdapter<Comment, CommentViewHolder> firebaseRecyclerAdapterr = new FirebaseRecyclerAdapter<Comment, CommentViewHolder>
                 (
 
-              Comment.class,
+               Comment.class,
                 R.layout.comment_list_item,
                 CommentViewHolder.class,
                 mDatabaseComment
@@ -176,7 +171,7 @@ public class Comments extends AppCompatActivity {
                 viewHolder.Mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(Comments.this,"Helllll",Toast.LENGTH_SHORT).show();
+                      //todo
                     }
                 });
             }
@@ -202,12 +197,6 @@ public class Comments extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
-
-
-
-
     public static class CommentViewHolder extends RecyclerView.ViewHolder{
 
         View Mview;
@@ -219,17 +208,13 @@ public class Comments extends AppCompatActivity {
         public CommentViewHolder(View itemView ) {
             super(itemView);
             Mview = itemView;
-            Log.i("HHHHHH:","CommentViewHolder: ");
-            Log.i("HHHHHH:","CommentViewHolder: ");
             comment_sender_image = (ImageView) itemView.findViewById(R.id.senderImage_imageView_commentView);
             comment_sender_name = (TextView) itemView.findViewById(R.id.senderName_textView_commentView);
             comment_body = (TextView)itemView.findViewById(R.id.comment_body_commentView);
             comment_sending_date = (TextView) itemView.findViewById(R.id.sender_date_commentView);
         }
         public void setComment_sender_name(String sender_name_comment) {
-            Log.i("HHHHHH", "setComment_sender_name: "+sender_name_comment);
             comment_sender_name.setText(sender_name_comment);
-
         }
 
         public void setComment_sender_image(final String sender_image_comment , final Context c) {
@@ -238,7 +223,6 @@ public class Comments extends AppCompatActivity {
                 public void onSuccess() {
 
                 }
-
                 @Override
                 public void onError() {
                     Picasso.with(c).load(sender_image_comment).centerCrop().resize(60,60).into(comment_sender_image);

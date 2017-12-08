@@ -27,6 +27,7 @@ import com.example.waqarahmed.neighbourlinking.Classes.AppUtils;
 import com.example.waqarahmed.neighbourlinking.Classes.Brand;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.BrandServices.upLoadBranProfileInfo;
+import com.example.waqarahmed.neighbourlinking.Services.BrandServices.upLoadBranUpdateProfileInfo;
 import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -74,7 +75,7 @@ public class UpDateBrandProfile extends AppCompatActivity {
         donrBtn = (Button) findViewById(R.id.doneBtn_brandProfile);
         BrandSharedPref.init(this);
          final Brand brand = BrandSharedPref.readObject(BrandSharedPref.OBJECT,null);
-        Picasso.with(UpDateBrandProfile.this).load(brand.getImage_url()).placeholder(R.mipmap.ic_launcher).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(imageButton , new Callback() {
+       /* Picasso.with(UpDateBrandProfile.this).load(brand.getImage_url()).placeholder(R.mipmap.ic_launcher).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(imageButton , new Callback() {
             @Override
             public void onSuccess() {
 
@@ -84,7 +85,7 @@ public class UpDateBrandProfile extends AppCompatActivity {
             public void onError() {
                 Picasso.with(UpDateBrandProfile.this).load(brand.getImage_url()).placeholder(R.mipmap.ic_launcher).centerCrop().resize(75,75).into(imageButton );
             }
-        });
+        });*/
         nameEdit.setText(brand.getName());
         ContactEdit.setText(brand.getContact());
         resultUri = Uri.parse(brand.getImage_url());
@@ -95,12 +96,12 @@ public class UpDateBrandProfile extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.name_brandProfile, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
         //   awesomeValidation.addValidation(this, R.id.contact_brandProfile, "^[2-9]{2}[0-9]{8}$", R.string.mobileerror);
         spnrValue =spinner.getSelectedItem().toString();
-        imageButton.setOnClickListener(new View.OnClickListener() {
+/*        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopupMenue();
             }
-        });
+        });*/
         donrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -111,7 +112,6 @@ public class UpDateBrandProfile extends AppCompatActivity {
                         startSetupAccount();
                     } else {
                         Toast.makeText(UpDateBrandProfile.this,"Error occur",Toast.LENGTH_SHORT).show();
-
                     }
 
                 }
@@ -144,7 +144,7 @@ public class UpDateBrandProfile extends AppCompatActivity {
             mInterstitialAd.show();
         } else {
             finish();
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
+
         }
 
     }
@@ -214,7 +214,7 @@ public class UpDateBrandProfile extends AppCompatActivity {
         final String name = nameEdit.getText().toString();
         final String contact = ContactEdit.getText().toString();
 
-        if(!TextUtils.isEmpty(name) && resultUri != null && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue))
+        if(!TextUtils.isEmpty(name)  && !TextUtils.isEmpty(contact) && !TextUtils.isEmpty(spnrValue))
         {
             if (AppStatus.getInstance(this).isOnline())
             {
@@ -222,19 +222,20 @@ public class UpDateBrandProfile extends AppCompatActivity {
                 {
                     progress = AppUtils.createProgressDialog(this);
                     progress.show();
-                    StorageReference mStorageChildImage = mUserProfileStorage.child(resultUri.getLastPathSegment());
+                   /* StorageReference mStorageChildImage = mUserProfileStorage.child(resultUri.getLastPathSegment());
                     mStorageChildImage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                     {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
                         {
-                            @SuppressWarnings("VisibleForTests")  Uri downloadURL = taskSnapshot.getDownloadUrl();
-                            progress.dismiss();
-                            upLoadBranProfileInfo ul = new upLoadBranProfileInfo(UpDateBrandProfile.this);
-                            ul.execute(name, downloadURL.toString(),contact,spnrValue);
+                            @SuppressWarnings("VisibleForTests")  Uri downloadURL = taskSnapshot.getDownloadUrl();*/
 
-                        }
-                    });
+
+                   //     }
+                    //});
+                    progress.dismiss();
+                    upLoadBranUpdateProfileInfo ul = new  upLoadBranUpdateProfileInfo(UpDateBrandProfile.this);
+                    ul.execute(name,contact,spnrValue);
 
                 }
 

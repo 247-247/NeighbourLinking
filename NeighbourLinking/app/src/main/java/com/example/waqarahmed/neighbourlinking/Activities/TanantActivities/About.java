@@ -27,7 +27,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class About extends AppCompatActivity {
-   ImageView mCurrentUserImage;
+    ImageView mCurrentUserImage;
     TextView mHeadName, mHeadDate , genderView,EmailView;
     EditText mFirstName,mLastName,mEmail,mAddress,mCity,mGender , mCreateField;
     DatabaseReference mDatabaseReferenceCurrentUser;

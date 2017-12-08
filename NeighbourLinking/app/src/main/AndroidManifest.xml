@@ -75,7 +75,7 @@
         <activity android:name=".Activities.ChangePasswordActivity" />
         <activity android:name=".Activities.NewRegistrations" />
         <activity android:name=".Activities.AdminActivities.NewTanantSignUp" />
-        <activity android:name=".Activities.AdminActivities.ManPowerList_admin"></activity>
+        <activity android:name=".Activities.AdminActivities.ManPowerList_admin" />
         <activity
             android:name=".Activities.AdminActivities.MainServiceActivity_Admin"
             android:label="Admin"
@@ -115,7 +115,8 @@
             android:name=".Activities.TanantActivities.Requests_Tanants"
             android:label="@string/title_activity_requests__tanants"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.AdminActivities.UploadSkillActivity"></activity>
+        <activity android:name=".Activities.AdminActivities.UploadSkillActivity" />
+        <activity android:name=".Activities.TanantActivities.UpdateAccountTenetActivity"></activity>
     </application>
 
 </manifest>

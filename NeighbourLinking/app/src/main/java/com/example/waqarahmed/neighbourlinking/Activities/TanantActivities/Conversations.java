@@ -162,10 +162,7 @@ private RecyclerView mRecyclerView;
                             map2.put("msg", mEditTextMessage.getText().toString());
                             msg_root.updateChildren(map2);
                             mEditTextMessage.setText("");
-
-
                         }
-
                     }
 
                     @Override
@@ -173,9 +170,6 @@ private RecyclerView mRecyclerView;
 
                     }
                 });
-
-
-
             }
         });
 
@@ -194,30 +188,28 @@ private RecyclerView mRecyclerView;
                             mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
 
                         }
-
-
                         @Override
                         public void onChildChanged(DataSnapshot dataSnapshot, String s)
                         {
-
+                             //todo
                         }
 
                         @Override
                         public void onChildRemoved(DataSnapshot dataSnapshot)
                         {
-
+                            //todo
                         }
 
                         @Override
                         public void onChildMoved(DataSnapshot dataSnapshot, String s)
                         {
-
+                            //todo
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError)
                         {
-
+                            //todo
                         }
                     });
                 }
@@ -231,10 +223,7 @@ private RecyclerView mRecyclerView;
                            // sendNotification(m);
                             mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
 
-
                         }
-
-
                         @Override
                         public void onChildChanged(DataSnapshot dataSnapshot, String s)
                         {

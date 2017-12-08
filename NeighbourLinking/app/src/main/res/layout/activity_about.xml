@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:weightSum="1"
     android:layout_height="match_parent">
-<LinearLayout
+<!--<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="5dp"
@@ -12,23 +14,36 @@
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:orientation="vertical"
-    tools:context="com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About">
-    <LinearLayout
+    tools:context="com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight=".88"
+        android:layout_height="0dp">
+        <!--main inner container-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+           <!-- profile iamge-->
             <ImageView
                 android:id="@+id/currentUser_imageView_aboutActivity"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
-
-            <LinearLayout
+           <!-- container hold name and date-->
+           <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+               <!-- name -->
                 <TextView
                     android:id="@+id/currentUserName_textView_aboutActivity"
                     android:layout_width="wrap_content"
@@ -36,54 +51,51 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="serif"
-                    android:text="Hellllo"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="18dp"/>
-
+               <!-- created date -->
                 <TextView
                     android:id="@+id/accountCreated_date_aboutActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="12/11/2017" />
+                    android:text="" />
             </LinearLayout>
-
         </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_height="2dp"
-        android:background="@color/cardview_dark_background"/>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-      <LinearLayout
-          style="@style/linealayoutUseInAbout">
-
-          <TextView
+            <!-- draw line container-->
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="2dp"
+            android:background="@color/cardview_dark_background"/>
+        <LinearLayout
+           android:layout_marginTop="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+          <!-- last name container-->
+          <LinearLayout
+           style="@style/linealayoutUseInAbout">
+              <TextView
               android:layout_width="0dp"
               android:textSize="20dp"
               android:layout_height="wrap_content"
               android:id="@+id/firstName_textView_aboutActivity"
               android:text="First Name:"
-
               android:layout_weight=".40"/>
-          <EditText
+           <EditText
               android:enabled="false"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight=".60"
               android:background="@drawable/customborder_for_blog_row"
               android:id="@+id/firstName_editiew_aboutActivity"/>
-
-      </LinearLayout>
+          </LinearLayout>
+          <!-- last name container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -97,12 +109,10 @@
                 android:background="@drawable/customborder_for_blog_row"
                 android:enabled="false"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
-
+          <!-- address container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,12 +126,10 @@
                 android:id="@+id/addressName_editiew_aboutActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
-
+          <!-- contact container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -135,11 +143,10 @@
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_height="wrap_content"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
+          <!-- created at container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -154,9 +161,9 @@
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
         </LinearLayout>
+          <!-- email container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -173,9 +180,9 @@
                 android:layout_weight=".60"/>
 
         </LinearLayout>
+         <!-- city container-->
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -191,16 +198,20 @@
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
         </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+<!--</LinearLayout>-->
+   <!-- google add-->
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
+        android:layout_weight=".12"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
     </com.google.android.gms.ads.AdView>
-</RelativeLayout>
+</LinearLayout>

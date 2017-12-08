@@ -123,7 +123,6 @@ public class AboutBrand extends AppCompatActivity {
         }
 
     }
-
     private void onIntentReceived(String userId) {
 
         new RetrievBranProfileInfoForClient(this){

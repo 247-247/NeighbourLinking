@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">NeighbourLinking</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="baseUrl">http://42314e4d.ngrok.io</string>
-
-
+    <string name="baseUrl">http://63678b5b.ngrok.io</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -29,7 +26,6 @@
     <string name="onLineServer">http://6b25c12a.ngrok.io</string>
     <string name="title_activity_request_related_detail">RequestRelatedDetail</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
     <string name="emailerror">Enter a valid email</string>
     <string name="nameerror">Enter a valid name</string>
     <string name="mobileerror">Enter a valid mobile</string>
@@ -45,8 +41,10 @@
         <item>C-6</item>
         <item>C-7</item>
         <item>C-8</item>
+        <item>C-9</item>
+        <item>C-10</item>
+        <item>C-11</item>
     </string-array>
-
     <string-array name="skill_list">
         <item>Electration</item>
         <item>Plumber</item>
@@ -54,7 +52,6 @@
         <item>Bike Mechanic</item>
         <item>Car Mechanic</item>
         <item>Wood Work</item>
-
     </string-array>
     <string name="title_activity_service_main">ServiceMainActivity</string>
     <string name="title_activity_main_brand">MainBrandActivity</string>

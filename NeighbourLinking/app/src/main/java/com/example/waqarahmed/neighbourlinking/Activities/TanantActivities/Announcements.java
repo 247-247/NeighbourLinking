@@ -91,10 +91,6 @@ RecyclerView announcement_recyclerView;
         backgroundWorker.execute(type);
 
 
-
-
-
-
     }
 
     @Override

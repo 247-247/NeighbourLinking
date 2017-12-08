@@ -109,8 +109,7 @@ public class MainBrandActivity extends AppCompatActivity {
 //                getSupportActionBar().setTitle(brand.getName());
 //
 //            }
-
-    //    }
+//    }
 
 
     }
@@ -130,11 +129,11 @@ public class MainBrandActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+       /* if (id == R.id.action_settings) {
             Intent BreandProfileIntent = new Intent(MainBrandActivity.this,BrandProfileBuilding.class);
             startActivity(BreandProfileIntent);
             return true;
-        }
+        }*/
         if (id == R.id.action_logout) {
             BrandSharedPref.init(getApplicationContext());
             BrandSharedPref.write(BrandSharedPref.ID,0);

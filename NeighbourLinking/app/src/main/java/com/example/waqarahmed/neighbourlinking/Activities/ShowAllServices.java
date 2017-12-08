@@ -115,15 +115,12 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
             AllServices = allServices;
             this.mContext = mContext;
         }
-
-
         @Override
         public ServiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_single_item, parent, false);
             ShowAllServices.ServiceViewHolder Svh = new ServiceViewHolder(v);
             return Svh ;
         }
-
         @Override
         public void onBindViewHolder(ServiceViewHolder holder, int position) {
 
@@ -131,9 +128,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
             holder.setServicet_type_name(service.getSkill());
             holder.setService_type_image(service.getImage_url(),mContext);
 
-
         }
-
         @Override
         public int getItemCount() {
             return AllServices.size();
@@ -145,9 +140,6 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
         View Mview;
         TextView serviceNameView;
         ImageView serviceTypeImage;
-
-
-
         public ServiceViewHolder(View itemView ) {
             super(itemView);
             Mview = itemView;
@@ -161,7 +153,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
         }
 
         public void setService_type_image(final String service_type_image , final Context c) {
-            Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).networkPolicy(NetworkPolicy.OFFLINE).into(serviceTypeImage, new Callback() {
+            Picasso.with(c).load(service_type_image).placeholder(R.mipmap.ic_launcher).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).networkPolicy(NetworkPolicy.OFFLINE).into(serviceTypeImage, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -169,7 +161,7 @@ public class ShowAllServices extends AppCompatActivity implements AsynResonseFor
 
                 @Override
                 public void onError() {
-                    Picasso.with(c).load(service_type_image).placeholder(R.mipmap.img_sample).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).into(serviceTypeImage);
+                    Picasso.with(c).load(service_type_image).placeholder(R.mipmap.ic_launcher).transform(new RoundedTransformation(50, 4)).centerCrop().resize(70,70).into(serviceTypeImage);
                 }
             });
 

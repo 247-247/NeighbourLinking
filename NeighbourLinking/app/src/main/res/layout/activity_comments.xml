@@ -10,33 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-    android:scrollbars="vertical"
-
-        android:id="@+id/commentRecycler"
-        ></android.support.v7.widget.RecyclerView>
+        android:scrollbars="vertical"
+        android:id="@+id/commentRecycler">
+    </android.support.v7.widget.RecyclerView>
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="50dp"
-       android:background="@drawable/boarder_around_comment_text_field"
-        android:orientation="horizontal"
-        >
-
+        android:background="@drawable/boarder_around_comment_text_field"
+        android:orientation="horizontal">
+       <!-- comment edit-->
         <EditText
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
             android:id="@+id/message_edit"
             android:layout_weight="1"/>
+        <!-- send message image button-->
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/send_comment"
-            android:id="@+id/sendComment_btn"
-           />
-
+            android:id="@+id/sendComment_btn" />
     </LinearLayout>
-
-
-
 </LinearLayout>

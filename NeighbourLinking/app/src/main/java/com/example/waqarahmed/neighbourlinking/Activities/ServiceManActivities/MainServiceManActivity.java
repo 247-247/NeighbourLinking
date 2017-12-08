@@ -133,7 +133,9 @@ public class MainServiceManActivity extends AppCompatActivity {
 
         if (id == R.id.action_about) {
 
-            Intent serviceProfile = new Intent(MainServiceManActivity.this,ServiceManProfile.class);
+            //Intent serviceProfile = new Intent(MainServiceManActivity.this,ServiceManProfile.class);
+            Intent serviceProfile = new Intent(MainServiceManActivity.this,AboutServiceman.class);
+
             startActivity(serviceProfile);
             return true;
         }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     xmlns:android="http://schemas.android.com/apk/res/android" >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,18 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
+       <!-- profile image-->
         <ImageView
             android:id="@+id/currentUser_imageView_rDActivity"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_margin="10dp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+           <!-- name tv-->
             <TextView
                 android:id="@+id/currentUserName_textView_rDActivity"
                 android:layout_width="wrap_content"
@@ -33,23 +31,20 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="25dp"
                 android:fontFamily="serif"
-                android:text="Hellllo"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
+           <!-- date tv-->
             <TextView
                 android:id="@+id/accountCreated_date_rDActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="12/11/2017" />
-
-
-
+                android:text="" />
         </LinearLayout>
-
     </LinearLayout>
+     <!--drw line-->
     <TextView
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
@@ -60,19 +55,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <LinearLayout
-
-            style="@style/linealayoutUseInAbout"
-            >
-
+            style="@style/linealayoutUseInAbout">
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/firstName_textView_rDActivity"
                 android:text="First Name:"
-
                 android:layout_weight=".40"/>
             <EditText
                 android:enabled="false"
@@ -81,20 +71,15 @@
                 android:layout_weight=".60"
                 android:background="@drawable/customborder_for_blog_row"
                 android:id="@+id/sName_editiew_rDActivity"/>
-
         </LinearLayout>
         <LinearLayout
-
-            style="@style/linealayoutUseInAbout"
-            >
-
+            style="@style/linealayoutUseInAbout">
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/firstName_textView_"
                 android:text="Is Accepted:"
-
                 android:layout_weight=".40"/>
             <EditText
                 android:enabled="false"
@@ -104,13 +89,9 @@
                 android:text="Panding"
                 android:background="@drawable/customborder_for_blog_row"
                 android:id="@+id/isAccepted_editiew_rDActivity"/>
-
         </LinearLayout>
-
-
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -124,14 +105,9 @@
                 android:id="@+id/status_editiew_rDActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
-
-
-
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -145,11 +121,9 @@
                 android:id="@+id/createDate_editiew_rAActivity"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
         <LinearLayout
             style="@style/linealayoutUseInAbout">
-
             <TextView
                 android:layout_width="0dp"
                 android:textSize="20dp"
@@ -167,16 +141,7 @@
                 android:scrollHorizontally="false"
                 android:background="@drawable/customborder_for_blog_row"
                 android:layout_weight=".60"/>
-
         </LinearLayout>
-
-
-
-
     </LinearLayout>
-
-
-
-
-</LinearLayout>
+ </LinearLayout>
 </ScrollView>

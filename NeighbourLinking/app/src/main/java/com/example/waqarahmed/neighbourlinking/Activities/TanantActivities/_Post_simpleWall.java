@@ -85,12 +85,8 @@ public class _Post_simpleWall extends AppCompatActivity {
         final String desc_val = mDescription.getText().toString().trim();
         if(!TextUtils.isEmpty(title_val) && !TextUtils.isEmpty(desc_val) ){
             mProgBar.show();
-
-
-                    final DatabaseReference newPost = dbRefPost.push();
-
-
-                    mCurrenUser.addValueEventListener(new ValueEventListener() {
+            final DatabaseReference newPost = dbRefPost.push();
+            mCurrenUser.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             newPost.child("title").setValue(title_val);
@@ -117,10 +113,8 @@ public class _Post_simpleWall extends AppCompatActivity {
                     });
 
                     mProgBar.dismiss();
-
-
-                }
-            }
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

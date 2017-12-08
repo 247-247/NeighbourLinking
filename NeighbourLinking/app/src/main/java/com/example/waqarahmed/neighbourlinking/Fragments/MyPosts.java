@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.waqarahmed.neighbourlinking.Activities.BrandActivities.MainBrandActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.About;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.CommentsOnPost;
+import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.UpdateAccountTenetActivity;
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities._Post_simpleWall;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -100,6 +101,15 @@ public class MyPosts extends Fragment {
             }
         });
 
+        mCurrentUserUpdatetd_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent About_Intent = new Intent(getActivity().getApplicationContext(), UpdateAccountTenetActivity.class);
+                startActivity(About_Intent);
+
+            }
+        });
         if(mAuth.getCurrentUser() != null) {
 
             currentUserId = mAuth.getCurrentUser().getUid();
@@ -140,7 +150,7 @@ public class MyPosts extends Fragment {
                               final String imageUrl = dataSnapshot.child("image").getValue().toString();
                               mCurrentUserName_textView.setText(name);
                               mAccountCreated_date_textView.setText(create_date);
-                              Picasso.with(getActivity().getApplicationContext()).load(imageUrl).centerCrop().resize(75, 75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
+                              Picasso.with(getActivity()).load(imageUrl).centerCrop().resize(75, 75).networkPolicy(NetworkPolicy.OFFLINE).into(mCurrentUser_imageView, new Callback() {
                                 @Override
                                 public void onSuccess() {
 

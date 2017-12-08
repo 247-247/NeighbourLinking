@@ -21,6 +21,11 @@ import com.example.waqarahmed.neighbourlinking.Interfaces.AsynResonseForMenPower
 import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Services.RetrievAllMenPowerList;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -32,6 +37,9 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
     String getIntent_skillName;
     RecyclerView menPowerList_recyclerView;
     TextView textView;
+    FirebaseAuth mAuth;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     ArrayList<ServiceMan> menlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +83,36 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
                 })
         );
 
-
-
-
-//        Toast.makeText(ManPowerList.this,getIntent_skillName,Toast.LENGTH_LONG).show();
+        // ads
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // intenrial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+        //end ads
         String type = "login";
         RetrievAllMenPowerList retrievdAllMenList = new RetrievAllMenPowerList(this);
         retrievdAllMenList.asyncResponse = this;
         retrievdAllMenList.execute(type,getIntent_skillName);
 
-
+    }
+    public  void showInternialAd()
+    {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
     }
 
@@ -109,9 +137,7 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
             }
 
           }
-
-
-              if(menlist.size()>0) {
+          if(menlist.size()>0) {
                   menPowerList_recyclerView.setVisibility(View.VISIBLE);
                   textView.setVisibility(View.INVISIBLE);
                  // this.menlist = Manlist;
@@ -205,11 +231,6 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
                 dateView.setText(no);
 
             }
-
-
-
-
-
         }
 }
     @Override
@@ -225,6 +246,8 @@ public class ManPowerList extends AppCompatActivity implements AsynResonseForMen
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        showInternialAd();
     }
 }

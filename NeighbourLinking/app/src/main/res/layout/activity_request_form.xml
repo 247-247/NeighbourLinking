@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     xmlns:android="http://schemas.android.com/apk/res/android" />
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.RequestForm">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,11 +45,6 @@
             android:background="@drawable/customborder_for_blog_row"
             android:layout_gravity="bottom|center"
             android:text="Done"/>
-
     </LinearLayout>
-
-
-
-
-</RelativeLayout>
+ </RelativeLayout>
 </ScrollView>

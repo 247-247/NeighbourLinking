@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
 
-    android:layout_height="40dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,8 +10,8 @@
         android:orientation="horizontal">
 
         <ImageView
-           android:layout_width="30dp"
-           android:layout_height="30dp"
+           android:layout_width="60dp"
+           android:layout_height="60dp"
            android:scaleType="fitCenter"
            android:src="@mipmap/ic_launcher"
            android:id="@+id/imageview_announcement_list_item"/>
@@ -20,36 +20,64 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:orientation="vertical">
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="1"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:layout_weight=".80"
+                    android:textSize="12dp"
                     android:textStyle="bold"
                     android:id="@+id/name_announcement_list_item"
                     android:layout_height="wrap_content"
-                    android:text="Any Name"/>
+                    android:text="Announcement title"/>
                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                   android:layout_weight=".10"
                     android:layout_height="wrap_content"
                     android:id="@+id/date_announcement_list_item"
-                    android:textAlignment="center"
                     android:text="12/12/17"/>
-            </LinearLayout>
+            </LinearLayout>-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:textSize="10dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/date_announcement_list_item"
+                    android:text="12/12/17"/>
+
+                <TextView
+                    android:id="@+id/name_announcement_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/date_announcement_list_item"
+                    android:layout_alignBottom="@+id/date_announcement_list_item"
+                    android:text="Announcement title"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+           <!-- announcement body-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:ellipsize="end"
+                android:textSize="12sp"
                 android:id="@+id/msg_announcement_list_item"
                 android:layout_height="wrap_content"
                 android:text="Any Text"/>
@@ -58,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bedg_announcement_list_item"
                 android:textAlignment="center"
-                android:text="12/12"/>
+                android:text=""/>
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>

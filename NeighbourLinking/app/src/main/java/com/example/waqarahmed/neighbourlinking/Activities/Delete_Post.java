@@ -19,6 +19,7 @@ import com.example.waqarahmed.neighbourlinking.Activities.AdminActivities.MainAc
 import com.example.waqarahmed.neighbourlinking.Activities.TanantActivities.MainActivity;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.example.waqarahmed.neighbourlinking.Shared.AdminSharedPref;
+import com.example.waqarahmed.neighbourlinking.Shared.BrandSharedPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,6 @@ ImageView mSndrImageView,mPost_imageView;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-
                 title = (String) dataSnapshot.child("title").getValue();
                 desc = (String)dataSnapshot.child("desc").getValue();
                 post_image =(String) dataSnapshot.child("post_image").getValue();
@@ -70,17 +70,31 @@ ImageView mSndrImageView,mPost_imageView;
                 user_name = (String)dataSnapshot.child("username").getValue();
                 sender_image =(String) dataSnapshot.child("sender_image").getValue();
                 post_date =(String) dataSnapshot.child("send_date").getValue();
-                if(mAuth.getCurrentUser().getUid().toString().equals(user_id))
-                {
-                    mDeletePost.setVisibility(View.VISIBLE);
+                if(mAuth.getCurrentUser() != null) {
+                    if (mAuth.getCurrentUser().getUid().toString().equals(user_id)) {
+                        mDeletePost.setVisibility(View.VISIBLE);
 
-                }else if((AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no").equals("yes"))){
+                    } else if ((AdminSharedPref.read(AdminSharedPref.IS_ADMIN, "no").equals("yes"))) {
 
-                    mDeletePost.setVisibility(View.VISIBLE);
+                        mDeletePost.setVisibility(View.VISIBLE);
+                    } else {
+                        mDeletePost.setVisibility(View.INVISIBLE);
+
+                    }
                 }
                 else
                 {
-                    mDeletePost.setVisibility(View.INVISIBLE);
+                    try {
+                        if ((((BrandSharedPref.read(BrandSharedPref.ID, 0)) == Integer.parseInt(user_id)))) {
+
+                            mDeletePost.setVisibility(View.VISIBLE);
+                        } else {
+                            mDeletePost.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                    catch(NumberFormatException nfe){
+                        mDeletePost.setVisibility(View.INVISIBLE);
+                    }
 
                 }
                 Picasso.with(Delete_Post.this).load(sender_image).centerCrop().resize(75,75).into(mSndrImageView);
@@ -104,7 +118,6 @@ ImageView mSndrImageView,mPost_imageView;
                 builder1.setTitle("Delete Post");
                 builder1.setMessage("Are you sure you want to delete this entry?");
                 builder1.setCancelable(true);
-
                 builder1.setPositiveButton(
                         "Yes",
                         new DialogInterface.OnClickListener() {
@@ -115,8 +128,6 @@ ImageView mSndrImageView,mPost_imageView;
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(), "Successfully deleted", Toast.LENGTH_SHORT).show();
-
-
                                             if(AdminSharedPref.read(AdminSharedPref.IS_ADMIN,"no").equals("yes")){
                                                 Intent mainIntent = new Intent(Delete_Post.this, MainActivityAdmin.class);
                                                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -144,8 +155,6 @@ ImageView mSndrImageView,mPost_imageView;
 
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
-
-
             }
         });
 

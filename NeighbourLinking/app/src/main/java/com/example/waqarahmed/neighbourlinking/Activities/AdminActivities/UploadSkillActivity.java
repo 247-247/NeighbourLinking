@@ -69,9 +69,9 @@ public class UploadSkillActivity extends AppCompatActivity {
                 showPopupMenue();
             }
         });
-        mAdView = (AdView) findViewById(R.id.adView);
+       /* mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
     }
 

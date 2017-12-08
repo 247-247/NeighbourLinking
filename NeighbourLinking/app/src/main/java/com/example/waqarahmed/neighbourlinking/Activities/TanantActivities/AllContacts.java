@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.waqarahmed.neighbourlinking.Classes.Contact;
+import com.example.waqarahmed.neighbourlinking.Classes.RoundedTransformation;
 import com.example.waqarahmed.neighbourlinking.Listener.RecyclerItemClickListener;
 import com.example.waqarahmed.neighbourlinking.R;
 import com.google.android.gms.ads.AdRequest;
@@ -78,23 +79,19 @@ public class AllContacts extends AppCompatActivity {
                 new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-
                         Contact c = list.get(position);
-
                         Intent convIntent = new Intent(AllContacts.this,Conversations.class);
                         convIntent.putExtra("receverId",c.getUid());
                         convIntent.putExtra("receverName",c.getFirst_name());
-
                         startActivity(convIntent);
                     }
                 })
         );
 
-        // ads
+        // google ads
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
     }
 
@@ -113,11 +110,7 @@ public class AllContacts extends AppCompatActivity {
                     if (d.hasChild("image")) {
                         Contact c = d.getValue(Contact.class);
                         if (!TextUtils.equals(c.getUid(), mAuth.getCurrentUser().getUid())) {
-
                             list.add(c);
-                            Log.i("HHHHHHWWWWW", "onDataChange: " + c.getFirst_name());
-
-
                         }
                     }
                 }
@@ -185,7 +178,7 @@ public class AllContacts extends AppCompatActivity {
 
         }
         public void setContact_image(final String image , final Context cxt) {
-            Picasso.with(cxt).load(image).centerCrop().resize(75,75).networkPolicy(NetworkPolicy.OFFLINE).into(imageView, new Callback() {
+            Picasso.with(cxt).load(image).transform(new RoundedTransformation(50, 4)).centerCrop().resize(50,50).networkPolicy(NetworkPolicy.OFFLINE).into(imageView, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -193,7 +186,7 @@ public class AllContacts extends AppCompatActivity {
 
                 @Override
                 public void onError() {
-                    Picasso.with(cxt).load(image).centerCrop().resize(75,75).into(imageView);
+                    Picasso.with(cxt).load(image).transform(new RoundedTransformation(50, 4)).centerCrop().resize(50,50).into(imageView);
                 }
             });
         }

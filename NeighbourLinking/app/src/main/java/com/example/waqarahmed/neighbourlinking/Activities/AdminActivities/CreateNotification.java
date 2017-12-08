@@ -45,9 +45,9 @@ EditText titleEdit,discEdit;
                 sendNotification();
             }
         });
-        mAdView = (AdView) findViewById(R.id.adView);
+       /* mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
         // intenrial ads
         //end ads
     }

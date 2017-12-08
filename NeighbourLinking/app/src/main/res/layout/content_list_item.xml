@@ -9,29 +9,26 @@
 
         <ImageView
             android:id="@+id/contentImage_imageView_contentView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-           />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
-
+            <!--name-->
             <TextView
                 android:id="@+id/contentName_textView_contentView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="serif"
+                android:layout_marginTop="5dp"
                 android:text="Hellllo"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
+                android:textSize="16dp" />
+            <!-- home number and Created date-->
             <TextView
                 android:id="@+id/created_date_contentView"
                 android:layout_width="wrap_content"
@@ -42,10 +39,11 @@
 
         </LinearLayout>
     </LinearLayout>
+   <!-- draw line-->
     <TextView
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
-        android:layout_height="2dp" />
+        android:layout_height="1dp" />
 
 </LinearLayout>

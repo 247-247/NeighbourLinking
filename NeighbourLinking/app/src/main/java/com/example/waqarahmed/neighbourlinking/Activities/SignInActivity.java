@@ -187,12 +187,14 @@ public class SignInActivity extends AppCompatActivity {
                                Intent mainIntent = new Intent(SignInActivity.this, MainActivityAdmin.class);
                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                startActivity(mainIntent);
 
                            }else{
                                Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                               mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                startActivity(mainIntent);
                            }
 
@@ -200,6 +202,8 @@ public class SignInActivity extends AppCompatActivity {
                     } else {
 
                         Intent AccuntSetupIntent = new Intent(SignInActivity.this, Profile.class);
+                        AccuntSetupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        AccuntSetupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                         AccuntSetupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(AccuntSetupIntent);
 

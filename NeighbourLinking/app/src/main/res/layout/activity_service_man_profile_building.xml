@@ -7,6 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context="com.example.waqarahmed.neighbourlinking.Activities.ServiceManActivities.ServiceManProfileBuilding">
@@ -42,11 +44,10 @@
         <Spinner
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/skill_list_serviceProfile"
             android:background="@drawable/gradient_spinner"
             android:entries="@array/skill_list"></Spinner>
-
 
         <Button
             android:layout_width="wrap_content"
@@ -56,9 +57,6 @@
             android:background="@drawable/customborder_for_blog_row"
             android:text="Save"
             android:id="@+id/doneBtn_serviceProfile"/>
-
-
-
     </LinearLayout>
 
 
